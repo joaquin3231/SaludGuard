@@ -4,11 +4,15 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -28,7 +32,20 @@ public class Asessment {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
+	
 	//CONEXIONES
+	//asessments a patients(1:1)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "patient_id", unique = true)
+	private Patient patient_id;
+	
+	//asessments a patients(1:1)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "doctor_id", unique = true)
+	private Doctor doctor_id;
+	
+	//FALTA AGREGAR LAS CONEXIONES PARA MEDICAL RECORD
+	
 	
 	//CONSTRUCTOR
 	public Asessment() {}

@@ -48,6 +48,7 @@ public class Patient{
 	@JoinColumn(name = "medical_record_id", unique = true)
 	private MedicalRecord medical_id;
 	
+	
 	//CONSTRUCTOR
 	public Patient() {
 		super();
