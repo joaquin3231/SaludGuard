@@ -4,31 +4,40 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "doctors")
-public class Doctor {
+@Table(name = "medical_antecedents")
+public class MedicalAntecedent {
 
 	//VARIABLES	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty(message = "Medical license is required")
-	private String medLicense;
+	private String type;
+	
+	@NotEmpty(message="Title of antecedent is required")
+	@Size(min=2, message = "Title of antecedent needs at least 2 chars")
+	private String title;
+	
+	@NotEmpty(message="Description of antecedent is required")
+	@Size(min=2, message = "Description of antecedent needs at least 2 chars")
+	private String description;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@PastOrPresent(message = "The study date could not have been in the future")
+	private Date studyDate; 
 	
 	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -37,16 +46,9 @@ public class Doctor {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
 	
-	//CONEXIONES
-	//users a doctors(1:1)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", unique = true)
-	private User user;
-	
 	//CONSTRUCTOR
-	public Doctor() {}
+	public MedicalAntecedent() {}
 
-	//GETTERS AND SETTERS
 	public Long getId() {
 		return id;
 	}
@@ -54,11 +56,32 @@ public class Doctor {
 		this.id = id;
 	}
 
-	public String getMedLicense() {
-		return medLicense;
+	public String getType() {
+		return type;
 	}
-	public void setMedLicense(String medLicense) {
-		this.medLicense = medLicense;
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getStudyDate() {
+		return studyDate;
+	}
+	public void setStudyDate(Date studyDate) {
+		this.studyDate = studyDate;
 	}
 
 	public Date getCreateAt() {
@@ -75,19 +98,12 @@ public class Doctor {
 		this.updateAt = updateAt;
 	}
 	
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	@PrePersist //Antes de hacer la creacion
 	protected void onCreate() {
-		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
+		this.createAt = new Date(); 
 	}
 	@PreUpdate
 	protected void onUpdate() {
-		this.updateAt = new Date(); //DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+		this.updateAt = new Date(); 
 	}
 }

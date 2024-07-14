@@ -4,31 +4,37 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "doctors")
-public class Doctor {
+@Table(name = "locations")
+public class Location {
 
 	//VARIABLES	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty(message = "Medical license is required")
-	private String medLicense;
+	@NotEmpty(message="Address is required")
+	@Size(min=2, message = "Address needs at least 2 chars")
+	private String address;
+	
+	@NotEmpty(message="State is required")
+	@Size(min=2, message = "State needs at least 2 chars")
+	private String state;
+	
+	@NotEmpty(message="City is required")
+	@Size(min=2, message = "City needs at least 2 chars")
+	private String city;
 	
 	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -37,14 +43,8 @@ public class Doctor {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
 	
-	//CONEXIONES
-	//users a doctors(1:1)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", unique = true)
-	private User user;
-	
-	//CONSTRUCTOR
-	public Doctor() {}
+	//CONSTRUCTORES
+	public Location() {}
 
 	//GETTERS AND SETTERS
 	public Long getId() {
@@ -54,11 +54,25 @@ public class Doctor {
 		this.id = id;
 	}
 
-	public String getMedLicense() {
-		return medLicense;
+	public String getAddress() {
+		return address;
 	}
-	public void setMedLicense(String medLicense) {
-		this.medLicense = medLicense;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public Date getCreateAt() {
@@ -75,13 +89,6 @@ public class Doctor {
 		this.updateAt = updateAt;
 	}
 	
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	@PrePersist //Antes de hacer la creacion
 	protected void onCreate() {
 		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
@@ -90,4 +97,5 @@ public class Doctor {
 	protected void onUpdate() {
 		this.updateAt = new Date(); //DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	}
+	
 }

@@ -28,11 +28,11 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty(message="First name ir required")
+	@NotEmpty(message="First name is required")
 	@Size(min=2, message = "First name needs at least 2 chars")
 	private String firstName;
 	
-	@NotEmpty(message="Last name ir required")
+	@NotEmpty(message="Last name is required")
 	@Size(min=2, message = "Last name needs at least 2 chars")
 	private String lastName;
 	
@@ -47,16 +47,16 @@ public class User {
 	@Email(message = "Invalid email")
 	private String emailContact;
 	
-	@NotEmpty(message="email ir required")
+	@NotEmpty(message="email is required")
 	@Email(message = "Invalid email")
 	private String email;
 	
-	@NotEmpty(message="password ir required")
+	@NotEmpty(message="password is required")
 	@Size(min=6, message = "Password needs at least 2 chars")
 	private String password;
 	
 	@Transient
-	@NotEmpty(message="comfirm ir required")
+	@NotEmpty(message="comfirm is required")
 	@Size(min=6, message = "Comfirm needs at least 2 chars")
 	private String comfirm;
 	
@@ -156,10 +156,10 @@ public class User {
 	
 	@PrePersist //Antes de hacer la creacion
 	protected void onCreate() {
-		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
+		this.createAt = new Date(); 
 	}
 	@PreUpdate
 	protected void onUpdate() {
-		this.updateAt = new Date(); //DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+		this.updateAt = new Date(); 
 	}
 }
