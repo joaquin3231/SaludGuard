@@ -1,6 +1,7 @@
 package com.codingdojo.saludGuard.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -45,12 +47,22 @@ public class Asessment {
 	@JoinColumn(name = "doctor_id", unique = true)
 	private Doctor doctor_id;
 	
-	//FALTA AGREGAR LAS CONEXIONES PARA MEDICAL RECORD
 	//asessments a medical_redords( 1:n )
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "medical_record_id")
 	private MedicalRecord medicalRecord;
 	
+	//asessments a treatments ( n:1 )
+	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Treatment> treatmentList;
+	
+	//asessments a physical_detais ( n:1 )
+	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<PhysicalDetail> physicalDetailList;
+	
+	//asessments a medical_antecedents ( n:1 )
+	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<MedicalAntecedent> medicalAntecedents;
 	
 	//CONSTRUCTOR
 	public Asessment() {}
@@ -96,6 +108,27 @@ public class Asessment {
 	}
 	public void setMedicalRecord(MedicalRecord medicalRecord) {
 		this.medicalRecord = medicalRecord;
+	}
+
+	public List<Treatment> getTreatmentList() {
+		return treatmentList;
+	}
+	public void setTreatmentList(List<Treatment> treatmentList) {
+		this.treatmentList = treatmentList;
+	}
+
+	public List<PhysicalDetail> getPhysicalDetailList() {
+		return physicalDetailList;
+	}
+	public void setPhysicalDetailList(List<PhysicalDetail> physicalDetailList) {
+		this.physicalDetailList = physicalDetailList;
+	}
+
+	public List<MedicalAntecedent> getMedicalAntecedents() {
+		return medicalAntecedents;
+	}
+	public void setMedicalAntecedents(List<MedicalAntecedent> medicalAntecedents) {
+		this.medicalAntecedents = medicalAntecedents;
 	}
 
 	@PrePersist //Antes de hacer la creacion

@@ -4,11 +4,15 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -40,6 +44,15 @@ public class Treatment {
 	private Date updateAt;
 	
 	//CONEXIONES
+	//treatments a asessments ( 1:n )
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "assement_id")
+	private Asessment asessment;
+	
+	//treatments a medical_redords ( 1:n )
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "medical_record_id")
+	private MedicalRecord medicalRecord;
 	
 	//CONSTRUCTOR
 	public Treatment() {}
@@ -79,6 +92,20 @@ public class Treatment {
 		this.updateAt = updateAt;
 	}
 	
+	public Asessment getAsessment() {
+		return asessment;
+	}
+	public void setAsessment(Asessment asessment) {
+		this.asessment = asessment;
+	}
+
+	public MedicalRecord getMedicalRecord() {
+		return medicalRecord;
+	}
+	public void setMedicalRecord(MedicalRecord medicalRecord) {
+		this.medicalRecord = medicalRecord;
+	}
+
 	@PrePersist //Antes de hacer la creacion
 	protected void onCreate() {
 		this.createAt = new Date();

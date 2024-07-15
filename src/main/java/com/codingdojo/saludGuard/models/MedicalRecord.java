@@ -35,9 +35,22 @@ public class MedicalRecord {
 	private Date updateAt;
 	
 	//CONEXIONES
-	//asessments a medical_redords( n:1 )
+	//medical_redords a asessments( n:1 )
 	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Asessment> assementList;
+	
+	//medical_redords a treatment( n:1 )
+	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Treatment> treatmentList;
+	
+	//medical_redords a physical_detais ( n:1 )
+	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<PhysicalDetail> physicalDetailList;
+	
+	//medical_redords a medical_antecedents ( n:1 )
+	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<MedicalAntecedent> medicalAntecedentsList;
+	
 	
 	//CONSTRUCTOR
 	public MedicalRecord() {}
@@ -69,6 +82,27 @@ public class MedicalRecord {
 	}
 	public void setAssementList(List<Asessment> assementList) {
 		this.assementList = assementList;
+	}
+
+	public List<Treatment> getTreatmentList() {
+		return treatmentList;
+	}
+	public void setTreatmentList(List<Treatment> treatmentList) {
+		this.treatmentList = treatmentList;
+	}
+
+	public List<PhysicalDetail> getPhysicalDetailList() {
+		return physicalDetailList;
+	}
+	public void setPhysicalDetailList(List<PhysicalDetail> physicalDetailList) {
+		this.physicalDetailList = physicalDetailList;
+	}
+
+	public List<MedicalAntecedent> getMedicalAntecedentsList() {
+		return medicalAntecedentsList;
+	}
+	public void setMedicalAntecedentsList(List<MedicalAntecedent> medicalAntecedentsList) {
+		this.medicalAntecedentsList = medicalAntecedentsList;
 	}
 
 	@PrePersist //Antes de hacer la creacion
