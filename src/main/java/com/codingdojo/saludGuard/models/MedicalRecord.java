@@ -1,6 +1,7 @@
 package com.codingdojo.saludGuard.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,11 +12,11 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name = "medical_redords")
@@ -32,6 +33,11 @@ public class MedicalRecord {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
+	
+	//CONEXIONES
+	//asessments a medical_redords( n:1 )
+	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Asessment> assementList;
 	
 	//CONSTRUCTOR
 	public MedicalRecord() {}
@@ -56,6 +62,13 @@ public class MedicalRecord {
 	}
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
+	}
+	
+	public List<Asessment> getAssementList() {
+		return assementList;
+	}
+	public void setAssementList(List<Asessment> assementList) {
+		this.assementList = assementList;
 	}
 
 	@PrePersist //Antes de hacer la creacion

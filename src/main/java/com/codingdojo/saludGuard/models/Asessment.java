@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -45,6 +46,10 @@ public class Asessment {
 	private Doctor doctor_id;
 	
 	//FALTA AGREGAR LAS CONEXIONES PARA MEDICAL RECORD
+	//asessments a medical_redords( 1:n )
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "medical_record_id")
+	private MedicalRecord medicalRecord;
 	
 	
 	//CONSTRUCTOR
@@ -72,6 +77,27 @@ public class Asessment {
 		this.updateAt = updateAt;
 	}
 	
+	public Patient getPatient_id() {
+		return patient_id;
+	}
+	public void setPatient_id(Patient patient_id) {
+		this.patient_id = patient_id;
+	}
+
+	public Doctor getDoctor_id() {
+		return doctor_id;
+	}
+	public void setDoctor_id(Doctor doctor_id) {
+		this.doctor_id = doctor_id;
+	}
+
+	public MedicalRecord getMedicalRecord() {
+		return medicalRecord;
+	}
+	public void setMedicalRecord(MedicalRecord medicalRecord) {
+		this.medicalRecord = medicalRecord;
+	}
+
 	@PrePersist //Antes de hacer la creacion
 	protected void onCreate() {
 		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
