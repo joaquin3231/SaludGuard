@@ -14,4 +14,9 @@ public interface UserRepository extends CrudRepository<User,Long>{
 	User findByEmail(String email);
 	
 	List<User> findAll();
+	
+	//ENCONTRAR EL USUARIO POR DNI
+	User findByUserDNI(String userDni);
+	
+	
 }
