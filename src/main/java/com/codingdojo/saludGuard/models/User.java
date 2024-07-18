@@ -40,15 +40,12 @@ public class User {
 	private String lastName;
 	
 	@NotNull(message="DNI is required")
-	@Size(min=2, message = "DNI needs at least 2 chars")
+	@Size(min=8, max=8, message = "DNI needs at least 2 chars")
 	private String userDNI;
 	
 	@NotNull(message="Phone is required")
 	@Size(min=8, max=20, message = "Phone needs at least 8 chars")
 	private String phone;
-	
-	@Email(message = "Invalid email")
-	private String emailContact;
 	
 	@NotEmpty(message="email is required")
 	@Email(message = "Invalid email")
@@ -59,11 +56,11 @@ public class User {
 	private String password;
 	
 	@Transient
-	@NotEmpty(message="comfirm is required")
-	@Size(min=6, message = "Comfirm needs at least 2 chars")
-	private String comfirm;
+	@NotEmpty(message="confirm is required")
+	@Size(min=6, message = "Confirm needs at least 2 chars")
+	private String confirm;
 	
-	// No se le agrega anotación, ya que si o si se va a cargar el género
+	@NotEmpty(message = "gender is required")
 	private String gender;
 	
 	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
@@ -84,9 +81,27 @@ public class User {
 	public User() {}
 
 	//GETTERS AND SETTERS
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Location getLocation_id() {
+		return location_id;
+	}
+
+	public void setLocation_id(Location location_id) {
+		this.location_id = location_id;
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -112,13 +127,6 @@ public class User {
 		this.phone = phone;
 	}
 
-	public String getEmailContact() {
-		return emailContact;
-	}
-	public void setEmailContact(String emailContact) {
-		this.emailContact = emailContact;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -133,11 +141,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getComfirm() {
-		return comfirm;
+	public String getConfirm() {
+		return confirm;
 	}
-	public void setComfirm(String comfirm) {
-		this.comfirm = comfirm;
+	public void setConfirm(String confirm) {
+		this.confirm = confirm;
 	}
 
 	public String getGender() {
