@@ -40,12 +40,12 @@ public class Asessment {
 	//asessments a patients(1:1)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "patient_id", unique = true)
-	private Patient patient_id;
+	private Patient patient;
 	
 	//asessments a patients(1:1)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "doctor_id", unique = true)
-	private Doctor doctor_id;
+	private Doctor doctor;
 	
 	//asessments a medical_redords( 1:n )
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -88,19 +88,19 @@ public class Asessment {
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
-	
-	public Patient getPatient_id() {
-		return patient_id;
+
+	public Patient getPatient() {
+		return patient;
 	}
-	public void setPatient_id(Patient patient_id) {
-		this.patient_id = patient_id;
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
-	public Doctor getDoctor_id() {
-		return doctor_id;
+	public Doctor getDoctor() {
+		return doctor;
 	}
-	public void setDoctor_id(Doctor doctor_id) {
-		this.doctor_id = doctor_id;
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
 
 	public MedicalRecord getMedicalRecord() {

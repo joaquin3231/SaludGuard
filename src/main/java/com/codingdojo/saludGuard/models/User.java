@@ -75,7 +75,6 @@ public class User {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "location_id", unique = true)
 	private Location location_id;
-
 	
 	//CONSTRUCTOR
 	public User() {}

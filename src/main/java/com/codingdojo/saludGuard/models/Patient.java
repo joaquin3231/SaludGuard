@@ -46,7 +46,7 @@ public class Patient{
 	//medical_records a patients(1:1)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "medical_record_id", unique = true)
-	private MedicalRecord medical_id;
+	private MedicalRecord medicalRecord;
 	
 	
 	//CONSTRUCTOR
@@ -89,12 +89,12 @@ public class Patient{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	public MedicalRecord getMedical_id() {
-		return medical_id;
+
+	public MedicalRecord getMedicalRecord() {
+		return medicalRecord;
 	}
-	public void setMedical_id(MedicalRecord medical_id) {
-		this.medical_id = medical_id;
+	public void setMedicalRecord(MedicalRecord medicalRecord) {
+		this.medicalRecord = medicalRecord;
 	}
 
 	@PrePersist //Antes de hacer la creacion

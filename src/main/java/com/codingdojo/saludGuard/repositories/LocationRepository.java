@@ -5,18 +5,13 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.codingdojo.saludGuard.models.Location;
 import com.codingdojo.saludGuard.models.User;
 
 @Repository
+public interface LocationRepository extends CrudRepository<Location, Long>{
 
-public interface UserRepository extends CrudRepository<User, Long> {
+	List<Location> findAll();
 	
-	List<User> findAll();
-	
-	//ENCONTRAR EL USUARIO POR email
-	User findByEmail(String email);
-	
-	//ENCONTRAR EL USUARIO POR DNI
-	User findByUserDNI(String userDNI);
-	
+	Location findByUser(User user);
 }
