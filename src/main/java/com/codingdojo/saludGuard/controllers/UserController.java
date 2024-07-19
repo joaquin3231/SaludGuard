@@ -102,4 +102,10 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	//@GetMapping("/physical")
+	//public String physical() {
+		
+	//	return "PhysicalDetail.jsp";
+	//}
+	
 }

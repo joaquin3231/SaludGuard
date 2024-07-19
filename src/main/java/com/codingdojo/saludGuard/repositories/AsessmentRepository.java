@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.codingdojo.saludGuard.models.Asessment;
 import com.codingdojo.saludGuard.models.Patient;
 
+
 @Repository
 public interface AsessmentRepository extends CrudRepository<Asessment, Long>{
 
