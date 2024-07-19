@@ -14,7 +14,7 @@ public interface AsessmentRepository extends CrudRepository<Asessment, Long>{
 	List<Asessment> findAll();
 	
 	//Llamma a todos los Asessment en orden cronologico
-	List<Asessment> findAllOrderBycreateAtAsc();
+	//List<Asessment> findAllOrderBycreateAtAsc();
 	
 	Asessment findByPatient(Patient patient);
 	

@@ -13,5 +13,5 @@ public interface MedicalAntecedentRepository extends CrudRepository<MedicalAntec
 	List<MedicalAntecedent> findAll();
 	
 	//Llamma a todos los MedicalAntecedent en orden cronologico
-	List<MedicalAntecedent> findAllOrderBycreateAtAsc();
+	//List<MedicalAntecedent> findAllOrderBycreateAtAsc();
 }

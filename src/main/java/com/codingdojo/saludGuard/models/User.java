@@ -74,7 +74,7 @@ public class User {
 	//users a locations(1:1)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "location_id", unique = true)
-	private Location location_id;
+	private Location location;
 	
 	//CONSTRUCTOR
 	public User() {}
@@ -89,12 +89,12 @@ public class User {
 		this.id = id;
 	}
 
-	public Location getLocation_id() {
-		return location_id;
+	public Location getLocation() {
+		return location;
 	}
 
-	public void setLocation_id(Location location_id) {
-		this.location_id = location_id;
+	public void setLocation(Location location_id) {
+		this.location = location_id;
 	}
 	
 	public String getFirstName() {

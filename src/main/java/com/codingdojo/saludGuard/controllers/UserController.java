@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codingdojo.saludGuard.models.Gender;
+import com.codingdojo.saludGuard.models.Patient;
 import com.codingdojo.saludGuard.models.User;
+import com.codingdojo.saludGuard.services.PatientService;
 import com.codingdojo.saludGuard.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -22,6 +24,9 @@ public class UserController {
 
 	@Autowired
 	private UserService serv;
+	
+	@Autowired
+	private PatientService patService;
 	
 	@GetMapping("/prueba")
 	public String prueba() {
@@ -70,6 +75,11 @@ public class UserController {
 			model.addAttribute("gender", Gender.Genders); //Enviar la lista de provincias
 			return "access.jsp";
 		} else {
+			
+			Patient newPatient = new Patient();
+			newPatient.setUser(newUser);
+			patService.savePatient(newPatient);
+			
 			//Guardo al nuevo usuario en sesión
 			session.setAttribute("userInSession", newUser);
 			return "redirect:/dashboard";

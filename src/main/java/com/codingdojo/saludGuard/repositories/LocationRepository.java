@@ -13,5 +13,4 @@ public interface LocationRepository extends CrudRepository<Location, Long>{
 
 	List<Location> findAll();
 	
-	Location findByUser(User user);
 }
