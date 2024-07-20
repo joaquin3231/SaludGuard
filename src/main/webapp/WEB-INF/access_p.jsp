@@ -30,7 +30,7 @@
 						<input type="password" class="form-control" name="password" >
 					</div>
 					<input type="submit" class="btn btn-success mt-3" value="Acceder" >
-					<a class="btn btn-outline-success mt-3" href="/pruebados" role="button">Crear nueva cuenta</a>
+					<a class="btn btn-outline-success mt-3" href="/" role="button">Crear nueva cuenta</a>
 				</form>
 				<br>
 				<div>

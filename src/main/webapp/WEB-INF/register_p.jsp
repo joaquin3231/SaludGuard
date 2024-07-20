@@ -67,7 +67,7 @@
 				</form:form>
 				<br>
 				<div>
-					<h6>¿Ya tiene usuario? <a href="/prueba">Ingrese aquí.</a></h4>
+					<h6>¿Ya tiene usuario? <a href="/inicioSesion">Ingrese aquí.</a></h4>
 				</div>
 			</div>
 		</div>

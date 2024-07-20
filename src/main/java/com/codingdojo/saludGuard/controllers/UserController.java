@@ -28,23 +28,24 @@ public class UserController {
 	@Autowired
 	private PatientService patService;
 	
-	@GetMapping("/prueba")
-	public String prueba() {
-		
-		return "access_p.jsp";
-	}
-	
-	@GetMapping("/pruebados")
-	public String pruebados(@ModelAttribute("newUser") User newUser,
+	//Registro del usuario
+	@GetMapping("/")
+	public String reguistrarUser(@ModelAttribute("newUser") User newUser,
 			Model model) {
 		
-		model.addAttribute("genders", Gender.Genders);
+		model.addAttribute("genders", Gender.Genders);  //Enviar la lista de generos
 		
 		return "register_p.jsp";
 	}
 	
-	@GetMapping("/pruebatres")
-	public String pruebatres() {
+	@GetMapping("/inicioSesion")
+	public String inicioSesion() {
+		
+		return "access_p.jsp";
+	}
+	
+	@GetMapping("/inicioSesion/doc")
+	public String inicioSesionDoctor() {
 		
 		return "access_d.jsp";
 	}
@@ -55,15 +56,6 @@ public class UserController {
 		return "index.jsp";
 	}
 	
-	@GetMapping("/")
-	public String index(@ModelAttribute("newUser") User newUser,
-						Model model) {
-		
-		model.addAttribute("gender", Gender.Genders); //Enviar la lista de provincias
-		
-		return "access.jsp";
-	}
-	
 	@PostMapping("/register")
 	public String register(@Valid @ModelAttribute("newUser") User newUser,
 						   BindingResult result,
@@ -72,8 +64,8 @@ public class UserController {
 		serv.register(newUser, result);
 		
 		if(result.hasErrors()) {
-			model.addAttribute("gender", Gender.Genders); //Enviar la lista de provincias
-			return "access.jsp";
+			model.addAttribute("gender", Gender.Genders); //Enviar la lista de generos
+			return "register_p.jsp";
 		} else {
 			
 			Patient newPatient = new Patient();
@@ -98,7 +90,7 @@ public class UserController {
 		if(userTryingLogin == null) {
 			//Tiene algo mal
 			redirectAttributes.addFlashAttribute("errorLogin", "Wrong email/password");
-			return "redirect:/";
+			return "redirect:/inicioSesion";
 		} else {
 			session.setAttribute("userInSession", userTryingLogin); //Guardando en sesión el objeto de User
 			return "redirect:/dashboard";
