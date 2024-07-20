@@ -10,20 +10,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
 import com.codingdojo.saludGuard.models.Location;
+import com.codingdojo.saludGuard.models.User;
 import com.codingdojo.saludGuard.services.LocationService;
+import com.codingdojo.saludGuard.services.UserService;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
 public class LocationController {
 
 	@Autowired
+	private UserService userServ;
+	
+	@Autowired
 	private LocationService locServ;
 	
 	@GetMapping("/location")
 	public String formLocation(	@ModelAttribute("location") Location location,
-								Model model) {
+								Model model, HttpSession session) {
+		/*=== REVISION DE SESION ===*/
+		User userTemp = (User) session.getAttribute("userInSession"); //Obj User or Null
 		
+		if(userTemp == null) {
+			
+			return "redirect:/";
+		}
+		/*=== REVISION DE SESION ===*/
 		
 		String urlProvincias = "https://apis.datos.gob.ar/georef/api/provincias";
 		RestTemplate restTemplateProv = new RestTemplate();
@@ -35,7 +48,16 @@ public class LocationController {
 	
 	@PostMapping("/location/save")
 	public String saveLocation(	@Valid @ModelAttribute("location") Location location,
-								BindingResult result, Model model) {
+								BindingResult result, Model model, HttpSession session) {
+		
+		/*=== REVISION DE SESION ===*/
+		User userTemp = (User) session.getAttribute("userInSession"); //Obj User or Null
+		
+		if(userTemp == null) {
+			
+			return "redirect:/";
+		}
+		/*=== REVISION DE SESION ===*/
 		
 		if(result.hasErrors()) {
 			String urlProvincias = "https://apis.datos.gob.ar/georef/api/provincias";
@@ -45,8 +67,10 @@ public class LocationController {
 			
 			return "FormLocations.jsp";
 		} else {
-			locServ.saveLocation(location);
-			return "redirect:/location";
+			userTemp.setLocation(location);
+			userServ.saveUser(userTemp);
+			
+			return "redirect:/dashboard";
 		}
 	}
 }

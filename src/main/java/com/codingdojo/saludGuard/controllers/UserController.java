@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 public class UserController {
 
 	@Autowired
-	private UserService serv;
+	private UserService userServ;
 	
 	@Autowired
 	private PatientService patService;
@@ -51,7 +51,16 @@ public class UserController {
 	}
 	
 	@GetMapping("/dashboard")
-	public String landing() {
+	public String landing(HttpSession session) {
+		
+		/*=== REVISION DE SESION ===*/
+		User userTemp = (User) session.getAttribute("userInSession"); //Obj User or Null
+		
+		if(userTemp == null) {
+			
+			return "redirect:/";
+		}
+		/*=== REVISION DE SESION ===*/
 		
 		return "index.jsp";
 	}
@@ -61,7 +70,7 @@ public class UserController {
 						   BindingResult result,
 						   HttpSession session,
 						   Model model) {
-		serv.register(newUser, result);
+		userServ.register(newUser, result);
 		
 		if(result.hasErrors()) {
 			model.addAttribute("gender", Gender.Genders); //Enviar la lista de generos
@@ -85,7 +94,7 @@ public class UserController {
 						RedirectAttributes redirectAttributes, /*usar mensajes de Flash*/   
 						HttpSession session){
 		
-		User userTryingLogin = serv.login(email, password); //Obj User o null
+		User userTryingLogin = userServ.login(email, password); //Obj User o null
 		
 		if(userTryingLogin == null) {
 			//Tiene algo mal
