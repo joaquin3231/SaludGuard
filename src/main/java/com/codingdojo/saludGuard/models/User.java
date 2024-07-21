@@ -40,7 +40,7 @@ public class User {
 	private String lastName;
 	
 	@NotNull(message="DNI is required")
-	@Size(min=8, max=8, message = "DNI needs at least 2 chars")
+	@Size(min=8, max=8, message = "DNI needs at least 8 chars, and max 8")
 	private String userDNI;
 	
 	@NotNull(message="Phone is required")

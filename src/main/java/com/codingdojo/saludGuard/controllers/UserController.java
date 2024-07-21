@@ -73,7 +73,7 @@ public class UserController {
 		userServ.register(newUser, result);
 		
 		if(result.hasErrors()) {
-			model.addAttribute("gender", Gender.Genders); //Enviar la lista de generos
+			model.addAttribute("genders", Gender.Genders); //Enviar la lista de generos
 			return "register_p.jsp";
 		} else {
 			
