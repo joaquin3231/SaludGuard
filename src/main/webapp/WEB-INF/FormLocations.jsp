@@ -11,34 +11,60 @@
 </head>
 <body>
 
-	<div>
-		<form:form action="/location/save" method="POST" modelAttribute="location" >
-			<div>
-				<form:label path="address">Direccion: </form:label>
-				<form:input path="address" class="form-control"/>
-				<form:errors path="address" class="text-danger"/>
+	<div class="container">
+		<div class="d-flex justify-content-center">
+			<h1>¡Bienvenid@ a SaludGuard!</h1>
+			<h2>Para continuar, por favor complete los campos a continuación.</h2>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col-md-9" >
+				<form:form action="/location/save" method="POST" modelAttribute="location" class="row g-3">
+				
+					<div class="col-12">
+						<form:label path="address">Dirección (indique departamento/piso si es necesario):</form:label>
+						<form:input path="address" class="form-control"/>
+						<form:errors path="address" class="text-danger"/>
+					</div>
+					
+					<div class="col-12">
+						<form:label path="address2">Segunda dirección (opcional):</form:label>
+						<form:input path="address2" class="form-control"/>
+						<form:errors path="address2" class="text-danger"/>
+					</div>
+					
+					<div class="col-12">
+							<form:label path="city">Provincia</form:label>
+							<form:select path="city" class="form-select" id="selectLocation">
+								<c:forEach items="${provinciasResp.provincias}" var="provincia">
+									<form:option value="${provincia.nombre}" id="${ provincia.id }">${provincia.nombre}</form:option>
+								</c:forEach>
+							</form:select>
+					</div>
+						
+					<div class="col-md-6">
+							<form:label path="state">Municipio:</form:label>
+							<form:select path="state" class="form-select" id="selectMunicipios">
+							</form:select>	
+					</div>
+					
+					<div class="col-md-4">
+							<form:label path="town">Localidad:</form:label>
+							<form:input path="town" class="form-control"/>
+							<form:errors path="town" class="text-danger"/>
+					</div>
+						
+					<div class="col-md-2">
+							<form:label path="postalCode">Código postal:</form:label>
+							<form:input path="postalCode" class="form-control"/>
+							<form:errors path="postalCode" class="text-danger"/>
+					</div>
+					
+					<div class="col-12">
+						<input type="submit" class="btn btn-dark mt-3" value="Registrar" >
+					</div>
+				</form:form>
 			</div>
-			
-			<div>
-				<form:label path="city"></form:label>
-				<form:select path="city" class="form-select" id="selectLocation">
-					<c:forEach items="${provinciasResp.provincias}" var="provincia">
-						<form:option value="${provincia.nombre}" id="${ provincia.id }">${provincia.nombre}</form:option>
-					</c:forEach>
-				</form:select>
-			</div>
-			
-			<div>
-				<form:label path="state">Género con el que se identifica:</form:label>
-				<form:select path="state" class="form-select" id="selectMunicipios">
-				</form:select>
-			</div>
-			
-
-			
-			<input type="submit" class="btn btn-dark mt-3" value="Registrar" >
-		</form:form>
-		
+		</div>
 	</div>
 
 

@@ -19,19 +19,21 @@
 			<div class="col-sm">
 				<img id="img2" src="../img/logosug4.png" width=35% />
 				<h2>Acceso a su historial</h2>
-				<p class="text-danger">${errorLogin}</p>
-				<form action="/login" method="POST">
-					<div>
-						<label>E-mail:</label>
-						<input type="email" class="form-control" name="email" >
-					</div>
-					<div>
-						<label>Contraseña:</label>
-						<input type="password" class="form-control" name="password" >
-					</div>
-					<input type="submit" class="btn btn-success mt-3" value="Acceder" >
-					<a class="btn btn-outline-success mt-3" href="/" role="button">Crear nueva cuenta</a>
-				</form>
+				<div class="col-md-9">
+					<p class="text-danger">${errorLogin}</p>
+					<form action="/login" method="POST">
+						<div>
+							<label>E-mail:</label>
+							<input type="email" class="form-control" name="email" >
+						</div>
+						<div>
+							<label>Contraseña:</label>
+							<input type="password" class="form-control" name="password" >
+						</div>
+						<input type="submit" class="btn btn-success mt-3" value="Acceder" >
+						<a class="btn btn-outline-success mt-3" href="/" role="button">Crear nueva cuenta</a>
+					</form>
+				</div>
 				<br>
 				<div>
 					<h6>¿Olvidó su contraseña? <a href="#">Restablézcala aquí.</a></h4>

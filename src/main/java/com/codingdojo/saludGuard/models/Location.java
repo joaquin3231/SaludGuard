@@ -13,6 +13,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -28,9 +29,20 @@ public class Location {
 	@Size(min=2, message = "Address needs at least 2 chars")
 	private String address;
 	
+	@Size(min=2, message = "Address needs at least 2 chars")
+	private String address2;
+	
 	@NotEmpty(message="State is required")
 	@Size(min=2, message = "State needs at least 2 chars")
 	private String state;
+	
+	@NotNull(message="State is required")
+	@Size(min=4, message = "State needs at least 2 chars")
+	private String postalCode;
+	
+	@NotEmpty(message="State is required")
+	@Size(min=2, message = "State needs at least 2 chars")
+	private String town;
 	
 	@NotEmpty(message="City is required")
 	@Size(min=2, message = "City needs at least 2 chars")
@@ -89,6 +101,30 @@ public class Location {
 		this.updateAt = updateAt;
 	}
 	
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getTown() {
+		return town;
+	}
+
+	public void setTown(String town) {
+		this.town = town;
+	}
+
+	public String getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
 	@PrePersist //Antes de hacer la creacion
 	protected void onCreate() {
 		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP

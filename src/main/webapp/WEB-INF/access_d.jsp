@@ -19,18 +19,20 @@
 			<div class="col-sm">
 				<img id="img2" src="../img/logosug4.png" width=35% />
 				<h2>Acceder al panel (para profesionales)</h2>
-				<p class="text-danger">${errorLogin}</p>
-				<form action="/login" method="POST">
-					<div>
-						<label>DNI (sin puntos ni espacios):</label>
-						<input type="text" class="form-control" name="userDNI" >
-					</div>
-					<div>
-						<label>Contraseña:</label>
-						<input type="password" class="form-control" name="password" >
-					</div>
-					<input type="submit" class="btn btn-success mt-3" value="Acceder" >
-				</form>
+				<div class="col-md-9">
+					<p class="text-danger">${errorLogin}</p>
+					<form action="/login" method="POST">
+						<div>
+							<label>DNI (sin puntos ni espacios):</label>
+							<input type="text" class="form-control" name="userDNI" >
+						</div>
+						<div>
+							<label>Contraseña:</label>
+							<input type="password" class="form-control" name="password" >
+						</div>
+						<input type="submit" class="btn btn-success mt-3" value="Acceder" >
+					</form>
+				</div>
 				<br>
 				<div>
 					<h5>¿Olvidó su contraseña? <a href="#">Por favor clickee aquí para restablecerla.</a></h5>

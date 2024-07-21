@@ -26,7 +26,7 @@ selectLocation.addEventListener("change", (e) => {
 async function locationSearch(id){
 
     // consultamos a la api para que traiga los municipio segun el "id" cargado
-    let response = await fetch(`https://apis.datos.gob.ar/georef/api/municipios?provincia=${id}&max=1000`)
+    let response = await fetch(`https://apis.datos.gob.ar/georef/api/municipios?orden=nombre&provincia=${id}&max=1000`)
     let data = await response.json();
 
     // Seleccionamos los "municipios" del "data"
