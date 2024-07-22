@@ -33,9 +33,15 @@ public class UserController {
 	@Autowired
 	private MedicalRecordService mrServ;
 	
+	@GetMapping("/home")
+	public String landingPage() {
+		
+		return "landingpage.jsp";
+	}
+	
 	//Registro del usuario
 	@GetMapping("/")
-	public String reguistrarUser(@ModelAttribute("newUser") User newUser,
+	public String registrarUser(@ModelAttribute("newUser") User newUser,
 			Model model) {
 		
 		model.addAttribute("genders", Gender.Genders);  //Enviar la lista de generos
