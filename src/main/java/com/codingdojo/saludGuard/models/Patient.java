@@ -27,9 +27,6 @@ public class Patient{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Size(min=2, message = "First name needs at least 2 chars")
-	private String medicaid;
-	
 	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
@@ -60,13 +57,6 @@ public class Patient{
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getMedicaid() {
-		return medicaid;
-	}
-	public void setMedicaid(String medicaid) {
-		this.medicaid = medicaid;
 	}
 
 	public Date getCreateAt() {
