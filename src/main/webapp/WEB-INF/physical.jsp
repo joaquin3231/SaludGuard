@@ -21,6 +21,16 @@
 						<form:errors path="bloodPressure" class="text-danger" />
 					</div>
 					<div>
+						<form:label path="height" >Height in meters</form:label>
+						<form:input path="height" class="form-control" />
+						<form:errors path="height" class="text-danger" />
+					</div>
+					<div>
+						<form:label path="weight" >Weight in KL</form:label>
+						<form:input path="weight" class="form-control" />
+						<form:errors path="weight" class="text-danger" />
+					</div>
+					<div>
 						<form:label path="heartRate" >heart Rate:</form:label>
 						<form:input path="heartRate" class="form-control" />
 						<form:errors path="heartRate" class="text-danger" />
