@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codingdojo.saludGuard.models.Gender;
+import com.codingdojo.saludGuard.models.MedicalRecord;
 import com.codingdojo.saludGuard.models.Patient;
 import com.codingdojo.saludGuard.models.User;
+import com.codingdojo.saludGuard.services.MedicalRecordService;
 import com.codingdojo.saludGuard.services.PatientService;
 import com.codingdojo.saludGuard.services.UserService;
 
@@ -26,7 +28,10 @@ public class UserController {
 	private UserService userServ;
 	
 	@Autowired
-	private PatientService patService;
+	private PatientService patServ;
+	
+	@Autowired
+	private MedicalRecordService mrServ;
 	
 	//Registro del usuario
 	@GetMapping("/")
@@ -77,13 +82,17 @@ public class UserController {
 			return "register_p.jsp";
 		} else {
 			
+			userServ.saveUser(newUser);
 			Patient newPatient = new Patient();
+			MedicalRecord newMedicalRecord = new MedicalRecord();
 			newPatient.setUser(newUser);
-			patService.savePatient(newPatient);
+			newPatient.setMedicalRecord(newMedicalRecord);
+			patServ.savePatient(newPatient);
+			mrServ.saveMedicalRecord(newMedicalRecord);
 			
 			//Guardo al nuevo usuario en sesión
 			session.setAttribute("userInSession", newUser);
-			return "redirect:/dashboard";
+			return "redirect:/location";
 		}
 		
 	}

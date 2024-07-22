@@ -4,11 +4,15 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -47,6 +51,11 @@ public class Location {
 	@NotEmpty(message="City is required")
 	@Size(min=2, message = "City needs at least 2 chars")
 	private String city;
+	
+	//locations a users(1:1)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", unique = true)
+	private User user;
 	
 	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

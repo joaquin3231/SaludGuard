@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
 import com.codingdojo.saludGuard.models.Location;
+import com.codingdojo.saludGuard.models.MedicalRecord;
+import com.codingdojo.saludGuard.models.Patient;
 import com.codingdojo.saludGuard.models.User;
 import com.codingdojo.saludGuard.services.LocationService;
+import com.codingdojo.saludGuard.services.MedicalRecordService;
+import com.codingdojo.saludGuard.services.PatientService;
 import com.codingdojo.saludGuard.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -25,6 +29,15 @@ public class LocationController {
 	
 	@Autowired
 	private LocationService locServ;
+	
+	@Autowired
+	private PatientService patServ;
+	
+	@Autowired
+	private MedicalRecordService mrServ;
+	
+	@Autowired
+	private LocationService locationServ;
 	
 	@GetMapping("/location")
 	public String formLocation(	@ModelAttribute("location") Location location,
@@ -66,9 +79,11 @@ public class LocationController {
 			model.addAttribute("provinciasResp", respuestaProv);
 			
 			return "FormLocations.jsp";
+			
 		} else {
+			
+			locationServ.saveLocation(location);
 			userTemp.setLocation(location);
-			userServ.saveUser(userTemp);
 			
 			return "redirect:/dashboard";
 		}

@@ -1,5 +1,5 @@
 package com.codingdojo.saludGuard.controllers;
 
-public class TreatamentController {
+public class TreatmentController {
 
 }

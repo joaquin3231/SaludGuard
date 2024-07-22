@@ -92,8 +92,8 @@ public class User {
 		return location;
 	}
 
-	public void setLocation(Location location_id) {
-		this.location = location_id;
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	
 	public String getFirstName() {
@@ -152,6 +152,8 @@ public class User {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	
+	
 
 	public Date getCreateAt() {
 		return createAt;
