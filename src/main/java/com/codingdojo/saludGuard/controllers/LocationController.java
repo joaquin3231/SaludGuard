@@ -84,8 +84,8 @@ public class LocationController {
 			
 			locationServ.saveLocation(location);
 			userTemp.setLocation(location);
-			
-			return "redirect:/dashboard";
+			Long patientId = patServ.getPatient(userTemp.getId()).getId();
+			return "redirect:/dashboard/"+patientId;
 		}
 	}
 }

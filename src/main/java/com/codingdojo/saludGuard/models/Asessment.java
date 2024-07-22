@@ -19,6 +19,8 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "asessments")
@@ -35,6 +37,10 @@ public class Asessment {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
+
+	@NotEmpty(message="Observ of patient is required")
+	@Size(min=2, message = "Observ of patient needs at least 2 chars")
+	private String observation;
 	
 	//CONEXIONES
 	//asessments a patients(1:1)
@@ -129,6 +135,14 @@ public class Asessment {
 	}
 	public void setMedicalAntecedents(List<MedicalAntecedent> medicalAntecedents) {
 		this.medicalAntecedents = medicalAntecedents;
+	}
+
+	public String getObservation() {
+		return observation;
+	}
+
+	public void setObservation(String observation) {
+		this.observation = observation;
 	}
 
 	@PrePersist //Antes de hacer la creacion

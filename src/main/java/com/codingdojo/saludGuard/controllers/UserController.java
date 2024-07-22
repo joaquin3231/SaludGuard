@@ -111,7 +111,8 @@ public class UserController {
 			return "redirect:/inicioSesion";
 		} else {
 			session.setAttribute("userInSession", userTryingLogin); //Guardando en sesión el objeto de User
-			return "redirect:/dashboard";
+			Long patientId = patServ.getPatient(userTryingLogin.getId()).getId();
+			return "redirect:/dashboard/"+patientId;
 		}
 		
 	}
