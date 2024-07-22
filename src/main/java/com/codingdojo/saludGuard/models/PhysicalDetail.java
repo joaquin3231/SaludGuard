@@ -35,8 +35,6 @@ public class PhysicalDetail {
 	@NotNull(message="Weight of patient is required")
 	private float weight;
 	
-	//IMC = peso(KG) / [estatura (m)] ** 2;
-	// el (**) significa elevado
 	private float patientIMC; //este comentario es para destacar a la variable ya que nose si va a quedarse o nop :)
 	
 	@NotEmpty(message="Blood pressure of patient is required")

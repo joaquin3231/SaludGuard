@@ -30,6 +30,15 @@ public class PhysicalController {
         if (result.hasErrors()) {
             return "physical.jsp";
         }
+        //Calculamos el IMC 
+        
+        float height = physicalDetail.getHeight(); //estatura
+        float weight = physicalDetail.getWeight(); //peso
+        //IMC = peso(KG) / [estatura (m)] ** 2;
+        float patientIMC = weight / (float) Math.pow(height, 2);
+        
+        physicalDetail.setPatientIMC(patientIMC);
+        
         psd.savePhysicalDetail(physicalDetail);
         return "redirect:/prueba"; // agrege prueba solo para probar si funciona pero cambiar despues
     }
