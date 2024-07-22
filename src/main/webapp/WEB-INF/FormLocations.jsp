@@ -18,17 +18,17 @@
 		</div>
 		<div class="row justify-content-md-center">
 			<div class="col-md-9" >
-				<form:form action="/location/save" method="POST" modelAttribute="location" class="row g-3">
+				<form:form action="/location/save" method="POST" modelAttribute="location" class="row g-3" id="formLocation">
 				
 					<div class="col-12">
 						<form:label path="address">Dirección (indique departamento/piso si es necesario):</form:label>
-						<form:input path="address" class="form-control"/>
+						<form:input path="address" class="form-control" id="address"/>
 						<form:errors path="address" class="text-danger"/>
 					</div>
 					
 					<div class="col-12">
 						<form:label path="address2">Segunda dirección (opcional):</form:label>
-						<form:input path="address2" class="form-control"/>
+						<form:input path="address2" class="form-control" id="address2"/>
 						<form:errors path="address2" class="text-danger"/>
 					</div>
 					
@@ -49,15 +49,17 @@
 					
 					<div class="col-md-4">
 							<form:label path="town">Localidad:</form:label>
-							<form:input path="town" class="form-control"/>
+							<form:input path="town" class="form-control" id="town"/>
 							<form:errors path="town" class="text-danger"/>
 					</div>
 						
 					<div class="col-md-2">
 							<form:label path="postalCode">Código postal:</form:label>
-							<form:input path="postalCode" class="form-control"/>
+							<form:input path="postalCode" class="form-control" id="postalCode"/>
 							<form:errors path="postalCode" class="text-danger"/>
 					</div>
+					
+					<input type="hidden" value="${userInSession.id}" id="user">
 					
 					<div class="col-12">
 						<input type="submit" class="btn btn-dark mt-3" value="Registrar" >
@@ -69,5 +71,6 @@
 
 
 <script src="../js/changeLocationSelect.js"></script>
+<script src="../js/saveInfoLocation.js"></script>
 </body>
 </html>

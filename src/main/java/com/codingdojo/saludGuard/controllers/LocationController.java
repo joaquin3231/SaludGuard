@@ -81,9 +81,9 @@ public class LocationController {
 			return "FormLocations.jsp";
 			
 		} else {
-			
-			locationServ.saveLocation(location);
 			userTemp.setLocation(location);
+			userServ.saveUser(userTemp);
+			
 			Long patientId = patServ.getPatient(userTemp.getId()).getId();
 			return "redirect:/dashboard/"+patientId;
 		}
