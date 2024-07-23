@@ -88,4 +88,52 @@ public class LocationController {
 			return "redirect:/dashboard/"+patientId;
 		}
 	}
+	
+	@GetMapping("/register/prof/location")
+	public String formLocationProf(	@ModelAttribute("location") Location location,
+								Model model, HttpSession session) {
+		/*=== REVISION DE SESION ===*/
+		User userTemp = (User) session.getAttribute("userInSession"); //Obj User or Null
+		
+		if(userTemp == null) {
+			
+			return "redirect:/home";
+		}
+		/*=== REVISION DE SESION ===*/
+		
+		String urlProvincias = "https://apis.datos.gob.ar/georef/api/provincias";
+		RestTemplate restTemplateProv = new RestTemplate();
+		Object respuestaProv = restTemplateProv.getForObject(urlProvincias, Object.class);
+		model.addAttribute("provinciasResp", respuestaProv);
+		
+		return "FormLocations.jsp";
+	}
+	
+	@PostMapping("/register/prof/location/save")
+	public String saveLocationProf(	@Valid @ModelAttribute("location") Location location,
+								BindingResult result, Model model, HttpSession session) {
+		
+		/*=== REVISION DE SESION ===*/
+		User doctorTemp = (User) session.getAttribute("userInSession"); //Obj User or Null
+		
+		if(doctorTemp == null) {
+			
+			return "redirect:/home";
+		}
+		/*=== REVISION DE SESION ===*/
+		
+		if(result.hasErrors()) {
+			String urlProvincias = "https://apis.datos.gob.ar/georef/api/provincias";
+			RestTemplate restTemplateProv = new RestTemplate();
+			Object respuestaProv = restTemplateProv.getForObject(urlProvincias, Object.class);
+			model.addAttribute("provinciasResp", respuestaProv);
+			
+			return "FormLocations_d.jsp";
+			
+		} else {
+			doctorTemp.setLocation(location);
+			
+			return "redirect:/register/prof/confirmation";
+		}
+	}
 }

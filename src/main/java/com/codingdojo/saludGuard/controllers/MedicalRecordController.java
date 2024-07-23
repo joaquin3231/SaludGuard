@@ -53,6 +53,10 @@ public class MedicalRecordController {
 			return "redirect:/dashboard/"+patientInSessionId;
 		}
 		
+		if(userTemp.getLocation() == null) {
+			return "redirect:/location";
+		}
+		
 		return "dashboard_p.jsp";
 		
 	}

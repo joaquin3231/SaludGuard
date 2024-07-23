@@ -61,21 +61,6 @@ public class UserController {
 		return "access_d.jsp";
 	}
 	
-	@GetMapping("/dashboard")
-	public String landing(HttpSession session) {
-		
-		/*=== REVISION DE SESION ===*/
-		User userTemp = (User) session.getAttribute("userInSession"); //Obj User or Null
-		
-		if(userTemp == null) {
-			
-			return "redirect:/";
-		}
-		/*=== REVISION DE SESION ===*/
-		
-		return "index.jsp";
-	}
-	
 	@PostMapping("/register")
 	public String register(@Valid @ModelAttribute("newUser") User newUser,
 						   BindingResult result,
@@ -116,12 +101,13 @@ public class UserController {
 			redirectAttributes.addFlashAttribute("errorLogin", "Wrong email/password");
 			return "redirect:/inicioSesion";
 		} else {
-			session.setAttribute("userInSession", userTryingLogin); //Guardando en sesión el objeto de User
-			Long patientId = patServ.getPatient(userTryingLogin.getId()).getId();
 			
 			if(userTryingLogin.getLocation() == null) {
 				return "redirect:/location";
 			}
+			
+			session.setAttribute("userInSession", userTryingLogin); //Guardando en sesión el objeto de User
+			Long patientId = patServ.getPatient(userTryingLogin.getId()).getId();
 			
 			return "redirect:/dashboard/"+patientId;
 		}
@@ -131,6 +117,7 @@ public class UserController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("userInSession");
+		session.removeAttribute("adminInSession");
 		return "redirect:/";
 	}
 	

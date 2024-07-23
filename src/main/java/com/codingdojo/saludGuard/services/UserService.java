@@ -82,6 +82,9 @@ public class UserService {
 		return ur.save(user);
 	}
 	
+	public User getUserByUserDNI(String userDNI) {
+		return ur.findByUserDNI(userDNI);
+	}
 	
 	
 	
