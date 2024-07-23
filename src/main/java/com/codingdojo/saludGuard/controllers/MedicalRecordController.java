@@ -48,7 +48,7 @@ public class MedicalRecordController {
 		model.addAttribute("assesmentList", patientAssesments);
 		
 		//Medida de seguridad extra
-		Long patientInSessionId = patServ.getPatient(userTemp.getId()).getId();
+		Long patientInSessionId = patServ.getPatientByUser(userTemp).getId();
 		if(patientInSessionId != patientId) {
 			return "redirect:/dashboard/"+patientInSessionId;
 		}

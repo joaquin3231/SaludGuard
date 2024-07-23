@@ -13,21 +13,21 @@
 
 	<div class="container">
 		<div class="d-flex justify-content-center">
-			<h1>¡Bienvenid@ a SaludGuard!</h1>
-			<h2>Para continuar, por favor complete los campos a continuación.</h2>
+			<h1>ï¿½Bienvenid@ a SaludGuard!</h1>
+			<h2>Para continuar, por favor complete los campos a continuaciï¿½n.</h2>
 		</div>
 		<div class="row justify-content-md-center">
 			<div class="col-md-9" >
 				<form:form action="/location/save" method="POST" modelAttribute="location" class="row g-3" id="formLocation">
 				
 					<div class="col-12">
-						<form:label path="address">Dirección (indique departamento/piso si es necesario):</form:label>
+						<form:label path="address">Direcciï¿½n (indique departamento/piso si es necesario):</form:label>
 						<form:input path="address" class="form-control" id="address"/>
 						<form:errors path="address" class="text-danger"/>
 					</div>
 					
 					<div class="col-12">
-						<form:label path="address2">Segunda dirección (opcional):</form:label>
+						<form:label path="address2">Segunda direcciï¿½n (opcional):</form:label>
 						<form:input path="address2" class="form-control" id="address2"/>
 						<form:errors path="address2" class="text-danger"/>
 					</div>
@@ -54,15 +54,15 @@
 					</div>
 						
 					<div class="col-md-2">
-							<form:label path="postalCode">Código postal:</form:label>
+							<form:label path="postalCode">Cï¿½digo postal:</form:label>
 							<form:input path="postalCode" class="form-control" id="postalCode"/>
 							<form:errors path="postalCode" class="text-danger"/>
 					</div>
 					
-					<input type="hidden" value="${userInSession.id}" id="user">
+					<input type="hidden" value="patient${userInSession.id}" id="user">
 					
 					<div class="col-12">
-						<input type="submit" class="btn btn-dark mt-3" value="Registrar" >
+						<input type="submit" class="btn btn-dark mt-3" value="Registrar" id="enviar">
 					</div>
 				</form:form>
 			</div>

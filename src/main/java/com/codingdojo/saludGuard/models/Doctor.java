@@ -39,7 +39,7 @@ public class Doctor {
 	
 	//CONEXIONES
 	//users a doctors(1:1)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", unique = true)
 	private User user;
 	

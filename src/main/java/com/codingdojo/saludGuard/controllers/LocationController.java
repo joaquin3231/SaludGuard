@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
+import com.codingdojo.saludGuard.models.Admin;
 import com.codingdojo.saludGuard.models.Location;
-import com.codingdojo.saludGuard.models.MedicalRecord;
-import com.codingdojo.saludGuard.models.Patient;
 import com.codingdojo.saludGuard.models.User;
 import com.codingdojo.saludGuard.services.LocationService;
 import com.codingdojo.saludGuard.services.MedicalRecordService;
@@ -84,29 +83,37 @@ public class LocationController {
 			userTemp.setLocation(location);
 			userServ.saveUser(userTemp);
 			
-			Long patientId = patServ.getPatient(userTemp.getId()).getId();
+			Long patientId = patServ.getPatientByUser(userTemp).getId();
 			return "redirect:/dashboard/"+patientId;
 		}
 	}
 	
-	@GetMapping("/register/prof/location")
+	@GetMapping("/prof/location")
 	public String formLocationProf(	@ModelAttribute("location") Location location,
 								Model model, HttpSession session) {
 		/*=== REVISION DE SESION ===*/
-		User userTemp = (User) session.getAttribute("userInSession"); //Obj User or Null
+		Admin adminTemp = (Admin) session.getAttribute("adminInSession"); //Obj User or Null
 		
-		if(userTemp == null) {
+		if(adminTemp == null) {
+			
+			return "redirect:/home";
+		}
+		
+		if(adminTemp.getId().equals(null)) {
 			
 			return "redirect:/home";
 		}
 		/*=== REVISION DE SESION ===*/
+		User doctorTemp = (User) session.getAttribute("userDoctor");
 		
 		String urlProvincias = "https://apis.datos.gob.ar/georef/api/provincias";
 		RestTemplate restTemplateProv = new RestTemplate();
 		Object respuestaProv = restTemplateProv.getForObject(urlProvincias, Object.class);
 		model.addAttribute("provinciasResp", respuestaProv);
 		
-		return "FormLocations.jsp";
+		model.addAttribute("idDoctor", doctorTemp.getId());//para el js
+		
+		return "FormLocations_d.jsp";
 	}
 	
 	@PostMapping("/register/prof/location/save")
@@ -114,15 +121,21 @@ public class LocationController {
 								BindingResult result, Model model, HttpSession session) {
 		
 		/*=== REVISION DE SESION ===*/
-		User doctorTemp = (User) session.getAttribute("userInSession"); //Obj User or Null
+		Admin adminTemp = (Admin) session.getAttribute("adminInSession"); //Obj User or Null
 		
-		if(doctorTemp == null) {
+		if(adminTemp == null) {
+			
+			return "redirect:/home";
+		}
+		
+		if(adminTemp.getId().equals(null)) {
 			
 			return "redirect:/home";
 		}
 		/*=== REVISION DE SESION ===*/
 		
 		if(result.hasErrors()) {
+			
 			String urlProvincias = "https://apis.datos.gob.ar/georef/api/provincias";
 			RestTemplate restTemplateProv = new RestTemplate();
 			Object respuestaProv = restTemplateProv.getForObject(urlProvincias, Object.class);
@@ -131,6 +144,8 @@ public class LocationController {
 			return "FormLocations_d.jsp";
 			
 		} else {
+			User doctorTemp = (User) session.getAttribute("userDoctor");
+			
 			doctorTemp.setLocation(location);
 			
 			return "redirect:/register/prof/confirmation";

@@ -24,12 +24,14 @@ const codigoPostal = document.querySelector("#postalCode");
 //input hidden para obtener el id del usuario solo serviria para verificacion
 const user = document.querySelector("#user");
 
+//variable para el boton de enviar
+const submit = document.querySelector("#enviar");
+
 //creamos una variable de tipo objeto para guardar la info de location
 let locationSave = {
     address: "",
     address2: "",
     city: "",
-    cityid:"",
     state: "",
     town: "",
     postalCode: ""
@@ -62,6 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (locationGet !== null && options[i].value == locationGet.city) {
             locationSearch(options[i].id, locationGet.state);
         }
+        if(i == options.length - 1){
+            locationSearch(2);
+        }
     }
 })
 
@@ -87,7 +92,6 @@ selectMunicipios.addEventListener("change", (e) => {
     saveLocation();
 })
 
-
 localidad.addEventListener("keyup", (e) => {
     locationSave.town = e.target.value;
     saveLocation();
@@ -96,6 +100,15 @@ localidad.addEventListener("keyup", (e) => {
 codigoPostal.addEventListener("keyup", (e) => {
     locationSave.postalCode = e.target.value;
     saveLocation();
+})
+
+submit.addEventListener("click", () => {
+
+    const {address, address2, city, state, town,postalCode} = locationSave
+
+    if(address != "" && address2 != "" && city != "" && state != "" && town != "" && postalCode != ""){
+        localStorage.removeItem(`location${user.value}`);
+    }
 })
 
 //FUNCIONES

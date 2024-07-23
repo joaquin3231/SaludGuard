@@ -9,12 +9,11 @@
 </head>
 <body>
 	<div class="container">
-		<form:form action="/register/prof/confirmation" method="POST" modelAttribute="medLicense" class="row g-3" id="formLocation">
+		<form action="/register/prof/confirmation/save" method="POST"  class="row g-3" id="formLocation">
 				
 			<div class="col-12">
-				<form:label path="medLicense">Matrícula:</form:label>
-				<form:input path="medLicense" class="form-control" id="address"/>
-				<form:errors path="medLicense" class="text-danger"/>
+				<label >Matrícula:</label>
+				<input name="medLicense" type="text" required="required" class="form-control" id="address"/>
 			</div>
 					
 			<input type="hidden" value="${userInSession.id}" id="user">
@@ -22,7 +21,7 @@
 			<div class="col-12">
 				<input type="submit" class="btn btn-dark mt-3" value="Registrar" >
 			</div>
-		</form:form>
+		</form>
 	</div>
 </body>
 </html>

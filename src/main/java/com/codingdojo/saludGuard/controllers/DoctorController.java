@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.codingdojo.saludGuard.models.Admin;
 import com.codingdojo.saludGuard.models.Doctor;
@@ -67,15 +69,17 @@ public class DoctorController {
 			
 			userServ.saveUser(newUser);
 			
-			return "redirect:/register/prof/location";
+			session.setAttribute("userDoctor", newUser);
+			
+			return "redirect:/prof/location";
 		}
 		
 	}
 	
 	@GetMapping("/register/prof/confirmation")
-	public String confirmDoctor(@ModelAttribute("medLicense") String medLicense, Model model, HttpSession session) {
+	public String confirmDoctor(Model model, HttpSession session) {
 		/*=== REVISION DE SESION ===*/
-		User doctorTemp = (User) session.getAttribute("userInSession"); //Obj User or Null
+		User doctorTemp = (User) session.getAttribute("userDoctor"); //Obj User or Null
 		
 		if(doctorTemp == null) {
 			
@@ -85,27 +89,23 @@ public class DoctorController {
 		return "confirm_reg_d.jsp";
 	}
 	
-	@PostMapping("/register/prof/confirmation")
-	public String confirmDoctor(@Valid @ModelAttribute("medLicense") String medLicense, BindingResult result, Model model, HttpSession session) {
-		User doctorTemp = (User) session.getAttribute("userInSession"); //Obj User or Null
+	@PostMapping("/register/prof/confirmation/save")
+	public String confirmDoctor(@RequestParam("medLicense") String medLicense, Model model, HttpSession session) {
+		User doctorTemp = (User) session.getAttribute("userDoctor"); //Obj User or Null
 		
 		if(doctorTemp == null) {
 			
 			return "redirect:/home";
 		}
 		/*=== REVISION DE SESION ===*/
-		
-		if(result.hasErrors()) {
 			
-			return "confirm_reg_d.jsp";
-		} else {
-			
-			Doctor newDoctor = new Doctor();
-			newDoctor.setUser(doctorTemp);
-			doctorService.saveDoctor(newDoctor);
-			newDoctor.setMedLicense(medLicense);
-			return "redirect:/admin/centraldashboard";
-		}
+		Doctor newDoctor = new Doctor();
+		newDoctor.setUser(doctorTemp);
+		newDoctor.setMedLicense(medLicense);
+		doctorService.saveDoctor(newDoctor);
+
+		return "redirect:/admin/centraldashboard";
+	
 	}
 	
 	

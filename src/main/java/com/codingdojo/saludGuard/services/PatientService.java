@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codingdojo.saludGuard.models.Patient;
+import com.codingdojo.saludGuard.models.User;
 import com.codingdojo.saludGuard.repositories.PatientRepository;
 
 @Service
@@ -18,6 +19,10 @@ public class PatientService {
 	
 	public Patient getPatient(Long id) {
 		return PatientRepo.findById(id).orElse(null);
+	}
+	
+	public Patient getPatientByUser(User user) {
+		return PatientRepo.findByUser(user);
 	}
 	
 	public void deletePatient(Long id) {
