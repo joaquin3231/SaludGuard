@@ -18,7 +18,7 @@
 		</div>
 		<div class="row justify-content-md-center">
 			<div class="col-md-9" >
-				<form:form action="/register/prof/location/save" method="POST" modelAttribute="location" class="row g-3" id="formLocation">
+				<form:form action="/profLocation/save" method="POST" modelAttribute="location" class="row g-3" id="formLocation">
 				
 					<div class="col-12">
 						<form:label path="address">Direcci�n (indique departamento/piso si es necesario):</form:label>

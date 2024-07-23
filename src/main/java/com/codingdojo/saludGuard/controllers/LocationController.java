@@ -116,7 +116,7 @@ public class LocationController {
 		return "FormLocations_d.jsp";
 	}
 	
-	@PostMapping("/register/prof/location/save")
+	@PostMapping("/profLocation/save")
 	public String saveLocationProf(	@Valid @ModelAttribute("location") Location location,
 								BindingResult result, Model model, HttpSession session) {
 		
