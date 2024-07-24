@@ -40,7 +40,7 @@ public class TreatmentController {
 		/*=== REVISION DE SESION ===*/
 		
 		
-		return "treatmetnForm.jsp";
+		return "treatment.jsp";
 	}
 	
 	@PostMapping("/treatment/save")
@@ -58,7 +58,7 @@ public class TreatmentController {
 		/*=== REVISION DE SESION ===*/
 		
 		if(result.hasErrors()) {
-			return "treatmetnForm.jsp";
+			return "treatment.jsp";
 		} else {
 			
 			treatServ.saveTreatment(treatment);

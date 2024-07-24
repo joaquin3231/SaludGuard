@@ -32,7 +32,7 @@
 			<div class="col-12 d-flex justify-content-center">
 				<div class="form-container">
 				<h2 class="text-center">Treatment</h2>
-				<form:form action="/treatment" method="POST" modelAttribute="treatment" >
+				<form:form action="/treatment/save" method="POST" modelAttribute="treatmentNew" >
 					<div class="mb-3">
 						<form:label path="type" >type:</form:label>
 						<form:input path="type" class="form-control" />
