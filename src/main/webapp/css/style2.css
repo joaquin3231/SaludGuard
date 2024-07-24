@@ -7,3 +7,10 @@
 #img2 {
 	margin-bottom:2vh;
 }
+
+.radio-canada-big-body {
+  font-family: "Radio Canada Big", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
