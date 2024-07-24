@@ -21,7 +21,7 @@
 				<h2>Acceder al panel (para profesionales)</h2>
 				<div class="col-md-9">
 					<p class="text-danger">${errorLogin}</p>
-					<form action="/login" method="POST">
+					<form action="/loginDoc" method="POST">
 						<div>
 							<label>DNI (sin puntos ni espacios):</label>
 							<input type="text" class="form-control" name="userDNI" >
