@@ -18,6 +18,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -38,19 +39,17 @@ public class Asessment {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
 
-	@NotEmpty(message="Observ of patient is required")
-	@Size(min=2, message = "Observ of patient needs at least 2 chars")
 	private String observation;
 	
 	//CONEXIONES
 	//asessments a patients(1:1)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "patient_id", unique = true)
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn(name = "patient_id")
 	private Patient patient;
 	
 	//asessments a patients(1:1)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "doctor_id", unique = true)
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn(name = "doctor_id")
 	private Doctor doctor;
 	
 	//asessments a medical_redords( 1:n )
@@ -59,15 +58,15 @@ public class Asessment {
 	private MedicalRecord medicalRecord;
 	
 	//asessments a treatments ( n:1 )
-	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY)
 	private List<Treatment> treatmentList;
 	
 	//asessments a physical_detais ( n:1 )
-	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY)
 	private List<PhysicalDetail> physicalDetailList;
 	
 	//asessments a medical_antecedents ( n:1 )
-	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY)
 	private List<MedicalAntecedent> medicalAntecedents;
 	
 	//CONSTRUCTOR

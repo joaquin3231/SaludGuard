@@ -12,5 +12,8 @@
 	
 	<h2>con el paciente ${ patientTemp.user.firstName }</h2>
 
+	<a href="/treatment">new Treatment</a> <br>
+	<a href="/physical">new Physical Details</a> <br>
+	<a>new Medical Antecedent</a> <br>
 </body>
 </html>

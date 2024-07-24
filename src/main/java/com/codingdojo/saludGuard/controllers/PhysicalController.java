@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.codingdojo.saludGuard.models.Doctor;
 import com.codingdojo.saludGuard.models.PhysicalDetail;
 import com.codingdojo.saludGuard.services.PhysicalDetailService;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -20,13 +22,33 @@ public class PhysicalController {
 	private PhysicalDetailService  psd;
 	
 	@GetMapping("/physical")
-    public String showPhysicalDetail(@ModelAttribute("physicalDetail") PhysicalDetail physicalDetail) {
+    public String showPhysicalDetail(@ModelAttribute("physicalDetail") PhysicalDetail physicalDetail, HttpSession session) {
+		
+		/*=== REVISION DE SESION ===*/
+		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
+
+		if(doctTemp == null) {
+			
+			return "redirect:/inicioSesion/doc";
+		}
+		/*=== REVISION DE SESION ===*/
+		
         return "physical.jsp";
     }
 
     @PostMapping("/physical")
     public String createPhysicalDetail(@Valid @ModelAttribute("physicalDetail") PhysicalDetail physicalDetail,
-                                       BindingResult result, Model model) {
+                                       BindingResult result, Model model, HttpSession session) {
+    	
+		/*=== REVISION DE SESION ===*/
+		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
+
+		if(doctTemp == null) {
+			
+			return "redirect:/inicioSesion/doc";
+		}
+		/*=== REVISION DE SESION ===*/
+    	
         if (result.hasErrors()) {
             return "physical.jsp";
         }

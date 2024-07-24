@@ -39,9 +39,12 @@ public class Doctor {
 	
 	//CONEXIONES
 	//users a doctors(1:1)
-	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", unique = true)
 	private User user;
+	
+	@OneToOne(mappedBy = "doctor", fetch = FetchType.LAZY)
+	private Asessment asessment;
 	
 	//CONSTRUCTOR
 	public Doctor() {}
@@ -80,6 +83,13 @@ public class Doctor {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Asessment getAsessment() {
+		return asessment;
+	}
+	public void setAsessment(Asessment asessment) {
+		this.asessment = asessment;
 	}
 
 	@PrePersist //Antes de hacer la creacion
