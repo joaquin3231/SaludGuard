@@ -20,7 +20,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "treatment")
+@Table(name = "treatments")
 public class Treatment {
 
 	//VARIABLES	

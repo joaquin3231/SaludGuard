@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.codingdojo.saludGuard.models.Doctor;
 import com.codingdojo.saludGuard.models.Gender;
 import com.codingdojo.saludGuard.models.MedicalRecord;
 import com.codingdojo.saludGuard.models.Patient;
 import com.codingdojo.saludGuard.models.User;
+import com.codingdojo.saludGuard.services.DoctorService;
 import com.codingdojo.saludGuard.services.MedicalRecordService;
 import com.codingdojo.saludGuard.services.PatientService;
 import com.codingdojo.saludGuard.services.UserService;
@@ -29,6 +31,9 @@ public class UserController {
 	
 	@Autowired
 	private PatientService patServ;
+	
+	@Autowired
+	private DoctorService docServ;
 	
 	@Autowired
 	private MedicalRecordService mrServ;
@@ -106,6 +111,30 @@ public class UserController {
 			Long patientId = patServ.getPatientByUser(userTryingLogin).getId();
 			
 			return "redirect:/dashboard/"+patientId;
+		}
+		
+	}
+	
+	@PostMapping("/loginDoc")
+	public String loginDoc(@RequestParam("userDNI") String userDNI,
+						@RequestParam("password") String password,
+						RedirectAttributes redirectAttributes, /*usar mensajes de Flash*/   
+						HttpSession session){
+		
+		User userTryingLogin = userServ.loginByDni(userDNI, password); //Obj User o null
+		
+		if(userTryingLogin == null) {
+			//Tiene algo mal
+			redirectAttributes.addFlashAttribute("errorLogin", "Wrong email/password");
+			return "redirect:/inicioSesion/doc";
+		} else {
+			
+			Doctor doctTemp = docServ.getDoctorByUser(userTryingLogin);
+			
+			session.setAttribute("doctTemp", doctTemp); //Guardando en sesión el objeto de User
+			
+			
+			return "redirect:/findPatient";
 		}
 		
 	}

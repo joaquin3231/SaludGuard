@@ -72,6 +72,24 @@ public class UserService {
 		
 	}
 	
+	public User loginByDni(String dni, String password) {
+		//Revisamos que el correo exista en BD
+		User userTryingLogin = ur.findByUserDNI(dni); //Objeto User o NULL
+		
+		if(userTryingLogin == null) {
+			return null;
+		}
+		
+		//Comparar las contraseñas
+		//BCrypt.checkpw(Contra NO encriptada, Contra SI encriptada) -> True o False
+		if(BCrypt.checkpw(password, userTryingLogin.getPassword())) {
+			return userTryingLogin;
+		} else {
+			return null;
+		}
+		
+	}
+	
 	/* Método que en base a un id nos regresa un objeto de User */
 	public User getUser(Long id) {
 		return ur.findById(id).orElse(null);
