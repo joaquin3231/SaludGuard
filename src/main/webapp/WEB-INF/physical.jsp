@@ -11,13 +11,14 @@
 
 <style>
     body {
-        background-image: url("../img/login_pac.png"); /* Ruta de la imagen de fondo */
+        background-image: url("../img/login_pac.png"); 
         background-size: cover;
         background-position: center;
         height: 500px;
+        margin: 20px;
     }
     .form-container {
-        background-color: rgba(255, 255, 255, 0.8);
+       	background-color: rgba(255, 255, 255, 0.6);
         padding: 30px;
         margin: 20px;
         border-radius: 10px;
