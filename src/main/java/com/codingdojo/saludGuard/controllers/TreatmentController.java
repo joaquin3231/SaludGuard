@@ -88,10 +88,10 @@ public class TreatmentController {
 			treatment.setMedicalRecord(patient.getMedicalRecord());
 			treatServ.saveTreatment(treatment);
 			
-			asessTemp.getTreatmentList().add(treatment);
+			asessment.getTreatmentList().add(treatment);
 			asessServ.saveAsessment(asessment);
 			
-			patientTemp.getMedicalRecord().getTreatmentList().add(treatment);
+			patient.getMedicalRecord().getTreatmentList().add(treatment);
 			medicRecServ.saveMedicalRecord(patient.getMedicalRecord());
 			
 			return "redirect:/dashboard/doctor";

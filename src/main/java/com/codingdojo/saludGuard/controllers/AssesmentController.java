@@ -110,7 +110,9 @@ public class AssesmentController {
         Asessment newAsessment = new Asessment();
 
         if (session.getAttribute("antecedentTemp") != null) {
-            newAsessment = (Asessment) session.getAttribute("antecedentTemp");
+        	Asessment asessTemp = (Asessment) session.getAttribute("antecedentTemp");
+            
+            newAsessment = asessServ.getAsessment(asessTemp.getId());
         }
 
         newAsessment.setPatient(patient); //cargamos el paciente a la consulta

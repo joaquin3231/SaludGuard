@@ -14,6 +14,7 @@ import com.codingdojo.saludGuard.models.Patient;
 import com.codingdojo.saludGuard.models.PhysicalDetail;
 import com.codingdojo.saludGuard.services.AssesmentService;
 import com.codingdojo.saludGuard.services.MedicalRecordService;
+import com.codingdojo.saludGuard.services.PatientService;
 import com.codingdojo.saludGuard.services.PhysicalDetailService;
 
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +31,9 @@ public class PhysicalController {
 	
 	@Autowired
 	private MedicalRecordService medicRecServ;
+	
+	@Autowired
+	private PatientService patServ;
 	
 	@GetMapping("/physical")
     public String showPhysicalDetail(@ModelAttribute("physicalDetail") PhysicalDetail physicalDetail, HttpSession session) {
@@ -76,15 +80,26 @@ public class PhysicalController {
 		Asessment asessTemp = (Asessment) session.getAttribute("antecedentTemp");
 		Patient patientTemp = (Patient) session.getAttribute("patientTemp");
         
-        physicalDetail.setAsessment(asessTemp);
-        physicalDetail.setMedicalRecord(patientTemp.getMedicalRecord());
+		Asessment asessment = asessServ.getAsessment(asessTemp.getId());
+        if (asessment == null) {
+            return "redirect:/physical";
+        }
+        
+        Patient patient = patServ.getPatient(patientTemp.getId());
+        if (patient == null) {
+            return "redirect:/physical";
+        }
+		
+		
+        physicalDetail.setAsessment(asessment);
+        physicalDetail.setMedicalRecord(patient.getMedicalRecord());
         psd.savePhysicalDetail(physicalDetail);
         
-        asessTemp.getPhysicalDetailList().add(physicalDetail);
-        asessServ.saveAsessment(asessTemp);
+        asessment.getPhysicalDetailList().add(physicalDetail);
+        asessServ.saveAsessment(asessment);
         
-        patientTemp.getMedicalRecord().getPhysicalDetailList().add(physicalDetail);
-		medicRecServ.saveMedicalRecord(patientTemp.getMedicalRecord());
+        patient.getMedicalRecord().getPhysicalDetailList().add(physicalDetail);
+		medicRecServ.saveMedicalRecord(patient.getMedicalRecord());
         
         return "redirect:/dashboard/doctor"; // agrege prueba solo para probar si funciona pero cambiar despues
     }
