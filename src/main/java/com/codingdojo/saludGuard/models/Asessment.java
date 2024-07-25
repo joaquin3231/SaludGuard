@@ -44,30 +44,30 @@ public class Asessment {
 	
 	//CONEXIONES
 	//asessments a patients(1:1)
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "patient_Id", unique = false)
 	private Patient patient;
 	
 	//asessments a patients(1:1)
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "doctor_Id", unique = false)
 	private Doctor doctor;
 	
 	//asessments a medical_redords( 1:n )
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "medical_record_id")
 	private MedicalRecord medicalRecord;
 	
 	//asessments a treatments ( n:1 )
-	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Treatment> treatmentList;
 	
 	//asessments a physical_detais ( n:1 )
-	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<PhysicalDetail> physicalDetailList;
 	
 	//asessments a medical_antecedents ( n:1 )
-	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<MedicalAntecedent> medicalAntecedents;
 	
 	//CONSTRUCTOR

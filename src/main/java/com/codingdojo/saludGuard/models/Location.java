@@ -53,7 +53,7 @@ public class Location {
 	private String city;
 	
 	//locations a users(1:1)
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", unique = true)
 	private User user;
 	

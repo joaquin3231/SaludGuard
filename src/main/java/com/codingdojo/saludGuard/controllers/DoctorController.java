@@ -89,7 +89,7 @@ public class DoctorController {
 		return "confirm_reg_d.jsp";
 	}
 	
-	@PostMapping("/register/prof/confirmation/save")
+	@PostMapping("/save/prof")
 	public String confirmDoctor(@RequestParam("medLicense") String medLicense, Model model, HttpSession session) {
 		User doctorTemp = (User) session.getAttribute("userDoctor"); //Obj User or Null
 		

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="container">
-		<form action="/register/prof/confirmation/save" method="POST"  class="row g-3" id="formLocation">
+		<form action="/save/prof" method="POST"  class="row g-3" id="formLocation">
 				
 			<div class="col-12">
 				<label >Matrícula:</label>

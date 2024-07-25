@@ -80,33 +80,52 @@ public class AssesmentController {
 	@GetMapping("/dashboard/doctor")
 	public String dashboardDoctor(HttpSession session) {
 		
-		/*=== REVISION DE SESION ===*/
-		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
+		 /*=== REVISION DE SESION ===*/
+        Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
 
-		if(doctTemp == null) {
-			
-			return "redirect:/inicioSesion/doc";
-		}
-		/*=== REVISION DE SESION ===*/
-		Asessment newAsessment = new Asessment();
-		
-		if(session.getAttribute("antecedentTemp") != null) {
-			newAsessment = (Asessment) session.getAttribute("antecedentTemp");
-		}
-		Patient patientTemp = (Patient) session.getAttribute("patientTemp");
-		
-		newAsessment.setPatient(patientTemp); //cargamos el paciente a la consulta
-		newAsessment.setDoctor(doctTemp); //cargamos el doctor a la consulta
-		newAsessment.setMedicalRecord(patientTemp.getMedicalRecord());
-		
-		patientTemp.getMedicalRecord().getAssementList().add(newAsessment);
-		asessServ.saveAsessment(newAsessment);
-		
-		medicRecServ.saveMedicalRecord(patientTemp.getMedicalRecord());
+        if (doctTemp == null) {
+            return "redirect:/inicioSesion/doc";
+        }
+        /*=== REVISION DE SESION ===*/
 
-		session.setAttribute("antecedentTemp", newAsessment);
-		
-		return "dashboard_d.jsp";
+        // Obtener doctor de la base de datos para asegurar que está gestionado
+        Doctor doctor = docServ.getDoctor(doctTemp.getId());
+        if (doctor == null) {
+            return "redirect:/inicioSesion/doc";
+        }
+
+        // Obtener patient de la sesión y desde el servicio para asegurar que está gestionado
+        Patient patientTemp = (Patient) session.getAttribute("patientTemp");
+        Patient patient = patServ.getPatient(patientTemp.getId());
+        if (patient == null) {
+            return "redirect:/findPatient";
+        }
+
+        // Obtener el registro médico desde el servicio para asegurar que está gestionado
+        MedicalRecord medicalRecord = medicRecServ.getMedicalRecord(patient.getMedicalRecord().getId());
+        if (medicalRecord == null) {
+            return "redirect:/findPatient";
+        }
+
+        Asessment newAsessment = new Asessment();
+
+        if (session.getAttribute("antecedentTemp") != null) {
+            newAsessment = (Asessment) session.getAttribute("antecedentTemp");
+        }
+
+        newAsessment.setPatient(patient); //cargamos el paciente a la consulta
+        newAsessment.setDoctor(doctor); //cargamos el doctor a la consulta
+        newAsessment.setMedicalRecord(medicalRecord);
+
+        medicalRecord.getAssementList().add(newAsessment);
+        asessServ.saveAsessment(newAsessment);
+
+        medicRecServ.saveMedicalRecord(medicalRecord);
+
+        session.setAttribute("antecedentTemp", newAsessment);
+
+        return "dashboard_d.jsp";
+        
 	}
 	
 	@GetMapping("/existConsult")

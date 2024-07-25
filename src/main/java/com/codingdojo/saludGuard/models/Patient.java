@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -36,17 +37,17 @@ public class Patient{
 	
 	//CONEXIONES
 	//users a patients(1:1)
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", unique = true)
 	private User user;
 	
 	//medical_records a patients(1:1)
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "medical_record_id", unique = true)
 	private MedicalRecord medicalRecord;
 	
 	//patient a asessment (n: 1)
-	@OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Asessment> asessment;
 	
 	

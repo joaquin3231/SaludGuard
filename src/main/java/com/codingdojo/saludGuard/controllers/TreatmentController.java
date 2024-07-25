@@ -11,10 +11,10 @@ import com.codingdojo.saludGuard.models.Asessment;
 import com.codingdojo.saludGuard.models.Doctor;
 import com.codingdojo.saludGuard.models.Patient;
 import com.codingdojo.saludGuard.models.Treatment;
-import com.codingdojo.saludGuard.models.User;
 import com.codingdojo.saludGuard.services.AssesmentService;
 import com.codingdojo.saludGuard.services.DoctorService;
 import com.codingdojo.saludGuard.services.MedicalRecordService;
+import com.codingdojo.saludGuard.services.PatientService;
 import com.codingdojo.saludGuard.services.TreatmentService;
 
 import jakarta.servlet.http.HttpSession;
@@ -35,6 +35,9 @@ public class TreatmentController {
 	
 	@Autowired
 	private DoctorService docServ;
+	
+	@Autowired
+	private PatientService patServ;
 	
 	@GetMapping("/treatment")
 	public String treatmentForm(@ModelAttribute("treatmentNew") Treatment treatment,
@@ -71,15 +74,25 @@ public class TreatmentController {
 			Asessment asessTemp = (Asessment) session.getAttribute("antecedentTemp");
 			Patient patientTemp = (Patient) session.getAttribute("patientTemp");
 			
-			treatment.setAsessment(asessTemp);
-			treatment.setMedicalRecord(patientTemp.getMedicalRecord());
+			Asessment asessment = asessServ.getAsessment(asessTemp.getId());
+	        if (asessment == null) {
+	            return "redirect:/treatment";
+	        }
+	        
+	        Patient patient = patServ.getPatient(patientTemp.getId());
+	        if (patient == null) {
+	            return "redirect:/treatment";
+	        }
+			
+			treatment.setAsessment(asessment);
+			treatment.setMedicalRecord(patient.getMedicalRecord());
 			treatServ.saveTreatment(treatment);
 			
 			asessTemp.getTreatmentList().add(treatment);
-			asessServ.saveAsessment(asessTemp);
+			asessServ.saveAsessment(asessment);
 			
 			patientTemp.getMedicalRecord().getTreatmentList().add(treatment);
-			medicRecServ.saveMedicalRecord(patientTemp.getMedicalRecord());
+			medicRecServ.saveMedicalRecord(patient.getMedicalRecord());
 			
 			return "redirect:/dashboard/doctor";
 		}

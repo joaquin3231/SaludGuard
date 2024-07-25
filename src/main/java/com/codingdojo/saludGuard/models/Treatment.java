@@ -45,12 +45,12 @@ public class Treatment {
 	
 	//CONEXIONES
 	//treatments a asessments ( 1:n )
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "assement_id")
 	private Asessment asessment;
 	
 	//treatments a medical_redords ( 1:n )
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "medical_record_id")
 	private MedicalRecord medicalRecord;
 	
