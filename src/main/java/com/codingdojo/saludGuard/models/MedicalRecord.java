@@ -36,19 +36,19 @@ public class MedicalRecord {
 	
 	//CONEXIONES
 	//medical_redords a asessments( n:1 )
-	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY)
 	private List<Asessment> assementList;
 	
 	//medical_redords a treatment( n:1 )
-	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY)
 	private List<Treatment> treatmentList;
 	
 	//medical_redords a physical_detais ( n:1 )
-	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY)
 	private List<PhysicalDetail> physicalDetailList;
 	
 	//medical_redords a medical_antecedents ( n:1 )
-	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY)
 	private List<MedicalAntecedent> medicalAntecedentsList;
 	
 	

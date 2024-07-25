@@ -52,12 +52,12 @@ public class MedicalAntecedent {
 	
 	//CONEXIONES
 	//medical_antecedents a asessments ( 1:n )
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "assement_id")
 	private Asessment asessment;
 	
 	//medical_antecedents a medical_redords ( 1:n )
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "medical_record_id")
 	private MedicalRecord medicalRecord;
 	

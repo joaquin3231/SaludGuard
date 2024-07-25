@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.codingdojo.saludGuard.models.Asessment;
 import com.codingdojo.saludGuard.models.Doctor;
+import com.codingdojo.saludGuard.models.Patient;
 import com.codingdojo.saludGuard.models.PhysicalDetail;
+import com.codingdojo.saludGuard.services.AssesmentService;
+import com.codingdojo.saludGuard.services.MedicalRecordService;
 import com.codingdojo.saludGuard.services.PhysicalDetailService;
 
 import jakarta.servlet.http.HttpSession;
@@ -20,6 +24,12 @@ public class PhysicalController {
 	
 	@Autowired
 	private PhysicalDetailService  psd;
+	
+	@Autowired
+	private AssesmentService asessServ;
+	
+	@Autowired
+	private MedicalRecordService medicRecServ;
 	
 	@GetMapping("/physical")
     public String showPhysicalDetail(@ModelAttribute("physicalDetail") PhysicalDetail physicalDetail, HttpSession session) {
@@ -61,8 +71,22 @@ public class PhysicalController {
         
         physicalDetail.setPatientIMC(patientIMC);
         
+        
+        //conectando todas las cosas para la base de datos
+		Asessment asessTemp = (Asessment) session.getAttribute("antecedentTemp");
+		Patient patientTemp = (Patient) session.getAttribute("patientTemp");
+        
+        physicalDetail.setAsessment(asessTemp);
+        physicalDetail.setMedicalRecord(patientTemp.getMedicalRecord());
         psd.savePhysicalDetail(physicalDetail);
-        return "redirect:/prueba"; // agrege prueba solo para probar si funciona pero cambiar despues
+        
+        asessTemp.getPhysicalDetailList().add(physicalDetail);
+        asessServ.saveAsessment(asessTemp);
+        
+        patientTemp.getMedicalRecord().getPhysicalDetailList().add(physicalDetail);
+		medicRecServ.saveMedicalRecord(patientTemp.getMedicalRecord());
+        
+        return "redirect:/dashboard/doctor"; // agrege prueba solo para probar si funciona pero cambiar despues
     }
 	
 

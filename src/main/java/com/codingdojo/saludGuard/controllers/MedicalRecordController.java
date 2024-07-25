@@ -39,6 +39,10 @@ public class MedicalRecordController {
 		}
 		/* === REVISAMOS SESION === */
 		
+		if(userTemp.getLocation() == null) {
+			return "redirect:/location";
+		}
+		
 		//Enviar mi paciente
 		Patient myPatient = patServ.getPatient(patientId);
 		model.addAttribute("patient", myPatient);
@@ -51,10 +55,6 @@ public class MedicalRecordController {
 		Long patientInSessionId = patServ.getPatientByUser(userTemp).getId();
 		if(patientInSessionId != patientId) {
 			return "redirect:/dashboard/"+patientInSessionId;
-		}
-		
-		if(userTemp.getLocation() == null) {
-			return "redirect:/location";
 		}
 		
 		return "dashboard_p.jsp";

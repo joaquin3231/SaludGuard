@@ -74,6 +74,7 @@ public class User {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "location_id", unique = true)
 	private Location location;
+
 	
 	//CONSTRUCTOR
 	public User() {}
@@ -152,8 +153,6 @@ public class User {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
-	
 
 	public Date getCreateAt() {
 		return createAt;

@@ -148,6 +148,8 @@ public class LocationController {
 			
 			doctorTemp.setLocation(location);
 			
+			session.setAttribute("userDoctor", doctorTemp);
+			
 			return "redirect:/register/prof/confirmation";
 		}
 	}

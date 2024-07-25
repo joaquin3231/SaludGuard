@@ -78,8 +78,7 @@ public class AssesmentController {
 	}
 	
 	@GetMapping("/dashboard/doctor")
-	public String dashboardDoctor(	@ModelAttribute("assesment") Asessment newAsessment,
-									HttpSession session) {
+	public String dashboardDoctor(HttpSession session) {
 		
 		/*=== REVISION DE SESION ===*/
 		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
@@ -89,6 +88,8 @@ public class AssesmentController {
 			return "redirect:/inicioSesion/doc";
 		}
 		/*=== REVISION DE SESION ===*/
+		Asessment newAsessment = new Asessment();
+		
 		if(session.getAttribute("antecedentTemp") != null) {
 			newAsessment = (Asessment) session.getAttribute("antecedentTemp");
 		}
@@ -99,15 +100,28 @@ public class AssesmentController {
 		newAsessment.setMedicalRecord(patientTemp.getMedicalRecord());
 		
 		patientTemp.getMedicalRecord().getAssementList().add(newAsessment);
+		asessServ.saveAsessment(newAsessment);
+		
 		medicRecServ.saveMedicalRecord(patientTemp.getMedicalRecord());
-		
-
-		
 
 		session.setAttribute("antecedentTemp", newAsessment);
 		
-		
-		
 		return "dashboard_d.jsp";
+	}
+	
+	@GetMapping("/existConsult")
+	public String finishConsult(HttpSession session) {
+		/*=== REVISION DE SESION ===*/
+		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
+
+		if(doctTemp == null) {
+			
+			return "redirect:/inicioSesion/doc";
+		}
+		/*=== REVISION DE SESION ===*/
+		
+		session.removeAttribute("antecedentTemp");
+		
+		return "redirect:/findPatient";
 	}
 }

@@ -1,10 +1,10 @@
 package com.codingdojo.saludGuard.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -39,12 +40,13 @@ public class Doctor {
 	
 	//CONEXIONES
 	//users a doctors(1:1)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", unique = true)
 	private User user;
 	
-	@OneToOne(mappedBy = "doctor", fetch = FetchType.LAZY)
-	private Asessment asessment;
+	//doctor a asessments( n:1 )
+	@OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
+	private List<Asessment> asessment;
 	
 	//CONSTRUCTOR
 	public Doctor() {}
@@ -85,10 +87,10 @@ public class Doctor {
 		this.user = user;
 	}
 
-	public Asessment getAsessment() {
+	public List<Asessment> getAsessment() {
 		return asessment;
 	}
-	public void setAsessment(Asessment asessment) {
+	public void setAsessment(List<Asessment> asessment) {
 		this.asessment = asessment;
 	}
 

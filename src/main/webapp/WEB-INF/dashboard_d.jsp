@@ -15,5 +15,6 @@
 	<a href="/treatment">new Treatment</a> <br>
 	<a href="/physical">new Physical Details</a> <br>
 	<a>new Medical Antecedent</a> <br>
+	<a href="/existConsult">Finish Asessment</a>
 </body>
 </html>

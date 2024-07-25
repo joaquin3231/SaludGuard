@@ -62,12 +62,12 @@ public class PhysicalDetail {
 	
 	//CONEXIONES
 	//physical_detais a asessments ( 1:n )
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "assement_id")
 	private Asessment asessment;
 	
 	//physical_detais a medical_redords ( 1:n )
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "medical_record_id")
 	private MedicalRecord medicalRecord;
 	

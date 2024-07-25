@@ -1,10 +1,10 @@
 package com.codingdojo.saludGuard.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,11 +12,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "patients")
@@ -36,14 +36,18 @@ public class Patient{
 	
 	//CONEXIONES
 	//users a patients(1:1)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", unique = true)
 	private User user;
 	
 	//medical_records a patients(1:1)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "medical_record_id", unique = true)
 	private MedicalRecord medicalRecord;
+	
+	//patient a asessment (n: 1)
+	@OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+	private List<Asessment> asessment;
 	
 	
 	//CONSTRUCTOR
@@ -85,6 +89,13 @@ public class Patient{
 	}
 	public void setMedicalRecord(MedicalRecord medicalRecord) {
 		this.medicalRecord = medicalRecord;
+	}
+
+	public List<Asessment> getAsessment() {
+		return asessment;
+	}
+	public void setAsessment(List<Asessment> asessment) {
+		this.asessment = asessment;
 	}
 
 	@PrePersist //Antes de hacer la creacion

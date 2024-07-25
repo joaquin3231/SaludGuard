@@ -125,7 +125,7 @@ public class UserController {
 		
 		if(userTryingLogin == null) {
 			//Tiene algo mal
-			redirectAttributes.addFlashAttribute("errorLogin", "Wrong email/password");
+			redirectAttributes.addFlashAttribute("errorLogin", "Wrong dni/password");
 			return "redirect:/inicioSesion/doc";
 		} else {
 			

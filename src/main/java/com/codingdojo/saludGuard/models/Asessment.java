@@ -1,5 +1,6 @@
 package com.codingdojo.saludGuard.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,17 +44,17 @@ public class Asessment {
 	
 	//CONEXIONES
 	//asessments a patients(1:1)
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn(name = "patient_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "patient_Id", unique = false)
 	private Patient patient;
 	
 	//asessments a patients(1:1)
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn(name = "doctor_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "doctor_Id", unique = false)
 	private Doctor doctor;
 	
 	//asessments a medical_redords( 1:n )
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "medical_record_id")
 	private MedicalRecord medicalRecord;
 	
@@ -70,7 +71,11 @@ public class Asessment {
 	private List<MedicalAntecedent> medicalAntecedents;
 	
 	//CONSTRUCTOR
-	public Asessment() {}
+	public Asessment() {
+		this.treatmentList = new ArrayList<>();
+		this.physicalDetailList = new ArrayList<>();
+		this.medicalAntecedents = new ArrayList<>();
+	}
 
 	//GETTERS AND SETTERS
 	public Long getId() {
