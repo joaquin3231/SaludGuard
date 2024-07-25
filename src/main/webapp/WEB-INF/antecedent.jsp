@@ -16,16 +16,19 @@
 		<div class="row">
 			<div class="col-6">
 				<h2>Medical Antecedent</h2>
-				<form:form action="/antecedent" method="POST" modelAttribute="medicalAntecedent" >
+				<form:form action="/antecedent/save" method="POST" modelAttribute="antecedent" >
 					<div>
 						<form:label path="type" >type:</form:label>
-						<form:input path="type" class="form-control" />
-						<form:errors path="type" class="text-danger" />
-					</div>
+						<form:select path="type">
+							<c:forEach items="${typeAntecedents}" var="type">
+								<form:option value="${type}">${type}</form:option>
+							</c:forEach>
+						</form:select>
+					</div>					
 					<div>
-						<form:label path=" title" > title:</form:label>
-						<form:input path=" title" class="form-control" />
-						<form:errors path=" title" class="text-danger" />
+						<form:label path="title" > title:</form:label>
+						<form:input path="title" class="form-control" />
+						<form:errors path="title" class="text-danger" />
 					</div>
 					<div>
 						<form:label path="description">description:</form:label>
@@ -34,7 +37,7 @@
 					</div>
 					<div>
 						<form:label path="studyDate" >study Date:</form:label>
-						<form:input path="studyDate" class="form-control" />
+						<form:input path="studyDate" class="form-control" type="date"/>
 						<form:errors path="studyDate" class="text-danger" />
 					</div>
 					
