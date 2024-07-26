@@ -1,0 +1,31 @@
+@charset "ISO-8859-1";
+
+@charset "ISO-8859-1";
+
+.navbar-custom {
+            background-color: #1C3B40;
+}
+
+#logout {
+    background-color: #90ee90; /* Replace with your desired color */
+    border-color: #90ee90; /* Replace with your desired color */
+    color: #000000; /* Replace with your desired text color */
+}
+
+.ms-2 {
+    color: white;
+    font-weight:700
+}
+
+.radio-canada-big-body {
+  font-family: "Radio Canada Big", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.table {
+    background-color: rgba(255, 255, 255, 0.1); /* fondo blanco con 10% de opacidad */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* sombra gris con 20% de opacidad */
+    backdrop-filter: blur(5px); /* filtro de blur para darle un efecto de acrílico */
+  }

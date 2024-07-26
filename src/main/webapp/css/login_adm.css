@@ -1,0 +1,36 @@
+@charset "ISO-8859-1";
+
+    body {
+        background-image: url("../img/login_adm/wp_admin1.png"); 
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        margin: 1vw;
+    }
+    .form-container {
+        background-color: rgb(244, 244, 244);
+        padding: 2vw;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 40vw; 
+        margin-bottom: 20px; 
+    }
+    
+    #acctext{
+    	color: #363636;
+
+    }
+    
+    .radio-canada-big-body {
+		  font-family: "Radio Canada Big", sans-serif;
+		  font-optical-sizing: auto;
+		  font-weight: 800;
+		  font-style: normal;
+
+	}
+	
+	.btn-custom {
+    background-color: #90ee90; /* Replace with your desired color */
+    border-color: #90ee90; /* Replace with your desired color */
+    color: #000000; /* Replace with your desired text color */
+	}

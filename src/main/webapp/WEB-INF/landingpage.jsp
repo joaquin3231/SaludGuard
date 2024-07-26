@@ -1,66 +1,78 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaludGuard | Página principal</title>
-    <link rel="stylesheet" href="./css/stylelanding.css">
+    <title>Pagina principal</title>
+    <link rel="stylesheet" href="Style_landp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
 </head>
 
 <body>
+
     <div>
         <nav id="nav">
             <div id="box1">
-                <img src="./img/landingPage/logosaludguard.png" alt="logo">
+                <img src="./img/logosaludguard.png" alt="logo">
             </div>
             <div id="box2">
                 <div id="menu">
                     <ul>
                         <li>
-                            <a href="#">Inicio</a>
-                            <a href="#">Nosotros</a>
-                            <a href="#">Contacto</a>
+                            <a href="#contIMG">Inicio</a>
+                            <a href="#Separador2">Nosotros</a>
+                            <a href="#contacto">Contacto</a>
                         </li>
                     </ul>
                     <button class="dropdown-button">Acceso</button>
                     <div class="dropdown-content">
                         <a href="/inicioSesion">Paciente</a>
-                        <a href="/inicioSesion/doc">Medico</a>
+                        <a href="/inicioSesion/doc">Médico</a>
                     </div>
                 </div>
             </div>
         </nav>
     </div>
+
     <div id="contIMG">
-        <div id="contImgtx">
-        <h1>Tu historia en la palma
-            de tu mano</h1>
-            <h2>Con SaludGuard, tenés acceso a tu historia clínica desde cualquier lugar.</h2>
+        <div id="contIMGTXT">
+            <div id="mainlogo">
+                <img src="img/clicklogo.png" alt="logo">
+                SaludGuard
+            </div>
+            <h1 class="txt-animacion">Tu historia en la palma
+                de tu mano</h1>
+            <h2 class="txt-animacion">Con SaludGuard, tenés acceso a tu historia clínica desde cualquier lugar.</h2>
         </div>
-        <img src="./img/landingPage/fondo1.jpg" alt="">
     </div>
 
     <div id="contTXT">
         <div id="tx">
-            <h1>Bienvenido a SaludGuard</h1>
-            <p>Con SaludGuard, podés acceder a tu historia clínica en cualquier momento y
-                lugar, 10 que facilita la revisión de tus registros y la gestión de tu salud.</p>
+            <h1 class="animacicion-str">Bienvenido a SaludGuard</h1>
+            <p>Con SaludGuard, podés acceder a tu historia clínica en cualquier momento y lugar, facilitando la
+                revisión de tus registros y la gestión de tu salud.</p>
             <ul>
-                <li>Permite registros más rápidos en tu historia clínica</li>
-                <li>Dlagnostlcos mas precisos y eficientes</li>
-                <li>En caso de emergencias, tener acceso rápido a tu historial puede ser
-                    crucial para recibir el tratamiento adecuado.</li>
+                <li>Permite&nbsp;<strong class="animacicion-str">registros</strong>&nbsp;más&nbsp;<strong
+                        class="animacicion-str">rápidos</strong>&nbsp;en tu historia
+                    clínica</li>
+                <li><strong class="animacicion-str">Diagnostlcos</strong>
+                    &nbsp;más&nbsp;<strong class="animacicion-str">precisos</strong>&nbsp;y&nbsp;<strong
+                        class="animacicion-str">eficientes</strong></li>
+                <li>En caso de&nbsp;<strong class="animacicion-str">emergencias</strong>,&nbsp;tener acceso rápido a tu
+                    historial puede
+                    ser&nbsp;<strong class="animacicion-str">crucial</strong>&nbsp;para recibir tratamiento.
+                </li>
             </ul>
         </div>
     </div>
+    <div id="Separador2"></div>
     <div id="about">
-        <div id="about1">
+        <div id="about1" class="view">
             <h1>Sobre Nosotros</h1>
         </div>
-        <div id="about2">
+        <div id="about2" class="view">
             <p>En Salud Guard, nos dedicamos a transformar
                 la gestión de la salud a través de la tecnología
                 Nuestra aplicación está diseñada para
@@ -76,17 +88,17 @@
     </div>
     <div id="impcDat">
         <div id="impcDat1">
-            <h1>NUMEROS DE IMPACTO</h1>
+            <h1 class="NumerosImpc">NUMEROS DE IMPACTO</h1>
             <div class="SeparadorTit"></div>
         </div>
-        
+
         <div id="impcDat2">
             <div class="boxDat">
-                <p class="num">3.321</p>
+                <p class="num"></p>
                 <p class="info">Doctores registrados</p>
             </div>
             <div class="boxDat">
-                <p class="num">41.252</p>
+                <p class="num2"></p>
                 <p class="info">Historiales registrados</p>
             </div>
         </div>
@@ -98,41 +110,42 @@
             </div>
             <div id="FaQ">
                 <div id="FaqBox1">
-                    <div class="Faq FaqSeleccted">¿EI servicio tiene algún costo?</div>
-                    <div class="Faq">¿EI servicio tiene algún costo?</div>
-                    <div class="Faq">¿EI servicio tiene algún costo?</div>
-                    <div class="Faq">¿EI servicio tiene algún costo?</div>
+                    <div class="Faq ">¿EI servicio tiene algún costo?</div>
+                    <div class="Faq">¿Cual es el tiempo de espera?</div>
+                    <div class="Faq">¿Funciona las 24 horas?</div>
+                    <div class="Faq">¿En que areas funciona?</div>
                 </div>
-                <div id="FaqBox2">
-                    Contenido de preguntas
-                    HACER FUNCIONALIDAD JS
+
+                <div id="answerBox" class="oculto">
+
                 </div>
             </div>
         </div>
     </div>
     <div id="contacto">
-        <h2>CONTACTANOS</h2>
+        <h2 class="NumerosImpc">CONTACTANOS</h2>
         <div class="SeparadorTit"></div>
     </div>
     <div id="contacBox">
         <div class="contactIMG">
             <div class="contactImgtx">
-                <img src="./img/landingPage/ubicacion.png" alt="">
-            <p id="direc">Calle Austral, 456</p>
+                <a id="direc"
+                    href="https://www.google.com.ar/maps/place/Blvd.+Austral,+Pilar,+Provincia+de+Buenos+Aires/@-34.4524661,-58.8674718,17z/data=!3m1!4b1!4m6!3m5!1s0x95bc9c5ce6ed2b55:0xda1fca18f11985f6!8m2!3d-34.4524661!4d-58.8648969!16s%2Fg%2F11j11cnjbb?entry=ttu"><i
+                        class="fa fa-globe" aria-hidden="true"></i>
+                    Calle Austral, 456</a>
             </div>
-            <img src="./img/landingPage/duotone_7.png" alt="">
+            <img src="./img/duotone_7.png" alt="">
         </div>
         <div class="contactIMG">
             <div class="contactImgtx">
-                <img id="teleimg" src="./img/landingPage/telefono-inteligente.png" alt="telefono">
-            <p id="tele">+54 34846060</p>
-            <img id ="EmailImg" src="./img/landingPage/email.png" alt="">
-            <p id="email">kNk2J@example.com</p>
+                <a href="tel:+34678567876" id="tele"><i class="fas fa-info-circle fa-sm"></i>+54 34846060</a>
+                <a id="email" href="mailto:micorreo@hotmail.com"><i class="fa fa-envelope"
+                        aria-hidden="true"></i>kNk2J@gmail.com</a>
             </div>
-            <img src="./img/landingPage/duotone_9.png" alt="">
+            <img src="./img/duotone_9.png" alt="">
         </div>
     </div>
 </body>
-<script src="./js/scriptlanding.js"></script>
+<script src="Script_landp.js"></script>
 
 </html>
