@@ -8,32 +8,49 @@
 <meta charset="ISO-8859-1">
 <title>Physical Detail</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
 <style>
     body {
-        background-image: url("../img/login_pac.png"); 
+        margin: 0;
+        height: 700px; 
+        display: flex;
+        flex-direction: row;
+        overflow: hidden; 
+    }
+    .image-section {
+        flex: 1.5; 
+        background: url('../img/fisico.png') no-repeat center center;
         background-size: cover;
-        background-position: center;
-        height: 500px;
-        margin: 20px;
+        height: 700px; 
+    }
+    .form-section {
+        flex: 1; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(234, 234, 234);
     }
     .form-container {
-       	background-color: rgba(255, 255, 255, 0.6);
-        padding: 30px;
-        margin: 20px;
+        background-color: rgba(213, 213, 213, 0.8); 
+        padding: 30px; 
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 700px;
+        width: 500px; 
+        max-width: 550px;
+        min-height: 550px; 
+        align-items: center; 
+   		justify-content: center; 
     }
+  
+	.form-container .btn {
+    	margin-top: 20px; 
+	}
 </style>
-
 </head>
 <body>
-	<div class="container  d-flex justify-content-center align-items-center"  style="height: 600px;">
-		<div class="row w-100">
-			<div class="col-12 d-flex justify-content-center">
+	<div class="image-section"></div>
+    <div class="form-section">
 				<div class="form-container">
-				<h2  class="text-center">physical detail</h2>
+				<h2  class="text-center">Physical Detail</h2>
 				<form:form action="/physical" method="POST" modelAttribute="physicalDetail" >
 					<div class="mb-3">
 						<form:label path="bloodPressure" >blood Pressure</form:label>
@@ -71,8 +88,6 @@
 				</form:form>
 				</div>
 			</div>
-		</div>
-	</div>
 
 </body>
 </html>
