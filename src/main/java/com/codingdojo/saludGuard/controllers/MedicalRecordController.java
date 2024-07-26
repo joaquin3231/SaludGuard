@@ -2,14 +2,16 @@ package com.codingdojo.saludGuard.controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.codingdojo.saludGuard.models.Asessment;
 import com.codingdojo.saludGuard.models.MedicalAntecedent;
@@ -18,6 +20,7 @@ import com.codingdojo.saludGuard.models.Patient;
 import com.codingdojo.saludGuard.models.PhysicalDetail;
 import com.codingdojo.saludGuard.models.Treatment;
 import com.codingdojo.saludGuard.models.User;
+import com.codingdojo.saludGuard.services.AssesmentService;
 import com.codingdojo.saludGuard.services.MedicalRecordService;
 import com.codingdojo.saludGuard.services.PatientService;
 import com.codingdojo.saludGuard.services.UserService;
@@ -36,8 +39,14 @@ public class MedicalRecordController {
 	@Autowired
 	private MedicalRecordService mrServ;
 	
+	@Autowired
+	private AssesmentService asseServ;
+	
 	@GetMapping("/dashboard/{patientId}")
-	public String dashboard(@PathVariable("patientId") Long patientId, HttpSession session, Model model) {
+	public String dashboard(@PathVariable("patientId") Long patientId, 
+			@RequestParam(value = "doctorFirstName", required = false) String doctorFirstName,
+	        @RequestParam(value = "createAt", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date createAt,
+			HttpSession session, Model model) {
 		
 		/* === REVISAMOS SESION === */
 		User userTemp = (User) session.getAttribute("userInSession"); //Obj User o null
@@ -54,17 +63,35 @@ public class MedicalRecordController {
 		Patient myPatient = patServ.getPatient(patientId);
 		model.addAttribute("patient", myPatient);
 		
+		
+		// FILTRADO
+	    List<Asessment> filteredAssessments;
+
+	    if (doctorFirstName != null && !doctorFirstName.isEmpty() && createAt != null) {
+	        filteredAssessments = asseServ.getAsessmentsByDoctorFirstNameAndDate(doctorFirstName, createAt);
+	    } else if (doctorFirstName != null && !doctorFirstName.isEmpty()) {
+	        filteredAssessments = asseServ.getAsessmentsByDoctorFirstName(doctorFirstName);
+	    } else if (createAt != null) {
+	        filteredAssessments = asseServ.getAsessmentsByDate(createAt);
+	    } else {
+	        filteredAssessments = myPatient.getMedicalRecord().getAssementList(); 
+	    }
+	    
+	    model.addAttribute("assesmentList", filteredAssessments);
 		//CONSULTAS
 		//Obtener la lista de consultas del historial clinico del paciente
-		List<Asessment> patientAssesments = myPatient.getMedicalRecord().getAssementList();
+
 		
 		//Obtenemos Las ultimas tres consultas
 		List<Asessment> aseesmentList = new ArrayList<>();
 		
-		for (int i = (patientAssesments.size() - 1);i >= patientAssesments.size() - 6; i-- ) {
+		/*for (int i = (patientAssesments.size() - 1);i >= patientAssesments.size() - 6; i-- ) {
 			aseesmentList.add(patientAssesments.get(i));
-		}
-		model.addAttribute("assesmentList", aseesmentList);
+		}*/
+		
+		/*List<Asessment> patientAssesments = myPatient.getMedicalRecord().getAssementList();
+		
+		model.addAttribute("assesmentList", patientAssesments);*/
 		
 		//DETALLES FISICOS
 		//Obtenemos toda la historia clinica

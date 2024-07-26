@@ -17,7 +17,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <img id="logo1" src="../img/logosaludguardwhite.png" width="200" alt="Logo">
-					<span class="ms-2"> | ï¿½ Panel del paciente</span>
+					<span class="ms-2"> | Panel del paciente</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -67,26 +67,40 @@
         			</div>   
         			
         			<div>
-        				<table class="table table-striped">
-                                <thead>
-                                    <tr>
-										<th><i class="fas fa-calendar-alt fa-sm"></i> Fecha de consulta</th>
-										<th><i class="fas fa-user-md fa-sm"></i> Profesional</th>
-										<th><i class="fas fa-sticky-note fa-sm"></i> Observaciones</th>
-										<th><i class="fas fa-info-circle fa-sm"></i> Mï¿½s informaciï¿½n</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-	                                <c:forEach items="${assesmentList}" var="assesment">
-										<tr>
-									<td>${assesment.createAt}</td>
-									<td>${assesment.doctor.user.firstName}</td>
-									<td>${assesment.observation}</td>
-									<td> <a href="#">Mas informacion</a> </td>
-										</tr>
-									</c:forEach>
-                                </tbody>
-                            </table>
+        			
+        			 <!-- Formulario para los filtros -->
+				<form id="filterForm" method="GET" action="/dashboard/${patient.id}">
+				    <label for="doctorFirstName">Nombre del Doctor:</label>
+				    <input type="text" id="doctorFirstName" name="doctorFirstName" value="${param.doctorFirstName}">
+				    <br>
+				    <label for="date">Fecha:</label>
+				    <input type="date" id="date" name="createAt" value="${param.createAt}">
+				    <br>
+				    <button type="submit">Aplicar Filtro</button>
+				</form>
+				<br>
+				
+				<table class="table table-striped">
+				    <thead>
+				        <tr>
+				            <th><i class="fas fa-calendar-alt fa-sm"></i> Fecha de consulta</th>
+				            <th><i class="fas fa-user-md fa-sm"></i> Profesional</th>
+				            <th><i class="fas fa-sticky-note fa-sm"></i> Observaciones</th>
+				            <th><i class="fas fa-info-circle fa-sm"></i> Más información</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <c:forEach items="${assesmentList}" var="assesment">
+				            <tr>
+				                <td>${assesment.createAt}</td>
+				                <td>${assesment.doctor.user.firstName}</td>
+				                <td>${assesment.observation}</td>
+				                <td><a href="#">Más información</a></td>
+				            </tr>
+				        </c:forEach>
+				    </tbody>
+				</table>
+
         			</div>
         			     			
         		</div>
