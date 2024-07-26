@@ -130,10 +130,36 @@
     overflow: hidden;
 }
 
-.der .inf .content p{
+.der .inf .content > p{
     overflow: hidden;
     margin: 10px 0;
     font-size: 21px;
     color: #727272;
     border-bottom: 2px dashed #727272;
+}
+
+/* ESTILOS PARA CUANDO NO HAY NINGUNA CARGA*/
+.content .carga{
+    background-color: #27d2eda8;
+}
+
+.content .carga p{
+    border-bottom: 0;
+    color: #2a462a;
+    font-size: 25px;
+    font-weight: bold;
+    text-shadow: 10px 13px 4px #1c3b40b5;
+    padding: 15px
+}
+
+#antecedentes{
+    margin-top: 70px;
+}
+
+#tratamiento{
+    margin-top: 40px;
+}
+
+#consulta{
+    margin: 60px 0;
 }

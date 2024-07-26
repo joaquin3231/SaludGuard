@@ -60,9 +60,12 @@ public class MedicalRecordController {
 		
 		//Obtenemos Las ultimas tres consultas
 		List<Asessment> aseesmentList = new ArrayList<>();
-		
 		for (int i = (patientAssesments.size() - 1);i >= patientAssesments.size() - 6; i-- ) {
-			aseesmentList.add(patientAssesments.get(i));
+			if(i < 0) {
+				break;
+			} else {
+				aseesmentList.add(patientAssesments.get(i));
+			}
 		}
 		model.addAttribute("assesmentList", aseesmentList);
 		
@@ -74,28 +77,37 @@ public class MedicalRecordController {
 		List<PhysicalDetail> physicalList = medicalRecord.getPhysicalDetailList();
 		
 		//Obtenemos el ultimo detalle fisico
-		PhysicalDetail physicalDetail = physicalList.get(physicalList.size() - 1);
-		model.addAttribute("physicalDetail", physicalDetail);
+		
+		if(physicalList.size() != 0) {
+			PhysicalDetail physicalDetail = physicalList.get(physicalList.size() - 1);
+			model.addAttribute("physicalDetail", physicalDetail);
+		}
 		
 		//TRATAMIENTOS
 		//Obtenemos la lista de tratamientos
 		List<Treatment> treatmentList = medicalRecord.getTreatmentList();
 		
 		//Obtenemos el ultimo tratamiento hecho
-		Treatment treatment = treatmentList.get(treatmentList.size() - 1);
-		model.addAttribute("treatment", treatment);
+		
+		if(treatmentList.size() != 0) {
+			Treatment treatment = treatmentList.get(treatmentList.size() - 1);
+			model.addAttribute("treatment", treatment);			
+		}
 		
 		//ANTECEDENTES MEDICOS
 		List<MedicalAntecedent> antecedentList = medicalRecord.getMedicalAntecedentsList();
 		
 		//Obtenemos el ultimo antecedente hecho
-		MedicalAntecedent antecedent = antecedentList.get(antecedentList.size() - 1);
-		
-		SimpleDateFormat formatFecha = new SimpleDateFormat("yyyy-MM-dd");
-		String fecha = formatFecha.format(antecedent.getStudyDate());
-		
-		model.addAttribute("antecedentDate", fecha);
-		model.addAttribute("antecedent", antecedent);
+		if(antecedentList.size() != 0) {
+			MedicalAntecedent antecedent = antecedentList.get(antecedentList.size() - 1);
+			
+			SimpleDateFormat formatFecha = new SimpleDateFormat("yyyy-MM-dd");
+			String fecha = formatFecha.format(antecedent.getStudyDate());
+			
+			model.addAttribute("antecedentDate", fecha);
+			model.addAttribute("antecedent", antecedent);
+		}
+
 		
 		//Medida de seguridad extra
 		Long patientInSessionId = patServ.getPatientByUser(userTemp).getId();

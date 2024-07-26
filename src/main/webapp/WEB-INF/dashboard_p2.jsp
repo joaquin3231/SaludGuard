@@ -43,20 +43,40 @@
         			  			
         			<div class="content">
         			 	<img src="../img/patientImg/sticman.png" alt="patient sticman">
-        				<div class="contIzq">
-        					<p>Altura (M): <br>
-        					${ physicalDetail.height }</p>
-        					<p>Peso (Kg): <br>
-        					${ physicalDetail.weight }</p>
-        					<p>I.M.C <br>
-        					${ physicalDetail.patientIMC }</p>
-        				</div>
-        				<div class="contDer">
-        					<p>Presion Arterial <br>
-        					${ physicalDetail.bloodPressure }</p>
-        					<p>Ritmo Cardiaco <br>
-        					${ physicalDetail.heartRate }</p>
-        				</div>
+        			 	
+        			 	<c:if test="${ physicalDetail != null }">
+        			 		<div class="contIzq">
+	        					<p>Altura (M): <br>
+	        					${ physicalDetail.height }</p>
+	        					<p>Peso (Kg): <br>
+	        					${ physicalDetail.weight }</p>
+	        					<p>I.M.C <br>
+	        					${ physicalDetail.patientIMC }</p>
+	        				</div>
+	        				<div class="contDer">
+	        					<p>Presion Arterial <br>
+	        					${ physicalDetail.bloodPressure }</p>
+	        					<p>Ritmo Cardiaco <br>
+	        					${ physicalDetail.heartRate }</p>
+	        				</div>
+        			 	</c:if>
+        			 	
+        			 	<c:if test="${ physicalDetail == null }">
+        			 		<div class="contIzq">
+	        					<p>Altura (M): <br>
+	        					NO REGISTRADO</p>
+	        					<p>Peso (Kg): <br>
+	        					NO REGISTRADO</p>
+	        					<p>I.M.C <br>
+	        					NO REGISTRADO</p>
+	        				</div>
+	        				<div class="contDer">
+	        					<p>Presion Arterial <br>
+	        					NO REGISTRADO</p>
+	        					<p>Ritmo Cardiaco <br>
+	        					NO REGISTRADO</p>
+	        				</div>
+        			 	</c:if>
         			</div>
                     
                 </div>
@@ -67,28 +87,40 @@
         			</div>   
         			
         			<div>
-        				<table class="table table-striped">
-                                <thead>
-                                    <tr>
-										<th><i class="fas fa-calendar-alt fa-sm"></i> Fecha de consulta</th>
-										<th><i class="fas fa-user-md fa-sm"></i> Profesional</th>
-										<th><i class="fas fa-sticky-note fa-sm"></i> Observaciones</th>
-										<th><i class="fas fa-info-circle fa-sm"></i> M�s informaci�n</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-	                                <c:forEach items="${assesmentList}" var="assesment">
+        			
+        				<c:if test="${ assesmentList.size() != 0 }">
+	        				<table class="table table-striped">
+								<thead>
+	                                <tr>
+									<th><i class="fas fa-calendar-alt fa-sm"></i> Fecha de consulta</th>
+									<th><i class="fas fa-user-md fa-sm"></i> Profesional</th>
+									<th><i class="fas fa-sticky-note fa-sm"></i> Observaciones</th>
+									<th><i class="fas fa-info-circle fa-sm"></i> M�s informaci�n</th>
+	                        	</tr>
+							</thead>
+	                    		<tbody>
+									<c:forEach items="${assesmentList}" var="assesment">
 										<tr>
-									<td>${assesment.createAt}</td>
-									<td>${assesment.doctor.user.firstName}</td>
-									<td>${assesment.observation}</td>
-									<td> <a href="#">Mas informacion</a> </td>
+											<td>${assesment.createAt}</td>
+											<td>${assesment.doctor.user.firstName}</td>
+											<td>${assesment.observation}</td>
+											<td> <a href="#">Mas informacion</a> </td>
 										</tr>
 									</c:forEach>
-                                </tbody>
-                            </table>
-        			</div>
-        			     			
+	                        	</tbody>
+	                     	</table>
+        				</c:if>
+        				
+        				<c:if test="${ assesmentList.size() == 0 }">
+        					<div class="content">
+        					    <div class="carga" id="consulta">
+	        						<p>Ninguna consulta cargado</p>
+	        					</div>
+        					</div>
+        				</c:if>
+        				
+
+        			</div>			
         		</div>
         	</div>
         	
@@ -100,9 +132,20 @@
         			</div>
         			
         			<div class="content">
-        				<p class="tipo"> <b>Tipo: </b> <span>${ treatment.type }</span> </p>
-        				<p class="description"> <b>Descripcion: </b> <br>
-						<span>${ treatment.description }</span></p>
+        			
+        				<c:if test="${ treatment == null }">
+        					<div class="carga" id="tratamiento">
+	        					<p>Ningun tratamiento cargado</p>
+	        				</div>
+        				</c:if>
+        			
+        				<c:if test="${ treatment != null }">
+   							<p class="tipo"> <b>Tipo: </b> <span>${ treatment.type }</span> </p>
+	        				<p class="description"> <b>Descripcion: </b> <br>
+							<span>${ treatment.description }</span></p>
+        				</c:if>
+        			
+
         			</div>
         		</div>
         		<div class="inf">
@@ -112,14 +155,23 @@
         			</div>
         			
         			<div class="content">
-        				<p>Fecha de Estudio:  <br>
-       					${ antecedentDate }</p>
-       					<p>Tipo: <br>
-       					${ antecedent.type }</p>
-       					<p>Titulo: <br>
-       					${ antecedent.title }</p>
-       					<p>Descripcion <br>
-       					${ antecedent.description }</p>
+        			
+        				<c:if test="${ antecedentDate == null }">
+	        				<div class="carga" id="antecedentes">
+	        					<p>Ningun antecedente medico cargado</p>
+	        				</div>
+        				</c:if>
+        				
+        				<c:if test="${ antecedentDate != null }">
+        					<p>Fecha de Estudio:  <br>
+	       					${ antecedentDate }</p>
+	       					<p>Tipo: <br>
+	       					${ antecedent.type }</p>
+	       					<p>Titulo: <br>
+	       					${ antecedent.title }</p>
+	       					<p>Descripcion <br>
+	       					${ antecedent.description }</p>
+        				</c:if>
         			</div>
         			
         		</div>
