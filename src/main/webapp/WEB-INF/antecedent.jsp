@@ -14,8 +14,25 @@
         margin: 0;
         height: 700px; 
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         overflow: hidden; 
+    }
+    .header {
+        display: flex;
+        align-items: center;
+        background-color: rgb(31 152 111);
+        padding: 10px 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .header img {
+        height: 50px;
+        margin-right: 20px;
+        
+    }
+    .content {
+        display: flex;
+        flex: 1;
+        height: calc(700px - 70px);
     }
     .image-section {
         flex: 1.5; 
@@ -55,6 +72,10 @@
 </style>
 </head>
 <body>
+	<div class="header">
+        <img src="../img/logosaludguardwhite.png" alt="Logo">
+    </div>
+    <div class="content">
     <div class="image-section"></div>
     <div class="form-section">
         <div class="form-container">
@@ -87,6 +108,7 @@
                     <input type="submit" class="btn btn-success" value="Add">
                 </div>
             </form:form>
+        </div>
         </div>
     </div>
 </body>

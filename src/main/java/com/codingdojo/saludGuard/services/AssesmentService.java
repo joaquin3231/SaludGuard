@@ -31,12 +31,11 @@ public class AssesmentService {
         return asessmentRepo.findByDoctorFirstName(firstName);
     }
 
-    public List<Asessment> getAsessmentsByDate(Date date) {
-        return asessmentRepo.findByCreateAt(date);
-    }
+	public List<Asessment> getAsessmentsByDateIgnoringTime(Date date) {
+	    return asessmentRepo.findByCreateAtIgnoringTime(date);
+	    }
 
-    public List<Asessment> getAsessmentsByDoctorFirstNameAndDate(String firstName, Date date) {
-        return asessmentRepo.findByDoctorFirstNameAndCreateAt(firstName, date);
-    }
-	
+	public List<Asessment> getAsessmentsByDoctorFirstNameAndDate(String firstName, Date date) {
+	    return asessmentRepo.findByDoctorFirstNameAndCreateAt(firstName, date);
+	}	
 }

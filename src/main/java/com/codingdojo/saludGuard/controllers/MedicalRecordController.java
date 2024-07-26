@@ -71,8 +71,8 @@ public class MedicalRecordController {
 	        filteredAssessments = asseServ.getAsessmentsByDoctorFirstNameAndDate(doctorFirstName, createAt);
 	    } else if (doctorFirstName != null && !doctorFirstName.isEmpty()) {
 	        filteredAssessments = asseServ.getAsessmentsByDoctorFirstName(doctorFirstName);
-	    } else if (createAt != null) {
-	        filteredAssessments = asseServ.getAsessmentsByDate(createAt);
+	    } else if (createAt != null ) {
+	        filteredAssessments = asseServ.getAsessmentsByDateIgnoringTime(createAt);
 	    } else {
 	        filteredAssessments = myPatient.getMedicalRecord().getAssementList(); 
 	    }
