@@ -13,8 +13,25 @@
         margin: 0;
         height: 700px; 
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         overflow: hidden; 
+    }
+    .header {
+        display: flex;
+        align-items: center;
+        background-color: rgb(31 152 111);
+        padding: 10px 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .header img {
+        height: 50px;
+        margin-right: 20px;
+        
+    }
+    .content {
+        display: flex;
+        flex: 1;
+        height: calc(700px - 70px);
     }
     .image-section {
         flex: 1.5; 
@@ -31,22 +48,26 @@
     }
     .form-container {
         background-color: rgba(213, 213, 213, 0.8); 
-        padding: 30px; 
+        padding: 15px; 
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         width: 500px; 
         max-width: 550px;
-        min-height: 550px; 
+        min-height: 400px; 
         align-items: center; 
    		justify-content: center; 
     }
   
 	.form-container .btn {
-    	margin-top: 20px; 
+    	margin-top: 15px; 
 	}
 </style>
 </head>
 <body>
+	<div class="header">
+        <img src="../img/logosaludguardwhite.png" alt="Logo">
+    </div>
+    <div class="content">
 	<div class="image-section"></div>
     <div class="form-section">
 				<div class="form-container">
@@ -87,6 +108,7 @@
 					</div>
 				</form:form>
 				</div>
+			</div>
 			</div>
 
 </body>
