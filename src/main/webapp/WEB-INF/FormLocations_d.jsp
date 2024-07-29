@@ -53,7 +53,7 @@
 								</div>
 								
 								<div class="col-12">
-									<form:label path="address2">Segunda direcciï¿½n (opcional):</form:label>
+									<form:label path="address2">Segunda dirección (opcional):</form:label>
 									<form:input path="address2" class="form-control" id="address2"/>
 									<form:errors path="address2" class="text-danger"/>
 								</div>
