@@ -21,6 +21,11 @@
     justify-content: space-between
 }
 
+.doctorData {
+	color: white;
+	display: inline-block;
+}
+
 .divNav div{
     display: flex;
     align-items: center;
@@ -46,7 +51,6 @@
     background-color: #52df57;
     color: black;
     border-radius: 14px;
-    box-shadow: 7px 4px 7px 0px #000000;
 }
 
 .divNav a:hover{
@@ -169,15 +173,13 @@
 
 /* ESTILOS PARA CUANDO NO HAY NINGUNA CARGA*/
 .content .carga{
-    background-color: #27d2eda8;
 }
 
 .content .carga p{
     border-bottom: 0;
-    color: #2a462a;
+    color: black;
     font-size: 25px;
     font-weight: bold;
-    text-shadow: 10px 13px 4px #1c3b40b5;
     padding: 15px
 }
 

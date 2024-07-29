@@ -47,10 +47,10 @@ document.addEventListener('click', (e) => {
         const textoSeleccionado = e.target.textContent;
 
         const contenidos = {
-            '¿EI servicio tiene algún costo?': 'sum dolor sit amet, consectetur adipiscing elit. In nec pretium mi. Aenean in tempor eros. Maecenas fermentum sollicitudin odio ac porta. Nunc a porta enim. Aenean massa lectus, rutrum eget imperdiet id, congue at ante. Vestibulum dignissim vehicula scelerisque. Donec at leo vitae libero rutrum commodo vitae sed orci. Fusce egestas commodo metus in aliquam.empor eros. Maecenas fermentum sollicitudin odio ac porta. Nunc a porta enim. Aenean massa lectus, rutrum eget imperdiet id, congue at ante. Vestibulum dignissim vehicula sceleri',
-            '¿Funciona las 24 horas?': 'Si,empor eros. Maecenas fermentum sollicitudin odio ac porta. Nunc a porta enim. Aenean massa lectus, rutrum eget imperdiet id, congue at ante. Vestibulum dignissim vehicula sceleriempor eros. Maecenas fermentum sollicitudin odio ac porta. Nunc a porta enim. Aenean massa lectus, rutrum eget imperdiet id, congue at ante. Vestibulum dignissim vehicula sceleri',
-            '¿Cual es el tiempo de espera?': 'Si, loempor eros. Maecenas fermentum sollicitudin odio ac porta. Nunc a porta enim. Aenean massa lectus, rutrum eget imperdiet id, congue at ante. Vestibulum dignissim vehicula sceleri está',
-            '¿En que areas funciona?': 'Sempor eros. Maecenas fermentum sollicitudin odio ac porta. Nunc a porta enim. Aenean massa lectus, rutrum eget imperdiet id, congue at ante. Vestibulum dignissim vehicula sceleriempor eros. Maecenas fermentum sollicitudin odio ac porta. Nunc a porta enim. Aenean massa lectus, rutrum eget imperdiet id, congue at ante. Vestibulum dignissim vehicula sceleriempor eros. Maecenas fermentum sollicitudin odio ac porta. Nunc a porta enim. Aenean massa lectus, rutrum eget imperdiet id, congue at ante. Vestibulum dignissim vehicula scelerii, lo está'
+            '¿EI servicio tiene algún costo?': 'SaludGuard no tiene ningún costo de apertura, mantenimiento o cargos extra. Nuestra misión es la deacercar la inclusión tecnológica en salud a la mayor cantidad de personas a lo largo y a lo ancho de la Argentina.',
+'¿Funciona las 24 horas?': 'Tu historial clínico está siempre disponible para vos. 24/7. No más esperar a tener acceso a tu historia clínica en papel.  ',
+            '¿Qué funciones posee?': 'Con SaludGuard, podés visualizar tu historia clínica en un panel centralizado, tus tratamientos, antecedentes y estado físico, todo en un mismo lugar. Toda la información que los médicos carguen sobre tu estado físico, estarán en SaludGuard desde donde quieras acceder.',
+            '¿En que areas funciona?': 'El servicio actualmente se encuentra en despliegue en centros de salud designados en la Provincia de Buenos Aires y CABA. En una próxima etapa se extenderá a todas las provincias de Argentina.'
         };
 
         miDiv.textContent = '';

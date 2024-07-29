@@ -29,7 +29,7 @@ public class UserService {
 		if(!password.equals(confirm)) {
 			//SI no son iguales
 			//path, clave, mensaje
-			result.rejectValue("confirm", "Matches", "Password and confirmation don't match");
+			result.rejectValue("confirm", "Matches", "Las contraseñas no coinciden, asegúrese de confirmar su contraseña correctamente");
 		}
 		
 		//Revisar que el email no esté registrado
@@ -37,8 +37,16 @@ public class UserService {
 		User userExist = ur.findByEmail(email); //Objeto de User o null
 		if(userExist != null) {
 			//El correo ya está registrado
-			result.rejectValue("email", "Unique", "E-mail already exists");
+			result.rejectValue("email", "Unique", "El e-mail registrado ya existe, por favor ingrese otro, o contáctese a contacto@saludguard.com");
 		}
+		
+		//Revisar que el email no esté registrado
+		String userDNI = newUser.getUserDNI();
+		User userExist2 = ur.findByUserDNI(userDNI); //Objeto de User o null
+		if(userExist2 != null) {
+			//El DNI ya está registrado
+			result.rejectValue("userDNI", "Unique", "El DNI registrado ya existe, por favor ingrese otro, o contáctese a contacto@saludguard.com");
+				}
 		
 		//Si existe error, regreso null
 		if(result.hasErrors()) {

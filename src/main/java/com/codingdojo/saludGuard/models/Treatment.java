@@ -28,12 +28,12 @@ public class Treatment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty(message="Type of treatment is required")
-	@Size(min=2, message = "Type of treatment needs at least 2 chars")
+	@NotEmpty(message="Especifique el tipo de tratamiento")
+	@Size(min=2, message = "Especifique el tipo de tratamiento (si no aplica, escriba n/a)")
 	private String type;
 	
-	@NotEmpty(message="Description of treatment is required")
-	@Size(min=2, message = "Description of treatment needs at least 2 chars")
+	@NotEmpty(message="Especifique la descripción del tratamiento")
+	@Size(min=2, message = "Especifique la descripción del tratamiento (si no aplica, escriba n/a)")
 	private String description;
 	
 	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza

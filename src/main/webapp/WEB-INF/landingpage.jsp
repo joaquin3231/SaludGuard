@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina principal</title>
+    <title>SaludGuard | Página principal</title>
     <link rel="stylesheet" href="Style_landp.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="radio-canada-big-body">
 
     <div>
         <nav id="nav">
@@ -28,8 +30,8 @@
                     </ul>
                     <button class="dropdown-button">Acceso</button>
                     <div class="dropdown-content">
-                        <a href="/inicioSesion">Paciente</a>
-                        <a href="/inicioSesion/doc">Médico</a>
+                        <a id="paciente" href="/inicioSesion">Paciente</a>
+                        <a id="medico" href="/inicioSesion/doc">Médico</a>
                     </div>
                 </div>
             </div>
@@ -39,12 +41,12 @@
     <div id="contIMG">
         <div id="contIMGTXT">
             <div id="mainlogo">
-                <img src="img/clicklogo.png" alt="logo">
+                    <img src="img/clicklogo.png" alt="logo">
                 SaludGuard
             </div>
-            <h1 class="txt-animacion">Tu historia en la palma
+            <h1 class="txt-animacion">    Tu historia en la palma
                 de tu mano</h1>
-            <h2 class="txt-animacion">Con SaludGuard, tenés acceso a tu historia clínica desde cualquier lugar.</h2>
+            <h2 class="txt-animacion">      Con SaludGuard, tenés acceso a tu historia clínica desde cualquier lugar.</h2>
         </div>
     </div>
 
@@ -74,7 +76,7 @@
         </div>
         <div id="about2" class="view">
             <p>En Salud Guard, nos dedicamos a transformar
-                la gestión de la salud a través de la tecnología
+                la gestión de la salud a través de la tecnología.
                 Nuestra aplicación está diseñada para
                 proporcionar a los usuarios acceso fácil y
                 seguro a su historial médico completo,
@@ -102,6 +104,8 @@
                 <p class="info">Historiales registrados</p>
             </div>
         </div>
+        <br>
+        <br>
         <div id="impcDat3">
             <h2>
                 PREGUNTAS FRECUENTES
@@ -111,9 +115,9 @@
             <div id="FaQ">
                 <div id="FaqBox1">
                     <div class="Faq ">¿EI servicio tiene algún costo?</div>
-                    <div class="Faq">¿Cual es el tiempo de espera?</div>
+                    <div class="Faq">¿En que áreas funciona?</div>
+                    <div class="Faq">¿Qué funciones posee?</div>
                     <div class="Faq">¿Funciona las 24 horas?</div>
-                    <div class="Faq">¿En que areas funciona?</div>
                 </div>
 
                 <div id="answerBox" class="oculto">
@@ -123,7 +127,7 @@
         </div>
     </div>
     <div id="contacto">
-        <h2 class="NumerosImpc">CONTACTANOS</h2>
+        <h2 class="NumerosImpc">    CONTACTANOS</h2>
         <div class="SeparadorTit"></div>
     </div>
     <div id="contacBox">
@@ -138,9 +142,9 @@
         </div>
         <div class="contactIMG">
             <div class="contactImgtx">
-                <a href="tel:+34678567876" id="tele"><i class="fas fa-info-circle fa-sm"></i>+54 34846060</a>
+                <a href="tel:+34678567876" id="tele"><i class="fas fa-info-circle fa-sm"></i>+54 99991111</a>
                 <a id="email" href="mailto:micorreo@hotmail.com"><i class="fa fa-envelope"
-                        aria-hidden="true"></i>kNk2J@gmail.com</a>
+                        aria-hidden="true"></i>contacto@saludguard.com</a>
             </div>
             <img src="./img/duotone_9.png" alt="">
         </div>

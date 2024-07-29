@@ -6,10 +6,19 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Treatment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<title>Nuevo tratamiento</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <style>
-body {
+	.radio-canada-big-body {
+	  font-family: "Radio Canada Big", sans-serif;
+	  font-optical-sizing: auto;
+	  font-weight: 500;
+	  font-style: normal;
+	}
+	body {
         margin: 0;
         height: 700px; 
         display: flex;
@@ -67,7 +76,7 @@ body {
     }
 </style>
 </head>
-<body>
+<body class="radio-canada-big-body">
     <div class="header">
         <img src="../img/logosaludguardwhite.png" alt="Logo">
     </div>
@@ -75,20 +84,20 @@ body {
         <div class="image-section"></div>
         <div class="form-section">
             <div class="form-container">
-                <h2 class="text-center"> Treatment</h2>
+                <h2 class="text-center"> Tratamiento</h2>
                 <form:form action="/treatment/save" method="POST" modelAttribute="treatmentNew">
                     <div class="mb-3">
-                        <form:label path="type">Type:</form:label>
+                        <form:label path="type">Tipo de tratamiento:</form:label>
                         <form:input path="type" class="form-control" />
                         <form:errors path="type" class="text-danger" />
                     </div>
                     <div class="mb-3">
-                        <form:label path="description">Description:</form:label>
+                        <form:label path="description">Descripción:</form:label>
                         <form:textarea path="description" class="form-control" />
                         <form:errors path="description" class="text-danger" />
                     </div>
                     <div class="text-center">
-                        <input type="submit" class="btn btn-success" value="Add">
+                        <input type="submit" class="btn btn-success" value="Añadir">
                     </div>
                 </form:form>
             </div>

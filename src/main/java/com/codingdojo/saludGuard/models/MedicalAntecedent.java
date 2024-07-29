@@ -31,16 +31,16 @@ public class MedicalAntecedent {
 	
 	private String type;
 	
-	@NotEmpty(message="Title of antecedent is required")
-	@Size(min=2, message = "Title of antecedent needs at least 2 chars")
+	@NotEmpty(message="Se requiere un título del antecedente")
+	@Size(min=2, message = "Se requiere un título de antecedente")
 	private String title;
 	
-	@NotEmpty(message="Description of antecedent is required")
-	@Size(min=2, message = "Description of antecedent needs at least 2 chars")
+	@NotEmpty(message="Se requiere una descripción del antecedente")
+	@Size(min=2, message = "Se requiere una descripción del antecedente")
 	private String description;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@PastOrPresent(message = "The study date could not have been in the future")
+	@PastOrPresent(message = "La fecha no es válida")
 	private Date studyDate; 
 	
 	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza

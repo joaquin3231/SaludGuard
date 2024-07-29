@@ -6,9 +6,19 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Physical Detail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<title>Actualización de cuadro físico</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <style>
+	.radio-canada-big-body {
+	  font-family: "Radio Canada Big", sans-serif;
+	  font-optical-sizing: auto;
+	  font-weight: 500;
+	  font-style: normal;
+	}
+
     body {
         margin: 0;
         height: 700px; 
@@ -63,7 +73,7 @@
 	}
 </style>
 </head>
-<body>
+<body class="radio-canada-big-body">
 	<div class="header">
         <img src="../img/logosaludguardwhite.png" alt="Logo">
     </div>
@@ -71,40 +81,40 @@
 	<div class="image-section"></div>
     <div class="form-section">
 				<div class="form-container">
-				<h2  class="text-center">Physical Detail</h2>
+				<h2  class="text-center">Examen general</h2>
 				<form:form action="/physical" method="POST" modelAttribute="physicalDetail" >
 					<div class="mb-3">
-						<form:label path="bloodPressure" >blood Pressure</form:label>
+						<form:label path="bloodPressure" >Presión arterial (en mmHg):</form:label>
 						<form:input path="bloodPressure" class="form-control" />
 						<form:errors path="bloodPressure" class="text-danger" />
 					</div>
 					<div class="mb-3">
-						<form:label path="height" >Height in meters</form:label>
+						<form:label path="height" >Altura (en m):</form:label>
 						<form:input path="height" class="form-control" />
 						<form:errors path="height" class="text-danger" />
 					</div>
 					<div class="mb-3">
-						<form:label path="weight" >Weight in KL</form:label>
+						<form:label path="weight" >Peso (en kg):</form:label>
 						<form:input path="weight" class="form-control" />
 						<form:errors path="weight" class="text-danger" />
 					</div >
 					<div>
-						<form:label path="heartRate" >heart Rate:</form:label>
+						<form:label path="heartRate" >Frecuencia cardíaca (en ppm):</form:label>
 						<form:input path="heartRate" class="form-control" />
 						<form:errors path="heartRate" class="text-danger" />
 					</div>
 					<div class="mb-3">
-						<form:label path="bodyState" >body State:</form:label>
+						<form:label path="bodyState" >Estado físico general:</form:label>
 						<form:input path="bodyState" class="form-control" />
 						<form:errors path="bodyState" class="text-danger" />
 					</div>
 					<div class="mb-3">
-						<form:label path="observ">observ:</form:label>
+						<form:label path="observ">Otras observaciones:</form:label>
    						<form:textarea path="observ" class="form-control" />
     					<form:errors path="observ" class="text-danger" />
 					</div>
 					 <div class="text-center">
-					<input type="submit" class="btn btn-success" value="Add" >
+					<input type="submit" class="btn btn-success" value="Añadir" >
 					</div>
 				</form:form>
 				</div>

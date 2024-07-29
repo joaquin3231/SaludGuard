@@ -140,16 +140,20 @@
 
 /* ESTILOS PARA CUANDO NO HAY NINGUNA CARGA*/
 .content .carga{
-    background-color: #27d2eda8;
 }
 
 .content .carga p{
     border-bottom: 0;
-    color: #2a462a;
+    color: black;
     font-size: 25px;
     font-weight: bold;
-    text-shadow: 10px 13px 4px #1c3b40b5;
     padding: 15px
+}
+
+.inputDoctor{
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
 }
 
 #antecedentes{

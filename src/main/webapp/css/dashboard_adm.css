@@ -29,3 +29,26 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* sombra gris con 20% de opacidad */
     backdrop-filter: blur(5px); /* filtro de blur para darle un efecto de acrílico */
   }
+
+.form-container {
+    background-color: rgb(244, 244, 244);
+    padding: 2vw;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    width: 40vw; 
+    margin-bottom: 20px; 
+    text-align: center;
+}
+
+.tinside {
+    vertical-align: middle;
+}
+
+.formDni {
+    display: inline-block;
+}
+
+.admData {
+	color: white;
+	display: inline-block;
+}

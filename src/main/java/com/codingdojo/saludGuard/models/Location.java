@@ -29,27 +29,26 @@ public class Location {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty(message="Address is required")
-	@Size(min=2, message = "Address needs at least 2 chars")
+	@NotEmpty(message="Ingrese una dirección válida")
+	@Size(min=2, message = "Ingrese una dirección válida")
 	private String address;
 	
-	@Size(min=2, message = "Address needs at least 2 chars")
 	private String address2;
 	
-	@NotEmpty(message="State is required")
-	@Size(min=2, message = "State needs at least 2 chars")
+	@NotEmpty(message="Seleccione una provincia")
+	@Size(min=2, message = "Provincia")
 	private String state;
 	
-	@NotNull(message="State is required")
-	@Size(min=4, message = "State needs at least 2 chars")
+	@NotNull(message="Escriba un código postal")
+	@Size(min=4, message = "El código postal debe ser de al menos 4 dígitos")
 	private String postalCode;
 	
-	@NotEmpty(message="State is required")
-	@Size(min=2, message = "State needs at least 2 chars")
+	@NotEmpty(message="Ingrese una localidad")
+	@Size(min=2, message = "Ingrese una localidad válida")
 	private String town;
 	
-	@NotEmpty(message="City is required")
-	@Size(min=2, message = "City needs at least 2 chars")
+	@NotEmpty(message="Seleccione una ciudad/municipio")
+	@Size(min=2, message = "Municipio")
 	private String city;
 	
 	//locations a users(1:1)

@@ -17,7 +17,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <img id="logo1" src="../img/logosaludguardwhite.png" width="200" alt="Logo">
-					<span class="ms-2"> | ï¿½ Panel del paciente</span>
+					<span class="ms-2"> |   Panel del profesional   |   Paciente: ${antecedentTemp.patient.user.firstName} ${antecedentTemp.patient.user.lastName} </span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,8 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a id="logout" class="btn btn-custom" href="/logout">Cerrar sesion</a>
+                        	<span class="doctorData">${doctTemp.user.lastName}, ${doctTemp.user.firstName} | MM.NN: ${doctTemp.medLicense}       </span>
+                            <a id="logout" class="btn btn-custom" href="/logout">Cerrar sesión</a>
                         </li>
                     </ul>
                 </div>
@@ -39,7 +40,7 @@
         			<div class="divNav">
         				<div>
 	        				<img alt="flechitas" src="../img/patientImg/flechitas.png">
-	        				<p>Detalles Fisicos</p>	
+	        				<p>Detalles Físicos</p>	
         				</div>
 
         				<a href="/physical">Editar detalles fisicos</a> <br>
@@ -50,34 +51,34 @@
         			 	
         			 	<c:if test="${ physicalDetail != null }">
         			 		<div class="contIzq">
-	        					<p>Altura (M): <br>
+	        					<p>Altura (en m):<br>
 	        					${ physicalDetail.height }</p>
-	        					<p>Peso (Kg): <br>
+	        					<p>Peso (en Kg):<br>
 	        					${ physicalDetail.weight }</p>
-	        					<p>I.M.C <br>
+	        					<p>I.M.C (Índice de masa corporal):<br>
 	        					${ physicalDetail.patientIMC }</p>
 	        				</div>
 	        				<div class="contDer">
-	        					<p>Presion Arterial <br>
+	        					<p>Presión Arterial (en mmHg):<br>
 	        					${ physicalDetail.bloodPressure }</p>
-	        					<p>Ritmo Cardiaco <br>
+	        					<p>Ritmo Cardíaco (en ppm máx.):<br>
 	        					${ physicalDetail.heartRate }</p>
 	        				</div>
         			 	</c:if>
         			 	
         			 	<c:if test="${ physicalDetail == null }">
         			 		<div class="contIzq">
-	        					<p>Altura (M): <br>
+	        					<p>Altura (en m):<br>
 	        					NO REGISTRADO</p>
-	        					<p>Peso (Kg): <br>
+	        					<p>Peso (en Kg):<br>
 	        					NO REGISTRADO</p>
-	        					<p>I.M.C <br>
+	        					<p>I.M.C (Índice de masa corporal):<br>
 	        					NO REGISTRADO</p>
 	        				</div>
 	        				<div class="contDer">
-	        					<p>Presion Arterial <br>
+	        					<p>Presión Arterial (en mmHg):<br>
 	        					NO REGISTRADO</p>
-	        					<p>Ritmo Cardiaco <br>
+	        					<p>Ritmo Cardíaco (en ppm máx.):<br>
 	        					NO REGISTRADO</p>
 	        				</div>
         			 	</c:if>
@@ -103,16 +104,16 @@
 									<th><i class="fas fa-calendar-alt fa-sm"></i> Fecha de consulta</th>
 									<th><i class="fas fa-user-md fa-sm"></i> Profesional</th>
 									<th><i class="fas fa-sticky-note fa-sm"></i> Observaciones</th>
-									<th><i class="fas fa-info-circle fa-sm"></i> Mï¿½s informaciï¿½n</th>
+									<th><i class="fas fa-info-circle fa-sm"></i> Más información</th>
 	                        	</tr>
 							</thead>
 	                    		<tbody>
 									<c:forEach items="${assesmentList}" var="assesment">
 										<tr>
 											<td>${assesment.createAt}</td>
-											<td>${assesment.doctor.user.firstName}</td>
+											<td>${assesment.doctor.user.firstName} ${assesment.doctor.user.lastName}</td>
 											<td>${assesment.observation}</td>
-											<td> <a href="#">Mas informacion</a> </td>
+											<td> <a href="#">Mas información</a> </td>
 										</tr>
 									</c:forEach>
 	                        	</tbody>
@@ -122,7 +123,7 @@
         				<c:if test="${ assesmentList.size() == 0 }">
         					<div class="content">
         					    <div class="carga" id="consulta">
-	        						<p>Ninguna consulta cargado</p>
+	        						<p>No se encuentran consultas registradas</p>
 	        					</div>
         					</div>
         				</c:if>
@@ -147,14 +148,14 @@
         			
         				<c:if test="${ treatment == null }">
         					<div class="carga" id="tratamiento">
-	        					<p>Ningun tratamiento cargado</p>
+	        					<p>No se encuentran tratamientos registrados</p>
 	        				</div>
         				</c:if>
         			
         				<c:if test="${ treatment != null }">
-   							<p class="tipo"> <b>Tipo: </b> <span>${ treatment.type }</span> </p>
-	        				<p class="description"> <b>Descripcion: </b> <br>
-							<span>${ treatment.description }</span></p>
+   							<p class="ml-2 tipo"> <b>       Tipo: </b> <span>${ treatment.type }</span> </p>
+	        				<p class="ml-2 description"> <b>       Descripción: </b> <br>
+							<span>       ${ treatment.description }</span></p>
         				</c:if>
         			
 
@@ -164,7 +165,7 @@
         			<div class="divNav">
         				<div>
 	        				<img alt="antecedentes" src="../img/patientImg/antecedente.png">
-	        				<p>Antecedentes Medicos</p>
+	        				<p>Antecedentes médicos</p>
         				</div>
         				
         				<a href="/antecedent">Cargar nuevo antecedente</a> <br>
@@ -174,7 +175,7 @@
         			
         				<c:if test="${ antecedentDate == null }">
 	        				<div class="carga" id="antecedentes">
-	        					<p>Ningun antecedente medico cargado</p>
+	        					<p>No se encuentran antecedentes médicos registrados</p>
 	        				</div>
         				</c:if>
         				
@@ -183,9 +184,9 @@
 	       					${ antecedentDate }</p>
 	       					<p>Tipo: <br>
 	       					${ antecedent.type }</p>
-	       					<p>Titulo: <br>
+	       					<p>Título: <br>
 	       					${ antecedent.title }</p>
-	       					<p>Descripcion <br>
+	       					<p>Descripción <br>
 	       					${ antecedent.description }</p>
         				</c:if>
         			</div>

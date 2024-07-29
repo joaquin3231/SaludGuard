@@ -28,6 +28,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
+                       		<span class="admData"> Administrador: ${adminInSession.name}   </span>
                             <a id="logout" class="btn btn-custom" href="/admin/logout">Cerrar sesión</a>
                         </li>
                     </ul>
@@ -35,36 +36,46 @@
             </div>
      </nav>
     
-	<div class="container justify-content-center align-items-center">
+	<div class="container d-flex justify-content-center align-items-center">
 		<header class="justify-content-between">
 		<h1 class="mt-3">Bienvenido, administrador</h1>
 		<c:set var="now" value="<%= new java.util.Date()%>" />
 		<h3>Fecha y hora: <fmt:formatDate type="both" dateStyle="long" timeStyle="long" value="${now}" /></h3>
 		</header>
-		
-		<h3>Registrar un nuevo usuario (profesional):</h3>
-		<a class="btn btn-warning" href="/register/prof">Registrar</a>
-		
-	 	<h3>Modificar un usuario ya existente:</h3>
-		 <form:form action="/admin/searchuser" method="post" modelAttribute="user">
-	        <label for="userDNI">DNI:</label>
-	        <form:input path="userDNI" id="userDNI" />
-	        <button type="submit" class="btn btn-info mt-3">Buscar</button>
-    	</form:form> 
-    	
-    <c:choose>
-        <c:when test="${not empty searchResult}">
-            <h2>User Details</h2>
-            <p>ID: ${searchResult.id}</p>
-            <p>Nombre: ${searchResult.firstName}</p>
-            <p>Email: ${searchResult.email}</p>
-        </c:when>
-        <c:otherwise>
-            <p>No user found.</p>
-        </c:otherwise>
-    </c:choose>
-		
-		
 	</div>
+
+    <div class="row justify-content-center">
+        <div class="m-3 col-md-4 form-container d-flex flex-column justify-content-center">
+            <div class="tinside">
+                <h3>Registrar un nuevo usuario (profesional):</h3>
+                <a class="btn btn-warning" href="/register/prof">Registrar</a>
+            </div>
+        </div>
+            
+            <div class="m-3 col-md-4 form-container d-flex flex-column justify-content-center">
+            <div class="tinside">
+            <h3>Modificar un usuario ya existente:</h3>
+            <form:form action="/admin/searchuser" method="post" modelAttribute="user" class="formDni">
+                <label for="userDNI"><span>DNI:</span></label>
+                <form:input path="userDNI" id="userDNI" />
+                <button type="submit" class="btn btn-info mt-3">Buscar</button>
+            </form:form> 
+            
+            <c:choose>
+                <c:when test="${not empty searchResult}">
+                    <h2>User Details</h2>
+                    <p>ID: ${searchResult.id}</p>
+                    <p>Nombre: ${searchResult.firstName}</p>
+                    <p>Email: ${searchResult.email}</p>
+                </c:when>
+                <c:otherwise>
+                    <p>No user found.</p>
+                </c:otherwise>
+            </c:choose>
+        </div>
+            </div>
+	    </div>
+    </div>
+    </div>
 </body>
 </html>

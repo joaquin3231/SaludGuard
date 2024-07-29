@@ -31,35 +31,35 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty(message="First name is required")
-	@Size(min=2, message = "First name needs at least 2 chars")
+	@NotEmpty(message="Por favor, ingrese su nombre completo")
+	@Size(min=2, message = "Ingrese un nombre válido")
 	private String firstName;
 	
-	@NotEmpty(message="Last name is required")
-	@Size(min=2, message = "Last name needs at least 2 chars")
+	@NotEmpty(message="Por favor, ingrese su apellido")
+	@Size(min=2, message = "Ingrese un apellido válido")
 	private String lastName;
 	
-	@NotNull(message="DNI is required")
-	@Size(min=8, max=8, message = "DNI needs at least 8 chars, and max 8")
+	@NotNull(message="Por favor, ingrese su DNI sin puntos ni espacios")
+	@Size(min=7, max=9, message = "Ingrese un DNI válido")
 	private String userDNI;
 	
-	@NotNull(message="Phone is required")
-	@Size(min=8, max=20, message = "Phone needs at least 8 chars")
+	@NotNull(message="Por favor, ingrese su número de teléfono")
+	@Size(min=8, max=20, message = "Ingrese un número de teléfono válido")
 	private String phone;
 	
-	@NotEmpty(message="email is required")
-	@Email(message = "Invalid email")
+	@NotEmpty(message="Por favor, ingrese su e-mail")
+	@Email(message = "Ingrese una dirección de e-mail válida")
 	private String email;
 	
-	@NotEmpty(message="password is required")
-	@Size(min=6, message = "Password needs at least 2 chars")
+	@NotEmpty(message="Ingrese una contraseña")
+	@Size(min=6, message = "Ingrese una contraseña de al menos 6 caracteres")
 	private String password;
 	
 	@Transient
-	@Size(min=6, message = "Confirm needs at least 2 chars")
+	@Size(min=6, message = "Las contraseñas no coinciden")
 	private String confirm;
 	
-	@NotEmpty(message = "gender is required")
+	@NotEmpty(message = "Ingrese su sexo, como indica en su DNI")
 	private String gender;
 	
 	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza

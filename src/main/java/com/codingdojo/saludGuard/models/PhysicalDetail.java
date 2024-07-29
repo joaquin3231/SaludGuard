@@ -29,28 +29,28 @@ public class PhysicalDetail {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message="Height of patient is required")
+	@NotNull(message="Especifique la altura del paciente (en metros)")
 	private float height;
 	
-	@NotNull(message="Weight of patient is required")
+	@NotNull(message="Especifique el peso del paciente (en kg)")
 	private float weight;
 	
 	private float patientIMC; //este comentario es para destacar a la variable ya que nose si va a quedarse o nop :)
 	
-	@NotEmpty(message="Blood pressure of patient is required")
-	@Size(min=2, message = "Blood pressure of patient needs at least 2 chars")
+	@NotEmpty(message="Especifique la presión sanguínea del paciente (en mmHg)")
+	@Size(min=2, message = "Se requieren al menos dos dígitos")
 	private String bloodPressure;
 	
-	@NotEmpty(message="Heart rate of patient is required")
-	@Size(min=2, message = "Heart rate of patient needs at least 2 chars")
+	@NotEmpty(message="Especifique la frecuencia cardíaca (en ppm máx.)")
+	@Size(min=2, message = "Se requieren al menos dos dígitos")
 	private String heartRate;
 	
-	@NotEmpty(message="Body state of patient is required")
-	@Size(min=2, message = "Body state of patient needs at least 2 chars")
+	@NotEmpty(message="Especifique el estado general del paciente")
+	@Size(min=2, message = "Se requieren al menos dos dígitos")
 	private String bodyState;
 	
-	@NotEmpty(message="Observ of patient is required")
-	@Size(min=2, message = "Observ of patient needs at least 2 chars")
+	@NotEmpty(message="Especifique observaciones del paciente (si no aplica, escriba n/a)")
+	@Size(min=2, message = "Especifique observaciones del paciente")
 	private String observ;
 	
 	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza

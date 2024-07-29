@@ -17,7 +17,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <img id="logo1" src="../img/logosaludguardwhite.png" width="200" alt="Logo">
-					<span class="ms-2"> | Panel del paciente</span>
+					<span class="ms-2"> |   Panel del paciente</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,8 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a id="logout" class="btn btn-custom" href="/logout">Cerrar sesion</a>
+                        	<span class="patientData"> Paciente: ${userInSession.lastName}, ${userInSession.firstName}       </span>
+                            <a id="logout" class="btn btn-custom" href="/logout">Cerrar sesión</a>
                         </li>
                     </ul>
                 </div>
@@ -38,7 +39,7 @@
         		<div class="sup">
         			<div class="divNav">
         				<img alt="flechitas" src="../img/patientImg/flechitas.png">
-        				<p>Detalles Fisicos</p>
+        				<p>Cuadro físico general</p>
         			</div>
         			  			
         			<div class="content">
@@ -46,34 +47,34 @@
         			 	
         			 	<c:if test="${ physicalDetail != null }">
         			 		<div class="contIzq">
-	        					<p>Altura (M): <br>
+	        					<p>Altura (en m):<br>
 	        					${ physicalDetail.height }</p>
-	        					<p>Peso (Kg): <br>
+	        					<p>Peso (en Kg):<br>
 	        					${ physicalDetail.weight }</p>
-	        					<p>I.M.C <br>
+	        					<p>I.M.C (Índice de masa corporal):<br>
 	        					${ physicalDetail.patientIMC }</p>
 	        				</div>
 	        				<div class="contDer">
-	        					<p>Presion Arterial <br>
+	        					<p>Presión Arterial (en mmHg):<br>
 	        					${ physicalDetail.bloodPressure }</p>
-	        					<p>Ritmo Cardiaco <br>
+	        					<p>Ritmo Cardíaco (en ppm máx.):<br>
 	        					${ physicalDetail.heartRate }</p>
 	        				</div>
         			 	</c:if>
         			 	
         			 	<c:if test="${ physicalDetail == null }">
         			 		<div class="contIzq">
-	        					<p>Altura (M): <br>
+	        					<p>Altura (en m):<br>
 	        					NO REGISTRADO</p>
-	        					<p>Peso (Kg): <br>
+	        					<p>Peso (en Kg):<br>
 	        					NO REGISTRADO</p>
-	        					<p>I.M.C <br>
+	        					<p>I.M.C (Índice de masa corporal):<br>
 	        					NO REGISTRADO</p>
 	        				</div>
 	        				<div class="contDer">
-	        					<p>Presion Arterial <br>
+	        					<p>Presión Arterial (en mmHg):<br>
 	        					NO REGISTRADO</p>
-	        					<p>Ritmo Cardiaco <br>
+	        					<p>Ritmo Cardíaco (en ppm máx.):<br>
 	        					NO REGISTRADO</p>
 	        				</div>
         			 	</c:if>
@@ -88,15 +89,17 @@
         			
         			<div>
         			 <!-- Formulario para los filtros -->
-				<form id="filterForm" method="GET" action="/dashboard/${patient.id}">
-				    <label for="doctorFirstName">Nombre del Doctor:</label>
-				    <input type="text" id="doctorFirstName" name="doctorFirstName" value="${param.doctorFirstName}">
-				    <br>
-				    <label for="date">Fecha:</label>
-				    <input type="date" id="date" name="createAt" value="${param.createAt}">
-				    <br>
-				    <button type="submit">Aplicar Filtro</button>
-				</form>
+        		<div class="formFilter">
+					<form class="filterForm" method="GET" action="/dashboard/${patient.id}">
+					    <label for="doctorFirstName">Nombre del Doctor:</label>
+					    <input class="inputDoctor" type="text" id="doctorFirstName" name="doctorFirstName" value="${param.doctorFirstName}">
+					    <br>
+					    <label for="date">Fecha:</label>
+					    <input type="date" id="date" name="createAt" value="${param.createAt}">
+					    <br>
+					    <button type="submit">Aplicar Filtro</button>
+					</form>
+				</div>
 				<br>
 				
 				<table class="table table-striped">
@@ -171,7 +174,7 @@
         			
         				<c:if test="${ treatment == null }">
         					<div class="carga" id="tratamiento">
-	        					<p>Ningun tratamiento cargado</p>
+	        					<p>No se encuentran tratamientos registrados</p>
 	        				</div>
         				</c:if>
         			
@@ -194,7 +197,7 @@
         			
         				<c:if test="${ antecedentDate == null }">
 	        				<div class="carga" id="antecedentes">
-	        					<p>Ningun antecedente medico cargado</p>
+	        					<p>No se encuentran antecedentes médicos registrados</p>
 	        				</div>
         				</c:if>
         				
