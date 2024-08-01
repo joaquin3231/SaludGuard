@@ -47,7 +47,7 @@
         flex: 1.5; 
         background: url('../img/fisico.png') no-repeat center center;
         background-size: cover;
-        height: 700px; 
+        height: 100vh;
     }
     .form-section {
         flex: 1; 
@@ -55,6 +55,7 @@
         justify-content: center;
         align-items: center;
         background-color: rgb(234, 234, 234);
+        height: 100vh;
     }
     .form-container {
         background-color: rgba(213, 213, 213, 0.8); 

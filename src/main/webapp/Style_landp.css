@@ -2,26 +2,23 @@
     margin: 0;
     padding: 0;
 }
-
-body {
-
-    background-image: url("img/background1.png");
-    overflow: auto;
-    scroll-behavior: smooth;
-
-}
-
-.radio-canada-big-body {
-  font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-}
-
 html {
     width: 100vw;
     height: 100vh;
 
+}
+
+.radio-canada-big-body {
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+body {
+    background-image: url("img/background1.png");
+    overflow: auto;
+    scroll-behavior: smooth;
 }
 
 body::-webkit-scrollbar {
@@ -30,40 +27,17 @@ body::-webkit-scrollbar {
     background: transparent;
 }
 
-/*NAV cambiar position a fixed*/
-
-.animacion-activa {
-    animation: text-focus-in 1.1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-}
-
-.abajo {
-    display: flex;
-    position: fixed;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 86px;
-    width: 100vw;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.935);
-    margin-top: 0px;
-    z-index: 9999;
-    animation: none;
-
-}
+    /*body modo oscuro*/
+    body.dark {
+        background-image: url("img/backgroundINVERTIDO.jpg");
+        /*cuando el body tenga la clase 'active' modifica el color de fondo*/
+        transition: 0.2s;
+    }
+    
 
 
-nav.abajo li a {
-    color: black; font-weight:  600;
-}
+/*NAV*/
 
-nav.abajo button {
-    background-color: rgb(25, 119, 88);
-}
-
-nav.abajo div.dropdown-content {
-    background-color: rgb(25, 119, 88);
-  
-}
 nav {
     margin-top: 4px;
     display: flex;
@@ -71,21 +45,15 @@ nav {
     flex-direction: row;
     justify-content: space-between;
     background-color: #0000006e;
-    height: 86px;
+    height: 54px;
     width: 100vw;
     align-items: center;
     transition: 0.3s;
     padding: 30x 20px;
     color: white;
+    scroll-behavior: smooth;
 
 }
-
-nav.abajo img {
-    width: 279px;
-    height: 76px;
-    margin-top: 0px;
-}
-
 
 #box1 {
     width: 744px;
@@ -93,17 +61,18 @@ nav.abajo img {
     padding: 29px;
 }
 
+#box1.logoscroll img {
+    width: 221px;
+    height: 37px;
+    position: relative;
+    top: 6px
+}
+
 #box1 img {
     width: 0px;
     height: 0px;
     margin-top: 0px;
 }
-
-#box1.logoscroll img {
-    width: 15vw;
-    height: 2.5vw;
-}
-
 #box2 {
     display: flex;
     flex-wrap: nowrap;
@@ -120,39 +89,158 @@ nav.abajo img {
     align-items: center;
 }
 
-
 ul {
-
     height: 35px;
-
 }
 
 li {
     display: flex;
     List-style: none;
-    font-family: "Radio Canada Big", sans-serif;
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
     font-weight: 100;
     font-size: 15px;
     list-style-type: disc
 }
 
-li a:hover{
+li a:hover {
     -webkit-animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
     animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
 }
 
 a {
-
-    font-size: 28px;
+    font-size: 14px;
     text-decoration: none;
     color: rgb(255, 250, 250);
-    margin-left: 93px;
+    margin-right: 138px;
+    margin-left: 23px;
     font-weight: 600;
+    position: relative;
+    top: 10px;
+    scroll-behavior: smooth;
+}
+
+/*Nav al desplazarse*/
+
+.animacion-activa {
+    animation: text-focus-in 1.1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.abajo {
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 54px;
+    width: 100vw;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.935);
+    margin-top: 0px;
+    z-index: 9999;
+    animation: none;
+    transition: 1s;
+    animation: text-focus-in 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    scroll-behavior: smooth;
 }
 
 
 
+nav.abajo li a {
+    color: black;
+    font-weight: 600;
+    scroll-behavior: smooth;
+}
 
+nav.abajo button {
+    background-color: rgb(25, 119, 88);
+}
+
+nav.abajo div.dropdown-content {
+    background-color: rgb(25, 119, 88);
+
+}
+
+/*nav desplazarse modo oscuro*/
+
+
+nav.abajo.dark {
+    background-color: rgb(255 255 255 / 45%);
+    transition: 0.2s;
+}
+
+#menu a.black {
+    color: #d1cdcd;
+    transition: 0.2s;
+}
+
+
+/*SWITCH MODO OSCURO*/
+
+
+.switch {
+    border-radius: 1000px;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    outline: none;
+}
+
+.switch::after {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-color: #F1F1F1;
+    /*color de fondo del circulo el boton */
+    top: 0;
+    left: 0;
+    right: unset;
+    border-radius: 100px;
+    transition: 0.3s ease all;
+    box-shadow: 0px 0px 2px 2px rgb(25, 119, 88);
+
+    /*color del circulo del boton */
+}
+
+.switch.active {
+    background-color: rgb(25, 119, 88);
+    /*color de fondo del boton*/
+    color: black;
+}
+
+.switch.active i {
+    color: rgb(255, 255, 255);
+    /*color del icono sol cuando esta activo*/
+}
+
+.switch.active::after {
+    right: 0;
+    left: unset;
+    /*realizar el movimiento de iz a derecha*/
+}
+
+.switch {
+    background-color: rgb(25, 119, 88);
+    ;
+    /*color de fondo del boton cuando no esta activo(se ve la luna)*/
+}
+
+.switch span {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    display: block;
+    background: none;
+    color: #fff;
+}
+
+.switch i {
+    color: #000000;
+    /*color de la luna*/
+}
+
+/*Boton desplegable*/
 .dropdown-button {
     background-color: rgb(31 152 111 / 57%);
     color: white;
@@ -160,16 +248,18 @@ a {
     font-size: 28px;
     border-radius: 35px;
     cursor: pointer;
-    width: 209px;
-    height: 56px;
-    margin-left: 93px;
+    width: 98px;
+    height: 36px;
+    margin: 0px 44px 0px 0px;
     border: none;
     position: relative;
     font-weight: 600;
-    position: relative;
     display: inline-block;
+    font-size: 14px;
 }
-.dropdown-button:hover{ -webkit-animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+
+.dropdown-button:hover {
+    -webkit-animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
     animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
     background-color: rgba(31, 152, 112, 0.828);
     transition: 1s;
@@ -180,74 +270,57 @@ a {
     background-color: rgb(31 152 111 / 57%);
     z-index: 1;
     display: block;
-    margin-top: 205px;
-    margin-left: 693px;
+    margin-top: 141px;
+    margin-left: 678px;
     color: white;
-    font-family: "Radio Canada Big", sans-serif;
-    width: 206px;
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
+    width: 107px;
     border-radius: 28px;
     animation-iteration-count: 1;
     animation: scale-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     transition: 1s;
+    height: 77px;
+
 }
-
-
-.dropdown-content.closing {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-26 20:25:44
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation scale-in-top
- * ----------------------------------------
- */
- @keyframes scale-in-top {
-    0% {
-      transform: scale(0);
-      transform-origin: 50% 0%;
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1);
-      transform-origin: 50% 0%;
-      opacity: 1;
-    }
-  }
-  
-
 
 .dropdown-content a {
     color: rgb(255, 255, 255);
-    padding: 12px 16px;
+    padding: 7px 0px;
     text-decoration: none;
     display: block;
     margin: 0px;
     text-align: center;
+    top: 1px;
 }
 
-.dropdown-content a:hover{ -webkit-animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+.dropdown-content a:hover {
+    -webkit-animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
     animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
 }
 
-#paciente:hover{background-color: rgba(31, 152, 112, 0.828);
-border-top-left-radius:20px ;
-    border-top-right-radius: 20px;
+#paciente {
+    margin-bottom: 10px;
+    padding: 9px 6px;
 }
 
-#medico:hover{background-color: rgba(31, 152, 112, 0.828);
-    border-bottom-left-radius:20px ;
-        border-end-end-radius: 20px;
-    }
-    
+#paciente:hover {
+    background-color: rgba(31, 152, 112, 0.828);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 9px 6px;
+    margin-bottom: 10px;
+}
 
 
+#medico {
+    padding: 9px 6px;
+}
+#medico:hover {
+    background-color: rgba(31, 152, 112, 0.828);
+    border-bottom-left-radius: 20px;
+    border-end-end-radius: 20px;
+    padding: 9px 6px;
+}
 
 .dropdown:hover .dropdown-button {
     background-color: #3e8e41;
@@ -261,32 +334,12 @@ border-top-left-radius:20px ;
     display: block;
 }
 
-#contIMG {
-    width: 100vw;
-    height: 47vw;
-    background-image: url(img/background2.jpg);
-    color: white;
-    font-size: 35px;
-    font-family: "Radio Canada Big", sans-serif;
-    font-weight: 100;
-    display: flex;
-    align-items: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin-top: -4px;
-;
-
-}
-
-
+/*Inicio*/
 
 #mainlogo {
-    font-size: 109px;
-    letter-spacing: -8px;
+    font-size: 81px;
+    letter-spacing: -7px;
     font-weight: 700;
-
-
-
 }
 
 .animacion-mainlogo {
@@ -295,91 +348,123 @@ border-top-left-radius:20px ;
 }
 
 #mainlogo img {
-    width: 85px;
-    height: 85px;
+    width: 65px;
+    height: 65px;
 }
-
-.animacion-txt{
-    animation: text-focus-in 2.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-    transition: 0.2s;
-}
-
-#tx {
-    margin-left: 71px;
-}
-
-#contIMG h1 {
-    margin: 0px;
-    padding-top: 40px;
-
-}
-
 .animacion-mainlogoH {
     animation: text-focus-in 3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
     transition: 0.2s;
 }
 
-#contIMG h2 {
+
+#contIMG {
+    width: 100vw;
+    height: 47vw;
+    background-image: url(img/background2.jpg);
+    color: white;
     font-size: 35px;
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
+    font-weight: 100;
+    display: flex;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: -4px;
+    ;
+
 }
 
-.animacion-strong {
-    animation: text-shadow-pop-top 1s both;
+#contIMG h1 {
+    margin: 0px;
+    padding-top: 2px;
+    font-size: 54px;
+
+}
+
+
+
+#contIMG h2 {
+    font-size: 25px;
+    margin-left: 38px;
+}
+
+
+/* inicio modo oscuro*/
+#contIMG.active {
+    color: #d1cdcd;
+}
+
+
+
+.darkTX {
+    background-color: rgb(19, 100, 72);
+    width: 100vw;
+    height: 46vw;
+    display: block;
+    color: #171717;
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
     transition: 0.2s;
 }
 
+
+
+
+
 /* BIENVENIDO A SALUGUARD */
-
 #contTXT {
-
     background-color: rgb(31, 152, 111);
     width: 100vw;
     height: 46vw;
     display: block;
     color: white;
-    font-family: "Radio Canada Big", sans-serif;
-
-
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
 }
-
 
 #contTXT h1 {
     font-size: 6vw;
     margin-top: 0px;
-    padding-top: 116px;
+    padding-top: 80px;
+    margin-bottom: 20px;
 }
 
 #contTXT p {
     font-size: 1.6vw;
-    margin-top: 17px;
-
-
 }
 
 #contTXT li {
     font-size: 1.6vw;
-    margin-top: 50px;
+    margin-top: 25px;
     list-style-type: disc;
-
 }
-
 
 #Separador2 {
     margin-bottom: 66px;
+}
+
+#parraf2 {
+    margin-top: 130px;
+    font-size: 1.6vw;
+}
+
+
+.animacion-txt {
+    animation: text-focus-in 2.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    transition: 0.2s;
 }
 
 
 /*SOBRE NOSOTROS*/
 #about {
     display: flex;
-    height: 45vw;
+    height: 47vw;
     flex-wrap: nowrap;
     justify-content: space-evenly;
-    font-family: "Radio Canada Big", sans-serif;
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
     font-weight: 100;
     color: white;
     margin-top: 50px;
     width: 100vw;
+    scroll-behavior: smooth;
 }
 
 .animacion-about {
@@ -387,43 +472,50 @@ border-top-left-radius:20px ;
     transition: 0.2s;
 }
 
-#about1 {
+.view {
     background-color: rgb(54, 100, 162);
-    height: 200px;
-    width: 200px;
+}
+
+
+#about1 {
+    height: 125px;
+    width: 125px;
     text-align: center;
     border-radius: 100px;
     margin-top: 33px;
-
 }
-
 
 #about1 h1 {
-    margin-top: 58px;
-
+    margin-top: 37px;
+    font-size: 21px;
 }
 
-
-
 #about2 {
-    background-color: rgb(54, 100, 162);
-    height: 625px;
-    width: 625px;
+    height: 515px;
+    width: 515px;
     text-align: center;
     border-radius: 354px;
     margin: 40px 60px;
-
     font-weight: 600;
 }
 
+
 #about2 p {
     text-align: center;
-    font-size: 28px;
+    font-size: 21px;
     margin-top: 118px;
     padding: 0px 43px;
 }
 
-/*DATOS DE IMOPACTO*/
+/*modo oscuro sobre nosotros*/
+.view.black {
+    background-color: rgb(54 100 162 / 45%);
+    animation: shadow-pop-bl-black 0.5s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+    color: #d1cdcd;
+}
+
+
+/*DATOS DE IMPACTO*/
 
 .animacion-impc {
     -webkit-animation: tracking-in-expand-fwd 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
@@ -433,10 +525,10 @@ border-top-left-radius:20px ;
 
 #impcDat {
     height: 643px;
-    font-family: "Radio Canada Big", sans-serif;
-    margin-top: 50px;
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
     transition: 0.2s;
 }
+
 
 #impcDat1 {
     text-align: center;
@@ -447,6 +539,8 @@ border-top-left-radius:20px ;
     justify-content: space-between;
     align-items: center;
     transition: 0.2s;
+    font-size: 14.6px;
+    margin-bottom: 45px;
 }
 
 #impcDat2 {
@@ -464,10 +558,21 @@ border-top-left-radius:20px ;
     margin-top: 0px;
     margin-left: 10px;
     font-weight: 600;
+    font-size: 31.5px;
+
+}
+
+.info2 {
+    width: 189px;
+    margin-top: 0px;
+    margin-left: 10px;
+    font-weight: 600;
+    font-size: 31.5px;
+
 }
 
 .num {
-    font-size: 80px;
+    font-size: 72px;
     margin-top: 0px;
     color: rgb(23, 116, 87);
     font-weight: 600;
@@ -476,7 +581,7 @@ border-top-left-radius:20px ;
 }
 
 .num2 {
-    font-size: 80px;
+    font-size: 72px;
     margin-top: 0px;
     color: rgb(23, 116, 87);
     font-weight: 600;
@@ -529,6 +634,27 @@ border-top-left-radius:20px ;
     font-size: 35px;
 }
 
+
+/*modo oscuro datos de impacto*/
+
+.NumerosImpc.black {
+    color: #d1cdcd;
+}
+
+.NumerosImpc2.black {
+    color: #d1cdcd;
+}
+
+.info.black {
+    color: #d1cdcd;
+}
+
+.info2.black {
+    color: #d1cdcd;
+}
+
+
+
 /*PREGUNTAS FRECUENTES*/
 
 #impcDat3 {
@@ -557,7 +683,7 @@ border-top-left-radius:20px ;
 
 .Faq {
     margin-bottom: 14px;
-    background-color: rgb(196, 210, 215);
+    background-color: rgba(196, 210, 215, 0.607);
     height: 36px;
     width: 333px;
     border-radius: 21px;
@@ -566,23 +692,22 @@ border-top-left-radius:20px ;
     font-size: 21px;
     color: white;
     font-weight: 600;
-    
+
 }
 
-.Faq:hover{
+.Faq:hover {
     cursor: pointer;
 }
 
 .FaqSeleccted {
     /*clase para cuando se selecciona un area de cosultas*/
-    background-color: rgb(54, 100, 162);
+    background-color: rgba(54, 101, 162, 0.778);
 }
-
 
 #answerBox {
     height: 264px;
     background-color: rgba(54, 101, 162, 0.477);
-   
+
     width: 50vw;
     text-align: center;
     border-radius: 53px;
@@ -609,8 +734,6 @@ border-top-left-radius:20px ;
     display: none;
 }
 
-
-
 .SeparadorTit {
     height: 6px;
     width: 215px;
@@ -619,6 +742,8 @@ border-top-left-radius:20px ;
     margin-bottom: 21px;
 }
 
+
+/*CONTACTO*/
 #contacto {
     text-align: center;
     letter-spacing: 10px;
@@ -627,10 +752,12 @@ border-top-left-radius:20px ;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    font-family: "Radio Canada Big", sans-serif;
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
     margin-top: 100px;
     animation: tracking-in-expand 2s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
     animation-iteration-count: 1;
+    scroll-behavior: smooth;
+    margin-bottom: 23px;
 }
 
 #contacBox {
@@ -641,7 +768,7 @@ border-top-left-radius:20px ;
 
 .contactIMG img {
     width: 50vw;
-    height: 37vw;
+    height: 35vw;
     display: inline-block;
 
 
@@ -656,7 +783,7 @@ border-top-left-radius:20px ;
     position: absolute;
     left: 15%;
     transform: translate(-50%, -50%);
-    font-family: "Radio Canada Big", sans-serif;
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
 
     margin-top: 331px;
     width: 73px;
@@ -666,40 +793,45 @@ border-top-left-radius:20px ;
 
 #direc {
     position: absolute;
-    left: 37%;
+    left: 28%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 35px;
-    font-family: "Radio Canada Big", sans-serif;
+    font-size: 29px;
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
     font-weight: 100;
-    margin-top: 331px;
+    margin-top: 333px;
+    animation: none;
 }
 
-#direc:hover{
+#direc:hover {
     -webkit-animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
-            animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
-animation-iteration-count: 1;}
+    animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+    animation-iteration-count: 1;
+}
 
 #tele {
     position: absolute;
-    left: 21%;
+    left: 20%;
     transform: translate(-50%, -50%);
     color: white;
     font-size: 35px;
-    font-family: "Radio Canada Big", sans-serif;
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
     font-weight: 100;
     margin-top: 331px;
     animation: none;
 }
-#tele:hover{
-        -webkit-animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
-                animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
-    animation-iteration-count: 1;}
+
+#tele:hover {
+    -webkit-animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+    animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+    animation-iteration-count: 1;
+}
+
 #teleimg {
     position: absolute;
     left: 10%;
     transform: translate(-50%, -50%);
-    font-family: "Radio Canada Big", sans-serif;
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
     margin-top: 331px;
     width: 51px;
     height: 51px;
@@ -708,20 +840,21 @@ animation-iteration-count: 1;}
 
 #email {
     position: absolute;
-    left: 25%;
+    left: 28%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 35px;
-    font-family: "Radio Canada Big", sans-serif;
+    font-size: 29px;
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
     font-weight: 100;
     margin-top: 401px;
-animation: none;
+    animation: none;
 }
 
-#email:hover{
+#email:hover {
     -webkit-animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
-            animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
-animation-iteration-count: 1;}
+    animation: text-shadow-drop-center 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+    animation-iteration-count: 1;
+}
 
 
 
@@ -729,26 +862,25 @@ animation-iteration-count: 1;}
     position: absolute;
     left: 10%;
     transform: translate(-50%, -50%);
-    font-family: "Radio Canada Big", sans-serif;
+    font-family: "Radio Canada Big", "Radio Canada Big", sans-serif;;
     margin-top: 390px;
     width: 61px;
     height: 52px;
 }
 
 
-i{margin-right: 5px;}
+i {
+    margin-right: 5px;
+}
 
+/*Contacto modo oscuro*/
+.Contac.black {
+    color: #d1cdcd;
+}
 
 
 /*kayframes animaciones/*
 
-
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-26 9:31:5
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
 
 /**
  * ----------------------------------------
@@ -774,33 +906,6 @@ i{margin-right: 5px;}
     }
 }
 
-@keyframes tracking-in-expand-fwd {
-    0% {
-        letter-spacing: -0.5em;
-        -webkit-transform: translateZ(-700px);
-        transform: translateZ(-700px);
-        opacity: 0;
-    }
-
-    40% {
-        opacity: 0.6;
-    }
-
-    100% {
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
-        opacity: 1;
-    }
-}
-
-
-
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-26 5:8:5
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
 
 /**
  * ----------------------------------------
@@ -820,13 +925,6 @@ i{margin-right: 5px;}
     }
 }
 
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-26 4:59:45
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
 /**
  * ----------------------------------------
  * animation text-focus-in
@@ -845,13 +943,6 @@ i{margin-right: 5px;}
 }
 
 
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-25 20:35:50
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
 /**
  * ----------------------------------------
  * animation slide-fwd-center
@@ -866,14 +957,6 @@ i{margin-right: 5px;}
         transform: translateZ(160px);
     }
 }
-
-
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-25 18:20:5
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
 
 /**
  * ----------------------------------------
@@ -898,19 +981,12 @@ i{margin-right: 5px;}
     }
 }
 
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-26 5:23:22
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
 /**
  * ----------------------------------------
  * animation text-shadow-pop-bottom
  * ----------------------------------------
  */
-@keyframes text-shadow-pop-top {
+@keyframes text-shadow-pop-top1 {
     0% {
         text-shadow: 0 0 rgb(54, 100, 162), 0 0 rgb(54, 100, 162), 0 0 rgb(54, 100, 162), 0 0 rgb(54, 100, 162), 0 0 rgb(54, 100, 162), 0 0 rgb(54, 100, 162), 0 0 rgb(54, 100, 162), 0 0 rgb(54, 100, 162);
         transform: translateY(0);
@@ -922,13 +998,6 @@ i{margin-right: 5px;}
     }
 }
 
-
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-25 18:49:53
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
 
 /**
  * ----------------------------------------
@@ -946,13 +1015,6 @@ i{margin-right: 5px;}
         transform-origin: right;
     }
 }
-
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-25 19:0:8
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
 
 /** 
  * ----------------------------------------
@@ -974,13 +1036,6 @@ i{margin-right: 5px;}
     }
 }
 
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-25 20:46:58
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
 /**
  * ----------------------------------------
  * animation shadow-pop-bl
@@ -998,36 +1053,17 @@ i{margin-right: 5px;}
     }
 }
 
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-26 6:59:36
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
+@keyframes shadow-pop-bl-black {
+    0% {
+        box-shadow: 0 0 rgb(19, 100, 72), 0 0 rgb(19, 100, 72), 0 0 rgb(19, 100, 72), 0 0 rgb(19, 100, 72), 0 0 rgb(19, 100, 72), 0 0 rgb(19, 100, 72), 0 0 rgb(19, 100, 72), 0 0 rgb(19, 100, 72);
+        transform: translateX(0) translateY(0);
+    }
 
-/**
- * ----------------------------------------
- * animation slide-in-fwd-left
- * ----------------------------------------
- */
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-26 7:4:13
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation slide-fwd-center
- * ----------------------------------------
- */
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-26 7:4:13
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
+    100% {
+        box-shadow: -1px 1px rgb(19, 100, 72), -2px 2px rgb(19, 100, 72), -3px 3px rgb(19, 100, 72), -4px 4px rgb(19, 100, 72), -5px 5px rgb(19, 100, 72), -6px 6px rgb(19, 100, 72), -7px 7px rgb(19, 100, 72), -8px 8px rgb(19, 100, 72);
+        transform: translateX(8px) translateY(-8px);
+    }
+}
 
 /**
  * ----------------------------------------
@@ -1058,23 +1094,38 @@ i{margin-right: 5px;}
     }
 }
 
-/* ----------------------------------------------
- * Generated by Animista on 2024-7-26 10:37:16
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
 
 /**
  * ----------------------------------------
  * @animation text-shadow-drop-center
  * ----------------------------------------
  */
- @-webkit-keyframes text-shadow-drop-center {
+@-webkit-keyframes text-shadow-drop-center {
     0% {
-      text-shadow: 0 0 0 rgb(0, 255, 174);
+        text-shadow: 0 0 0 rgb(0, 255, 174);
     }
+
     100% {
-      text-shadow: 0 0 18px rgb(15, 193, 136);
+        text-shadow: 0 0 18px rgb(15, 193, 136);
     }
-  }
+}
+
+/**
+ * ----------------------------------------
+ * @animation scale-in-top
+ * ----------------------------------------
+ */
+
+@keyframes scale-in-top {
+    0% {
+        transform: scale(0);
+        transform-origin: 50% 0%;
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        transform-origin: 50% 0%;
+        opacity: 1;
+    }
+}

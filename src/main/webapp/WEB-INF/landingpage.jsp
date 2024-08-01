@@ -18,9 +18,14 @@
         <nav id="nav">
             <div id="box1">
                 <img src="./img/logosaludguard.png" alt="logo">
+                
             </div>
             <div id="box2">
-                <div id="menu">
+                <div id="menu" >
+                    <button class="switch" id="switch">
+                        <span><i class="fa-solid fa-sun"></i></span>
+                        <span><i class="fa-solid fa-moon"></i></span>
+                    </button>
                     <ul>
                         <li>
                             <a href="#contIMG">Inicio</a>
@@ -28,6 +33,8 @@
                             <a href="#contacto">Contacto</a>
                         </li>
                     </ul>
+
+
                     <button class="dropdown-button">Acceso</button>
                     <div class="dropdown-content">
                         <a id="paciente" href="/inicioSesion">Paciente</a>
@@ -41,32 +48,27 @@
     <div id="contIMG">
         <div id="contIMGTXT">
             <div id="mainlogo">
-                    <img src="img/clicklogo.png" alt="logo">
+                  <img src="img/clicklogo.png" alt="logo">
                 SaludGuard
             </div>
-            <h1 class="txt-animacion">    Tu historia en la palma
-                de tu mano</h1>
-            <h2 class="txt-animacion">      Con SaludGuard, tenés acceso a tu historia clínica desde cualquier lugar.</h2>
+            <h1 class="txt-animacion">   Tu historia en la palma de tu mano</h1>
+            <h2 class="txt-animacion">Con SaludGuard, tenés acceso a tu historia clínica desde cualquier lugar.
+            </h2>
         </div>
     </div>
 
     <div id="contTXT">
         <div id="tx">
-            <h1 class="animacicion-str">Bienvenido a SaludGuard</h1>
-            <p>Con SaludGuard, podés acceder a tu historia clínica en cualquier momento y lugar, facilitando la
-                revisión de tus registros y la gestión de tu salud.</p>
+            <h1>  Bienvenido a SaludGuard</h1>
+            <p>      &nbsp;En SaludGuard, te ofrecemos la posibilidad de acceder a tu historia clínica en cualquier momento y desde cualquier lugar, facilitando       &nbsp;así la revisión de tus registros médicos y la gestión integral de tu salud. Nuestra plataforma está diseñada para simplificar y mejorar       &nbsp;tu experiencia con la información médica personal, brindándote la tranquilidad de tener tus datos siempre al alcance de la mano.
+            </p>
             <ul>
-                <li>Permite&nbsp;<strong class="animacicion-str">registros</strong>&nbsp;más&nbsp;<strong
-                        class="animacicion-str">rápidos</strong>&nbsp;en tu historia
-                    clínica</li>
-                <li><strong class="animacicion-str">Diagnostlcos</strong>
-                    &nbsp;más&nbsp;<strong class="animacicion-str">precisos</strong>&nbsp;y&nbsp;<strong
-                        class="animacicion-str">eficientes</strong></li>
-                <li>En caso de&nbsp;<strong class="animacicion-str">emergencias</strong>,&nbsp;tener acceso rápido a tu
-                    historial puede
-                    ser&nbsp;<strong class="animacicion-str">crucial</strong>&nbsp;para recibir tratamiento.
+                <li>      &nbsp;Permite&nbsp;<strong >registros</strong>&nbsp;más&nbsp;<strong>rápidos</strong>&nbsp;en tu historiaclínica</li>
+                <li>      &nbsp;Diagnostlcos&nbsp;más&nbsp;<strong >precisos</strong>&nbsp;y&nbsp;<strong>eficientes</strong></li>
+                <li>      &nbsp;Acceso&nbsp;<strong >crucial</strong>&nbsp;en caso de emergencia
                 </li>
             </ul>
+            <p id="parraf2">      &nbsp;Te brindamos una herramienta que revolucionará la manera en que manejás tu salud. Con SaludGuard, tu bienestar está en tus       &nbsp;manos, de manera segura, accesible y eficiente. ¡Sumate a la transformación digital en la salud y contá con tener tu historia clínica       &nbsp;siempre con vos!</p>
         </div>
     </div>
     <div id="Separador2"></div>
@@ -101,13 +103,13 @@
             </div>
             <div class="boxDat">
                 <p class="num2"></p>
-                <p class="info">Historiales registrados</p>
+                <p class="info2">Historiales registrados</p>
             </div>
         </div>
         <br>
         <br>
         <div id="impcDat3">
-            <h2>
+            <h2 class="NumerosImpc2">
                 PREGUNTAS FRECUENTES
             </h2>
             <div id="Separador">
@@ -126,8 +128,9 @@
             </div>
         </div>
     </div>
+
     <div id="contacto">
-        <h2 class="NumerosImpc">    CONTACTANOS</h2>
+        <h2 class="Contac">   CONTACTANOS</h2>
         <div class="SeparadorTit"></div>
     </div>
     <div id="contacBox">

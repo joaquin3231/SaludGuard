@@ -3,13 +3,52 @@
 <html>
 <head>
     <title>Panel para pacientes</title>
-    <link rel="stylesheet" href="../css/styledashboard_p.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.navbar-custom {
+            background-color: #1C3B40;
+}
+
+#logout {
+    background-color: #90ee90; /* Replace with your desired color */
+    border-color: #90ee90; /* Replace with your desired color */
+    color: #000000; /* Replace with your desired text color */
+}
+
+.ms-2 {
+    color: white;
+    font-weight:700
+}
+
+.radio-canada-big-body {
+  font-family: "Radio Canada Big", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.table {
+    background-color: rgba(255, 255, 255, 0.1); /* fondo blanco con 10% de opacidad */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* sombra gris con 20% de opacidad */
+    backdrop-filter: blur(5px); /* filtro de blur para darle un efecto de acrílico */
+  }
+
+body {
+    background-image: url('../img/background1.png');
+    background-position: center;
+}
+</style>
 <body class="radio-canada-big-body">
     <div>
         <nav class="navbar navbar-custom navbar-expand-lg">

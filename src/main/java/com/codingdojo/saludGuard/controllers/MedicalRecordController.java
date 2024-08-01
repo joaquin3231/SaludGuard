@@ -155,8 +155,8 @@ public class MedicalRecordController {
 	}
 	
 	
-	/*
-	@GetMapping("/dashboard/{patientId}")
+	
+	@GetMapping("/dashboard/table/{patientId}")
 	public String dashboard(@PathVariable("patientId") Long patientId, HttpSession session, Model model) {
 		
 		// === REVISAMOS SESION ===
@@ -187,6 +187,6 @@ public class MedicalRecordController {
 		return "dashboard_p.jsp";
 		
 	}
-	*/
+	
 	
 }

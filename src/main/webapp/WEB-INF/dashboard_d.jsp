@@ -104,7 +104,6 @@
 									<th><i class="fas fa-calendar-alt fa-sm"></i> Fecha de consulta</th>
 									<th><i class="fas fa-user-md fa-sm"></i> Profesional</th>
 									<th><i class="fas fa-sticky-note fa-sm"></i> Observaciones</th>
-									<th><i class="fas fa-info-circle fa-sm"></i> Más información</th>
 	                        	</tr>
 							</thead>
 	                    		<tbody>
@@ -113,7 +112,6 @@
 											<td>${assesment.createAt}</td>
 											<td>${assesment.doctor.user.firstName} ${assesment.doctor.user.lastName}</td>
 											<td>${assesment.observation}</td>
-											<td> <a href="#">Mas información</a> </td>
 										</tr>
 									</c:forEach>
 	                        	</tbody>
