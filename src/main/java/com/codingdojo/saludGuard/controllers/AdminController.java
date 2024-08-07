@@ -23,7 +23,6 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
-
 public class AdminController {
 
 	@Autowired
@@ -42,13 +41,14 @@ public class AdminController {
 	public String adminDashboard(HttpSession session, Model model, User user) {
 		
 		/*=== REVISION DE SESION ===*/
-		Admin adminTemp = (Admin) session.getAttribute("adminInSession"); //Obj User or Null
+		Admin adminTemp = (Admin) session.getAttribute("adminInSession");
 		
 		if(adminTemp == null) {
 			
 			return "redirect:/home";
 		}
 		/*=== REVISION DE SESION ===*/
+		
         model.addAttribute("user", user);
 		LocalDateTime now = LocalDateTime.now();
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -76,7 +76,6 @@ public class AdminController {
 		} else {
 			
 			adminService.saveAdmin(newAdmin);
-			
 			session.setAttribute("adminInSession", newAdmin);
 			return "redirect:/admin/centraldashboard";
 		}
@@ -86,18 +85,17 @@ public class AdminController {
 	@PostMapping("/admin/login")
 	public String loginAdmin(@RequestParam("email") String email,
 						@RequestParam("password") String password,
-						RedirectAttributes redirectAttributes, /*usar mensajes de Flash*/   
+						RedirectAttributes redirectAttributes,   
 						HttpSession session){
 		
-		Admin adminTryingLogin = adminService.login(email, password); //Obj User o null
-		
+		Admin adminTryingLogin = adminService.login(email, password);
 		if(adminTryingLogin == null) {
 
 			redirectAttributes.addFlashAttribute("errorAdminLogin", "Wrong email/password");
 			return "redirect:/admin/access";
 		} else {
-			session.setAttribute("adminInSession", adminTryingLogin); //Guardando en sesión el objeto de User
 			
+			session.setAttribute("adminInSession", adminTryingLogin);
 			return "redirect:/admin/centraldashboard";
 		}
 		
@@ -105,6 +103,7 @@ public class AdminController {
 	
 	@GetMapping("/admin/logout")
 	public String adminLogout(HttpSession session) {
+		
 		session.removeAttribute("adminInSession");
 		return "redirect:/home";
 	}

@@ -16,6 +16,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -24,49 +25,47 @@ import jakarta.validation.constraints.Size;
 @Table(name = "locations")
 public class Location {
 
-	//VARIABLES	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty(message="Ingrese una dirección válida")
-	@Size(min=2, message = "Ingrese una dirección válida")
+	@NotEmpty(message="Enter a valid address")
+	@Size(min=2, message = "Enter a valid address")
 	private String address;
 	
 	private String address2;
 	
-	@NotEmpty(message="Seleccione una provincia")
-	@Size(min=2, message = "Provincia")
+	@NotEmpty(message="Select a state")
+	@Size(min=2, message = "Select a state")
 	private String state;
 	
-	@NotNull(message="Escriba un código postal")
-	@Size(min=4, message = "El código postal debe ser de al menos 4 dígitos")
+	@NotNull(message="Enter a valid postal code")
+	@NotBlank(message = "The field cannot be empty")
+	@Size(min=4, message = "Postal code must contain 4 numeric digits")
 	private String postalCode;
 	
-	@NotEmpty(message="Ingrese una localidad")
-	@Size(min=2, message = "Ingrese una localidad válida")
+	@NotEmpty(message="The field cannot be empty")
+	@Size(min=2, message = "Enter a valid town")
 	private String town;
 	
-	@NotEmpty(message="Seleccione una ciudad/municipio")
-	@Size(min=2, message = "Municipio")
+	@NotBlank(message = "The field cannot be empty")
+	@Size(min=2, message = "Enter a valid city")
 	private String city;
 	
-	//locations a users(1:1)
+	//locations to users(1:1)
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", unique = true)
 	private User user;
 	
-	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
+	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
 	
-	//CONSTRUCTORES
 	public Location() {}
 
-	//GETTERS AND SETTERS
 	public Long getId() {
 		return id;
 	}
@@ -133,7 +132,7 @@ public class Location {
 		this.address2 = address2;
 	}
 
-	@PrePersist //Antes de hacer la creacion
+	@PrePersist
 	protected void onCreate() {
 		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
 	}

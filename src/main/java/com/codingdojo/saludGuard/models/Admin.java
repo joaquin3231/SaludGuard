@@ -1,14 +1,23 @@
 package com.codingdojo.saludGuard.models;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -24,15 +33,15 @@ public class Admin {
 	private String name;
 	
 	@NotNull(message="DNI is required")
-	@Size(min=7, max=9, message = "DNI needs at least 8 chars, and max 8")
+	@Size(min=7, max=8, message = "DNI needs at least 8 chars, and max 8")
 	private String userDNI;
 	
 	@NotNull(message="Phone is required")
 	@Size(min=8, max=20, message = "Phone needs at least 8 chars")
 	private String phone;
 	
-	@NotEmpty(message="email is required")
-	@Email(message = "Invalid email")
+	@NotEmpty(message="E-Mail is required")
+	@Email(message = "The field must contain a valid E-Mail address format")
 	private String email;
 	
 	@NotEmpty(message="password is required")
@@ -43,7 +52,13 @@ public class Admin {
 	@Size(min=6, message = "Confirm needs at least 2 chars")
 	private String confirm;
 	
-	//CONSTRUCTOR
+	@Column(updatable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date createAt;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date updateAt;
+	
 	public Admin() {}
 
 	public Long getId() {
@@ -102,5 +117,13 @@ public class Admin {
 		this.confirm = confirm;
 	}
 	
+	@PrePersist
+	protected void onCreate() {
+		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
+	}
+	@PreUpdate
+	protected void onUpdate() {
+		this.updateAt = new Date(); //DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+	}
 	
 }

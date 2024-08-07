@@ -18,7 +18,9 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -30,31 +32,31 @@ public class Doctor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message = "Por favor, ingrese un número válido de licencia médica")
+	@NotNull(message = "Please enter a valid Medical License number")
+	@NotBlank(message = "The field cannot be empty")
+	@Pattern(regexp = "^[0-9]{7,8}$", message = "The Medical License field must contain 7 or 8 numeric digits.")
 	@Size(min=5, max=7)
 	private String medLicense;
 	
-	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
+	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
 	
-	//CONEXIONES
-	//users a doctors(1:1)
+	//Connections
+	//users to doctors(1:1)
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id", unique = true)
 	private User user;
 	
-	//doctor a asessments( n:1 )
+	//doctor to asessments(n:1)
 	@OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Asessment> asessment;
 	
-	//CONSTRUCTOR
 	public Doctor() {}
 
-	//GETTERS AND SETTERS
 	public Long getId() {
 		return id;
 	}
@@ -97,7 +99,7 @@ public class Doctor {
 		this.asessment = asessment;
 	}
 
-	@PrePersist //Antes de hacer la creacion
+	@PrePersist
 	protected void onCreate() {
 		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
 	}

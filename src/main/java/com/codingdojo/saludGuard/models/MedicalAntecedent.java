@@ -24,44 +24,43 @@ import jakarta.validation.constraints.Size;
 @Table(name = "medical_antecedents")
 public class MedicalAntecedent {
 
-	//VARIABLES	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String type;
 	
-	@NotEmpty(message="Se requiere un título del antecedente")
-	@Size(min=2, message = "Se requiere un título de antecedente")
+	@NotEmpty(message="Title of antecedent is required")
+	@Size(min=2, message = "Title of antecedent is required")
 	private String title;
 	
-	@NotEmpty(message="Se requiere una descripción del antecedente")
-	@Size(min=2, message = "Se requiere una descripción del antecedente")
+	@NotEmpty(message= "Description of antecedent is required")
+	@Size(min=2, message = "Description of antecedent is required")
 	private String description;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@PastOrPresent(message = "La fecha no es válida")
+	@PastOrPresent(message = "The date submitted is not valid")
 	private Date studyDate; 
 	
-	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
+	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
 	
-	//CONEXIONES
-	//medical_antecedents a asessments ( 1:n )
+	//Connections
+	
+	//medical_antecedents to asessments ( 1:n )
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "assement_id")
 	private Asessment asessment;
 	
-	//medical_antecedents a medical_redords ( 1:n )
+	//medical_antecedents to medical_redords ( 1:n )
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "medical_record_id")
 	private MedicalRecord medicalRecord;
 	
-	//CONSTRUCTOR
 	public MedicalAntecedent() {}
 
 	public Long getId() {
@@ -127,12 +126,12 @@ public class MedicalAntecedent {
 		this.medicalRecord = medicalRecord;
 	}
 
-	@PrePersist //Antes de hacer la creacion
+	@PrePersist
 	protected void onCreate() {
-		this.createAt = new Date(); 
+		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
 	}
 	@PreUpdate
 	protected void onUpdate() {
-		this.updateAt = new Date(); 
+		this.updateAt = new Date(); //DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	}
 }

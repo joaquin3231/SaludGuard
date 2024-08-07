@@ -50,14 +50,13 @@ public class AssesmentController {
 	
 	@GetMapping("/findPatient")
 	public String findPatientAsses(HttpSession session) {
-		/*=== REVISION DE SESION ===*/
-		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
+
+		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp");
 
 		if(doctTemp == null) {
 			
 			return "redirect:/inicioSesion/doc";
 		}
-		/*=== REVISION DE SESION ===*/
 		
 		return "formDniPatient.jsp";
 	}
@@ -65,19 +64,19 @@ public class AssesmentController {
 	@PostMapping("/getPatient")
 	public String getPatientAsses(@RequestParam("dniPaciente") String dniPaciente,
 							HttpSession session, RedirectAttributes redirectAttributes) {
-		/*=== REVISION DE SESION ===*/
-		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
+
+		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp");
 
 		if(doctTemp == null) {
 			
 			return "redirect:/inicioSesion/doc";
 		}
-		/*=== REVISION DE SESION ===*/
+
 		User user = userServ.getUserByUserDNI(dniPaciente);
 		Patient patient = patServ.getPatientByUser(user);
 		
 		if(patient == null) {
-			redirectAttributes.addFlashAttribute("errorFind", "patient does not exist");
+			redirectAttributes.addFlashAttribute("errorFind", "Patient does not exist");
 			return "redirect:/findPatient";
 		}
 		
@@ -88,28 +87,23 @@ public class AssesmentController {
 	@GetMapping("/dashboard/doctor")
 	public String dashboardDoctor(HttpSession session, Model model) {
 		
-		 /*=== REVISION DE SESION ===*/
-        Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
+        Doctor doctTemp = (Doctor) session.getAttribute("doctTemp");
 
         if (doctTemp == null) {
             return "redirect:/inicioSesion/doc";
         }
-        /*=== REVISION DE SESION ===*/
 
-        // Obtener doctor de la base de datos para asegurar que está gestionado
         Doctor doctor = docServ.getDoctor(doctTemp.getId());
         if (doctor == null) {
             return "redirect:/inicioSesion/doc";
         }
 
-        // Obtener patient de la sesión y desde el servicio para asegurar que está gestionado
         Patient patientTemp = (Patient) session.getAttribute("patientTemp");
         Patient patient = patServ.getPatient(patientTemp.getId());
         if (patient == null) {
             return "redirect:/findPatient";
         }
 
-        // Obtener el registro médico desde el servicio para asegurar que está gestionado
         MedicalRecord medicalRecord = medicRecServ.getMedicalRecord(patient.getMedicalRecord().getId());
         if (medicalRecord == null) {
             return "redirect:/findPatient";
@@ -123,8 +117,8 @@ public class AssesmentController {
             newAsessment = asessServ.getAsessment(asessTemp.getId());
         }
 
-        newAsessment.setPatient(patient); //cargamos el paciente a la consulta
-        newAsessment.setDoctor(doctor); //cargamos el doctor a la consulta
+        newAsessment.setPatient(patient);
+        newAsessment.setDoctor(doctor);
         newAsessment.setMedicalRecord(medicalRecord);
 
         medicalRecord.getAssementList().add(newAsessment);
@@ -134,12 +128,10 @@ public class AssesmentController {
 
         session.setAttribute("antecedentTemp", newAsessment);
         
+		//Assesments
         
-		//CONSULTAS
-		//Obtener la lista de consultas del historial clinico del paciente
 		List<Asessment> patientAssesments = patient.getMedicalRecord().getAssementList();
 		
-		//Obtenemos Las ultimas tres consultas
 		List<Asessment> aseesmentList = new ArrayList<>();
 		for (int i = (patientAssesments.size() - 1);i >= patientAssesments.size() - 6; i-- ) {
 			if(i < 0) {
@@ -150,32 +142,28 @@ public class AssesmentController {
 		}
 		model.addAttribute("assesmentList", aseesmentList);
 		
-		//DETALLES FISICOS
-		//Obtenemos la lista de detalles fisico
-		List<PhysicalDetail> physicalList = medicalRecord.getPhysicalDetailList();
+		//Physical Details
 		
-		//Obtenemos el ultimo detalle fisico
+		List<PhysicalDetail> physicalList = medicalRecord.getPhysicalDetailList();
 		
 		if(physicalList.size() != 0) {
 			PhysicalDetail physicalDetail = physicalList.get(physicalList.size() - 1);
 			model.addAttribute("physicalDetail", physicalDetail);
 		}
 		
-		//TRATAMIENTOS
-		//Obtenemos la lista de tratamientos
-		List<Treatment> treatmentList = medicalRecord.getTreatmentList();
+		//Treatments
 		
-		//Obtenemos el ultimo tratamiento hecho
+		List<Treatment> treatmentList = medicalRecord.getTreatmentList();
 		
 		if(treatmentList.size() != 0) {
 			Treatment treatment = treatmentList.get(treatmentList.size() - 1);
 			model.addAttribute("treatment", treatment);			
 		}
 		
-		//ANTECEDENTES MEDICOS
+		//Medical record
+		
 		List<MedicalAntecedent> antecedentList = medicalRecord.getMedicalAntecedentsList();
 		
-		//Obtenemos el ultimo antecedente hecho
 		if(antecedentList.size() != 0) {
 			MedicalAntecedent antecedent = antecedentList.get(antecedentList.size() - 1);
 			
@@ -185,23 +173,20 @@ public class AssesmentController {
 			model.addAttribute("antecedentDate", fecha);
 			model.addAttribute("antecedent", antecedent);
 		}
-        
-        
-        
+
         return "dashboard_d.jsp";
         
 	}
 	
 	@GetMapping("/existConsult")
 	public String finishConsult(HttpSession session) {
-		/*=== REVISION DE SESION ===*/
-		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
+
+		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp");
 
 		if(doctTemp == null) {
 			
 			return "redirect:/inicioSesion/doc";
 		}
-		/*=== REVISION DE SESION ===*/
 		
 		session.removeAttribute("antecedentTemp");
 		

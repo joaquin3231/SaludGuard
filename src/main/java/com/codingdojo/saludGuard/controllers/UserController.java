@@ -44,12 +44,11 @@ public class UserController {
 		return "landingpage.jsp";
 	}
 	
-	//Registro del usuario
 	@GetMapping("/")
 	public String registrarUser(@ModelAttribute("newUser") User newUser,
 			Model model) {
 		
-		model.addAttribute("genders", Gender.Genders);  //Enviar la lista de generos
+		model.addAttribute("genders", Gender.Genders); 
 		
 		return "register_p.jsp";
 	}
@@ -74,7 +73,7 @@ public class UserController {
 		userServ.register(newUser, result);
 		
 		if(result.hasErrors()) {
-			model.addAttribute("genders", Gender.Genders); //Enviar la lista de generos
+			model.addAttribute("genders", Gender.Genders);
 			return "register_p.jsp";
 		} else {
 			
@@ -86,7 +85,6 @@ public class UserController {
 			patServ.savePatient(newPatient);
 			mrServ.saveMedicalRecord(newMedicalRecord);
 			
-			//Guardo al nuevo usuario en sesión
 			session.setAttribute("userInSession", newUser);
 			return "redirect:/location";
 		}
@@ -96,18 +94,18 @@ public class UserController {
 	@PostMapping("/login")
 	public String login(@RequestParam("email") String email,
 						@RequestParam("password") String password,
-						RedirectAttributes redirectAttributes, /*usar mensajes de Flash*/   
+						RedirectAttributes redirectAttributes,
 						HttpSession session){
 		
-		User userTryingLogin = userServ.login(email, password); //Obj User o null
+		User userTryingLogin = userServ.login(email, password);
 		
 		if(userTryingLogin == null) {
-			//Tiene algo mal
+
 			redirectAttributes.addFlashAttribute("errorLogin", "Wrong email/password");
 			return "redirect:/inicioSesion";
 		} else {
 			
-			session.setAttribute("userInSession", userTryingLogin); //Guardando en sesión el objeto de User
+			session.setAttribute("userInSession", userTryingLogin);
 			Long patientId = patServ.getPatientByUser(userTryingLogin).getId();
 			
 			return "redirect:/dashboard/"+patientId;
@@ -118,22 +116,21 @@ public class UserController {
 	@PostMapping("/loginDoc")
 	public String loginDoc(@RequestParam("userDNI") String userDNI,
 						@RequestParam("password") String password,
-						RedirectAttributes redirectAttributes, /*usar mensajes de Flash*/   
+						RedirectAttributes redirectAttributes, /*flash messages*/   
 						HttpSession session){
 		
-		User userTryingLogin = userServ.loginByDni(userDNI, password); //Obj User o null
+		User userTryingLogin = userServ.loginByDni(userDNI, password);
 		
 		if(userTryingLogin == null) {
-			//Tiene algo mal
+			
 			redirectAttributes.addFlashAttribute("errorLogin", "Wrong dni/password");
 			return "redirect:/inicioSesion/doc";
 		} else {
 			
 			Doctor doctTemp = docServ.getDoctorByUser(userTryingLogin);
 			
-			session.setAttribute("doctTemp", doctTemp); //Guardando en sesión el objeto de User
 			
-			
+			session.setAttribute("doctTemp", doctTemp);
 			return "redirect:/findPatient";
 		}
 		
@@ -141,6 +138,7 @@ public class UserController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
+		
 		session.removeAttribute("userInSession");
 		session.removeAttribute("adminInSession");
 		return "redirect:/";

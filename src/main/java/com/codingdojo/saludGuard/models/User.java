@@ -18,8 +18,10 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -31,24 +33,26 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty(message="Por favor, ingrese su nombre completo")
-	@Size(min=2, message = "Ingrese un nombre válido")
+	@NotEmpty(message="Name is required")
+	@Size(min=2, message = "Name needs at least 2 chars")
 	private String firstName;
 	
-	@NotEmpty(message="Por favor, ingrese su apellido")
-	@Size(min=2, message = "Ingrese un apellido válido")
+	@NotEmpty(message="Last name is required")
+	@Size(min=2, message = "Last name needs at least 2 chars")
 	private String lastName;
 	
-	@NotNull(message="Por favor, ingrese su DNI sin puntos ni espacios")
-	@Size(min=7, max=9, message = "Ingrese un DNI válido")
+	@NotNull(message="DNI is required")
+	@NotBlank(message = "The field cannot be empty")
+	@Size(min=7, max=8, message = "DNI needs at least 8 chars, and max 8")
 	private String userDNI;
 	
-	@NotNull(message="Por favor, ingrese su número de teléfono")
-	@Size(min=8, max=20, message = "Ingrese un número de teléfono válido")
+	@NotNull(message="Phone is required")
+    @NotBlank(message = "The field cannot be empty")
+	@Size(min=8, max=20, message = "Phone needs at least 8 chars")
 	private String phone;
 	
-	@NotEmpty(message="Por favor, ingrese su e-mail")
-	@Email(message = "Ingrese una dirección de e-mail válida")
+	@NotEmpty(message="E-Mail is required")
+	@Email(message = "The field must contain a valid E-Mail address format")
 	private String email;
 	
 	@NotEmpty(message="Ingrese una contraseña")
@@ -56,31 +60,28 @@ public class User {
 	private String password;
 	
 	@Transient
-	@Size(min=6, message = "Las contraseñas no coinciden")
+	@Size(min=6, message = "Passwords don't match")
 	private String confirm;
 	
-	@NotEmpty(message = "Ingrese su sexo, como indica en su DNI")
+	@NotEmpty(message = "Please specify your gender, as it shows on your DNI (National Identification Document)")
 	private String gender;
 	
-	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
+	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
+
+	//Connections 
 	
-	//CONEXIONES
-	//users a locations(1:1)
+	//users to locations(1:1)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "location_id", unique = true)
 	private Location location;
 
-	
-	//CONSTRUCTOR
 	public User() {}
 
-	//GETTERS AND SETTERS
-	
 	public Long getId() {
 		return id;
 	}
@@ -168,12 +169,12 @@ public class User {
 		this.updateAt = updateAt;
 	}
 	
-	@PrePersist //Antes de hacer la creacion
+	@PrePersist
 	protected void onCreate() {
-		this.createAt = new Date(); 
+		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
 	}
 	@PreUpdate
 	protected void onUpdate() {
-		this.updateAt = new Date(); 
+		this.updateAt = new Date(); //DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	}
 }

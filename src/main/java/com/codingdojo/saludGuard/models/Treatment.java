@@ -23,38 +23,37 @@ import jakarta.validation.constraints.Size;
 @Table(name = "treatments")
 public class Treatment {
 
-	//VARIABLES	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty(message="Especifique el tipo de tratamiento")
-	@Size(min=2, message = "Especifique el tipo de tratamiento (si no aplica, escriba n/a)")
+	@NotEmpty(message="Please specify the type of treatment")
+	@Size(min=2, message = "The field cannot be empty (if it doesn't apply, enter n/a")
 	private String type;
 	
-	@NotEmpty(message="Especifique la descripción del tratamiento")
-	@Size(min=2, message = "Especifique la descripción del tratamiento (si no aplica, escriba n/a)")
+	@NotEmpty(message="Please specify the description of treatment")
+	@Size(min=2, message = "The field cannot be empty (if it doesn't apply, enter n/a")
 	private String description;
 	
-	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
+	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
 	
-	//CONEXIONES
-	//treatments a asessments ( 1:n )
+	//Connections
+	
+	//treatments to asessments ( 1:n )
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "assement_id")
 	private Asessment asessment;
 	
-	//treatments a medical_redords ( 1:n )
+	//treatments to medical_redords ( 1:n )
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "medical_record_id")
 	private MedicalRecord medicalRecord;
 	
-	//CONSTRUCTOR
 	public Treatment() {}
 
 	public Long getId() {
@@ -106,12 +105,12 @@ public class Treatment {
 		this.medicalRecord = medicalRecord;
 	}
 
-	@PrePersist //Antes de hacer la creacion
+	@PrePersist
 	protected void onCreate() {
-		this.createAt = new Date();
+		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
 	}
-	@PreUpdate 
+	@PreUpdate
 	protected void onUpdate() {
-		this.updateAt = new Date();
+		this.updateAt = new Date(); //DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	}
 }

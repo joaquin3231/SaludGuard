@@ -37,17 +37,15 @@ public class MedicalAntecedentController {
 	private PatientService patServ;
 	
 	@GetMapping("/antecedent")
-	public String antecedentForm(	@ModelAttribute("antecedent") MedicalAntecedent antecedent,
-									HttpSession session, Model model) {
+	public String antecedentForm(@ModelAttribute("antecedent") MedicalAntecedent antecedent,
+								HttpSession session, Model model) {
 		
-		/*=== REVISION DE SESION ===*/
-		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
+		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp");
 
 		if(doctTemp == null) {
 			
 			return "redirect:/inicioSesion/doc";
 		}
-		/*=== REVISION DE SESION ===*/
 		
 		model.addAttribute("typeAntecedents", TypeAntecedentMedical.Types);
 		
@@ -55,17 +53,16 @@ public class MedicalAntecedentController {
 	}
 	
 	@PostMapping("/antecedent/save")
-	public String antecedentFormSave(	@Valid @ModelAttribute("antecedent") MedicalAntecedent antecedent,
-										BindingResult result,HttpSession session, Model model) {
-		/*=== REVISION DE SESION ===*/
-		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
+	public String antecedentFormSave(@Valid @ModelAttribute("antecedent") MedicalAntecedent antecedent,
+									BindingResult result,HttpSession session, Model model) {
+
+		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp");
 
 		if(doctTemp == null) {
 			
 			return "redirect:/inicioSesion/doc";
 		}
-		/*=== REVISION DE SESION ===*/
-		
+
 		if(result.hasErrors()) {
 			
 			model.addAttribute("typeAntecedents", TypeAntecedentMedical.Types);

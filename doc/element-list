@@ -1,0 +1,5 @@
+com.codingdojo.saludGuard
+com.codingdojo.saludGuard.controllers
+com.codingdojo.saludGuard.models
+com.codingdojo.saludGuard.repositories
+com.codingdojo.saludGuard.services

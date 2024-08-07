@@ -42,16 +42,14 @@ public class TreatmentController {
 	@GetMapping("/treatment")
 	public String treatmentForm(@ModelAttribute("treatmentNew") Treatment treatment,
 								HttpSession session) {
-		/*=== REVISION DE SESION ===*/
-		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
+
+		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp");
 
 		if(doctTemp == null) {
 			
 			return "redirect:/inicioSesion/doc";
 		}
-		/*=== REVISION DE SESION ===*/
-		
-		
+			
 		return "treatment.jsp";
 	}
 	
@@ -59,14 +57,12 @@ public class TreatmentController {
 	public String treatmentFormSave(@Valid @ModelAttribute("treatmentNew") Treatment treatment,
 									HttpSession session, BindingResult result) {
 		
-		/*=== REVISION DE SESION ===*/
-		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
+		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp");
 
 		if(doctTemp == null) {
 			
 			return "redirect:/inicioSesion/doc";
 		}
-		/*=== REVISION DE SESION ===*/
 		
 		if(result.hasErrors()) {
 			return "treatment.jsp";

@@ -41,14 +41,13 @@ public class LocationController {
 	@GetMapping("/location")
 	public String formLocation(	@ModelAttribute("location") Location location,
 								Model model, HttpSession session) {
-		/*=== REVISION DE SESION ===*/
-		User userTemp = (User) session.getAttribute("userInSession"); //Obj User or Null
+
+		User userTemp = (User) session.getAttribute("userInSession");
 		
 		if(userTemp == null) {
 			
 			return "redirect:/";
 		}
-		/*=== REVISION DE SESION ===*/
 		
 		String urlProvincias = "https://apis.datos.gob.ar/georef/api/provincias";
 		RestTemplate restTemplateProv = new RestTemplate();
@@ -62,14 +61,12 @@ public class LocationController {
 	public String saveLocation(	@Valid @ModelAttribute("location") Location location,
 								BindingResult result, Model model, HttpSession session) {
 		
-		/*=== REVISION DE SESION ===*/
-		User userTemp = (User) session.getAttribute("userInSession"); //Obj User or Null
+		User userTemp = (User) session.getAttribute("userInSession");
 		
 		if(userTemp == null) {
 			
 			return "redirect:/";
 		}
-		/*=== REVISION DE SESION ===*/
 		
 		if(result.hasErrors()) {
 			String urlProvincias = "https://apis.datos.gob.ar/georef/api/provincias";
@@ -91,8 +88,8 @@ public class LocationController {
 	@GetMapping("/prof/location")
 	public String formLocationProf(	@ModelAttribute("location") Location location,
 								Model model, HttpSession session) {
-		/*=== REVISION DE SESION ===*/
-		Admin adminTemp = (Admin) session.getAttribute("adminInSession"); //Obj User or Null
+
+		Admin adminTemp = (Admin) session.getAttribute("adminInSession");
 		
 		if(adminTemp == null) {
 			
@@ -103,7 +100,7 @@ public class LocationController {
 			
 			return "redirect:/home";
 		}
-		/*=== REVISION DE SESION ===*/
+		
 		User doctorTemp = (User) session.getAttribute("userDoctor");
 		
 		String urlProvincias = "https://apis.datos.gob.ar/georef/api/provincias";
@@ -111,7 +108,7 @@ public class LocationController {
 		Object respuestaProv = restTemplateProv.getForObject(urlProvincias, Object.class);
 		model.addAttribute("provinciasResp", respuestaProv);
 		
-		model.addAttribute("idDoctor", doctorTemp.getId());//para el js
+		model.addAttribute("idDoctor", doctorTemp.getId()); //para JS
 		
 		return "FormLocations_d.jsp";
 	}
@@ -120,8 +117,7 @@ public class LocationController {
 	public String saveLocationProf(	@Valid @ModelAttribute("location") Location location,
 								BindingResult result, Model model, HttpSession session) {
 		
-		/*=== REVISION DE SESION ===*/
-		Admin adminTemp = (Admin) session.getAttribute("adminInSession"); //Obj User or Null
+		Admin adminTemp = (Admin) session.getAttribute("adminInSession");
 		
 		if(adminTemp == null) {
 			
@@ -132,7 +128,6 @@ public class LocationController {
 			
 			return "redirect:/home";
 		}
-		/*=== REVISION DE SESION ===*/
 		
 		if(result.hasErrors()) {
 			

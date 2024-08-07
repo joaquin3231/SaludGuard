@@ -49,22 +49,20 @@ public class MedicalRecordController {
 			HttpSession session, Model model) {
 		
 		/* === REVISAMOS SESION === */
-		User userTemp = (User) session.getAttribute("userInSession"); //Obj User o null
+		User userTemp = (User) session.getAttribute("userInSession");
 		if(userTemp == null) {
 			return "redirect:/inicioSesion";
 		}
-		/* === REVISAMOS SESION === */
 		
 		if(userTemp.getLocation() == null) {
 			return "redirect:/location";
 		}
 		
-		//Enviar mi paciente
 		Patient myPatient = patServ.getPatient(patientId);
 		model.addAttribute("patient", myPatient);
 		
 		
-		// FILTRADO
+		// Filtering
 	    List<Asessment> filteredAssessments;
 
 	    if (doctorFirstName != null && !doctorFirstName.isEmpty() && createAt != null) {
@@ -78,20 +76,15 @@ public class MedicalRecordController {
 	    }
 	    
 	    model.addAttribute("assesmentList", filteredAssessments);
-		//CONSULTAS
-		//Obtener la lista de consultas del historial clinico del paciente
+	    
+		//Assesments
+	    List<Asessment> aseesmentList = new ArrayList<>();
+	    List<Asessment> patientAssesments = myPatient.getMedicalRecord().getAssementList();
 
-		
-		//Obtenemos Las ultimas tres consultas
-		/*List<Asessment> aseesmentList = new ArrayList<>();
-<<<<<<< HEAD
-		
 		for (int i = (patientAssesments.size() - 1);i >= patientAssesments.size() - 6; i-- ) {
 			aseesmentList.add(patientAssesments.get(i));
-		}*/
+		}
 		
-		/*List<Asessment> patientAssesments = myPatient.getMedicalRecord().getAssementList();
-		/*
 		model.addAttribute("assesmentList", patientAssesments);
 
 		for (int i = (patientAssesments.size() - 1);i >= patientAssesments.size() - 6; i-- ) {
@@ -102,37 +95,28 @@ public class MedicalRecordController {
 			}
 		}
 		model.addAttribute("assesmentList", aseesmentList);
- branch 'master' of https://github.com/joaquin3231/SaludGuard.git
-		*/
-		//DETALLES FISICOS
-		//Obtenemos toda la historia clinica
+ 
+		//Physical details
 		MedicalRecord medicalRecord = myPatient.getMedicalRecord();
 		
-		//Obtenemos la lista de detalles fisico
 		List<PhysicalDetail> physicalList = medicalRecord.getPhysicalDetailList();
-		
-		//Obtenemos el ultimo detalle fisico
 		
 		if(physicalList.size() != 0) {
 			PhysicalDetail physicalDetail = physicalList.get(physicalList.size() - 1);
 			model.addAttribute("physicalDetail", physicalDetail);
 		}
 		
-		//TRATAMIENTOS
-		//Obtenemos la lista de tratamientos
+		//Treatments
 		List<Treatment> treatmentList = medicalRecord.getTreatmentList();
-		
-		//Obtenemos el ultimo tratamiento hecho
 		
 		if(treatmentList.size() != 0) {
 			Treatment treatment = treatmentList.get(treatmentList.size() - 1);
 			model.addAttribute("treatment", treatment);			
 		}
 		
-		//ANTECEDENTES MEDICOS
+		//Medical Record
 		List<MedicalAntecedent> antecedentList = medicalRecord.getMedicalAntecedentsList();
 		
-		//Obtenemos el ultimo antecedente hecho
 		if(antecedentList.size() != 0) {
 			MedicalAntecedent antecedent = antecedentList.get(antecedentList.size() - 1);
 			
@@ -144,7 +128,7 @@ public class MedicalRecordController {
 		}
 
 		
-		//Medida de seguridad extra
+		//Safety step
 		Long patientInSessionId = patServ.getPatientByUser(userTemp).getId();
 		if(patientInSessionId != patientId) {
 			return "redirect:/dashboard/"+patientInSessionId;
@@ -154,31 +138,25 @@ public class MedicalRecordController {
 		
 	}
 	
-	
-	
 	@GetMapping("/dashboard/table/{patientId}")
 	public String dashboard(@PathVariable("patientId") Long patientId, HttpSession session, Model model) {
 		
-		// === REVISAMOS SESION ===
 		User userTemp = (User) session.getAttribute("userInSession"); //Obj User o null
 		if(userTemp == null) {
 			return "redirect:/inicioSesion";
 		}
-		// === REVISAMOS SESION ===
 		
 		if(userTemp.getLocation() == null) {
 			return "redirect:/location";
 		}
 		
-		//Enviar mi paciente
 		Patient myPatient = patServ.getPatient(patientId);
 		model.addAttribute("patient", myPatient);
 		
-		//Obtener la lista de consultas del historial clinico del paciente
 		List<Asessment> patientAssesments = myPatient.getMedicalRecord().getAssementList();
 		model.addAttribute("assesmentList", patientAssesments);
 		
-		//Medida de seguridad extra
+		//Safety step
 		Long patientInSessionId = patServ.getPatientByUser(userTemp).getId();
 		if(patientInSessionId != patientId) {
 			return "redirect:/dashboard/"+patientInSessionId;

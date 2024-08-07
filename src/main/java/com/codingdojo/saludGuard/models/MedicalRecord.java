@@ -22,40 +22,37 @@ import jakarta.persistence.Table;
 @Table(name = "medical_redords")
 public class MedicalRecord {
 
-	//VARIABLES
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
+	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
 	
-	//CONEXIONES
-	//medical_redords a asessments( n:1 )
+	//Connections
+	
+	//medical_redords to asessments( n:1 )
 	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Asessment> assementList;
 	
-	//medical_redords a treatment( n:1 )
+	//medical_redords to treatment( n:1 )
 	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Treatment> treatmentList;
 	
-	//medical_redords a physical_detais ( n:1 )
+	//medical_redords to physical_details ( n:1 )
 	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<PhysicalDetail> physicalDetailList;
 	
-	//medical_redords a medical_antecedents ( n:1 )
+	//medical_redords to medical_antecedents ( n:1 )
 	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<MedicalAntecedent> medicalAntecedentsList;
 	
-	
-	//CONSTRUCTOR
 	public MedicalRecord() {}
 
-	//GETTERS AND SETTERS
 	public Long getId() {
 		return id;
 	}
@@ -105,7 +102,7 @@ public class MedicalRecord {
 		this.medicalAntecedentsList = medicalAntecedentsList;
 	}
 
-	@PrePersist //Antes de hacer la creacion
+	@PrePersist
 	protected void onCreate() {
 		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
 	}

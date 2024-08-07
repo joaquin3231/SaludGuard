@@ -24,7 +24,7 @@ import jakarta.validation.Valid;
 public class PhysicalController {
 	
 	@Autowired
-	private PhysicalDetailService  psd;
+	private PhysicalDetailService psd;
 	
 	@Autowired
 	private AssesmentService asessServ;
@@ -38,14 +38,12 @@ public class PhysicalController {
 	@GetMapping("/physical")
     public String showPhysicalDetail(@ModelAttribute("physicalDetail") PhysicalDetail physicalDetail, HttpSession session) {
 		
-		/*=== REVISION DE SESION ===*/
 		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
 
 		if(doctTemp == null) {
 			
 			return "redirect:/inicioSesion/doc";
 		}
-		/*=== REVISION DE SESION ===*/
 		
         return "physical.jsp";
     }
@@ -54,29 +52,23 @@ public class PhysicalController {
     public String createPhysicalDetail(@Valid @ModelAttribute("physicalDetail") PhysicalDetail physicalDetail,
                                        BindingResult result, Model model, HttpSession session) {
     	
-		/*=== REVISION DE SESION ===*/
-		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp"); //Obj User or Null
-
+		Doctor doctTemp = (Doctor) session.getAttribute("doctTemp");
+		
 		if(doctTemp == null) {
 			
 			return "redirect:/inicioSesion/doc";
 		}
-		/*=== REVISION DE SESION ===*/
     	
         if (result.hasErrors()) {
             return "physical.jsp";
         }
-        //Calculamos el IMC 
         
-        float height = physicalDetail.getHeight(); //estatura
-        float weight = physicalDetail.getWeight(); //peso
-        //IMC = peso(KG) / [estatura (m)] ** 2;
+        float height = physicalDetail.getHeight();
+        float weight = physicalDetail.getWeight();
         float patientIMC = weight / (float) Math.pow(height, 2);
         
         physicalDetail.setPatientIMC(patientIMC);
         
-        
-        //conectando todas las cosas para la base de datos
 		Asessment asessTemp = (Asessment) session.getAttribute("antecedentTemp");
 		Patient patientTemp = (Patient) session.getAttribute("patientTemp");
         
@@ -89,8 +81,7 @@ public class PhysicalController {
         if (patient == null) {
             return "redirect:/physical";
         }
-		
-		
+			
         physicalDetail.setAsessment(asessment);
         physicalDetail.setMedicalRecord(patient.getMedicalRecord());
         psd.savePhysicalDetail(physicalDetail);
@@ -101,7 +92,7 @@ public class PhysicalController {
         patient.getMedicalRecord().getPhysicalDetailList().add(physicalDetail);
 		medicRecServ.saveMedicalRecord(patient.getMedicalRecord());
         
-        return "redirect:/dashboard/doctor"; // agrege prueba solo para probar si funciona pero cambiar despues
+        return "redirect:/dashboard/doctor";
     }
 	
 

@@ -28,12 +28,11 @@ import jakarta.validation.constraints.Size;
 @Table(name = "asessments")
 public class Asessment {
 	
-	//VARIABLES	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
+	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
 	
@@ -42,42 +41,40 @@ public class Asessment {
 
 	private String observation;
 	
-	//CONEXIONES
-	//asessments a patients(1:1)
+	//Connections
+	//asessments to patients(1:1)
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "patient_Id", unique = false)
 	private Patient patient;
 	
-	//asessments a patients(1:1)
+	//asessments to patients(1:1)
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "doctor_Id", unique = false)
 	private Doctor doctor;
 	
-	//asessments a medical_redords( 1:n )
+	//asessments to medical_redords( 1:n )
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "medical_record_id")
 	private MedicalRecord medicalRecord;
 	
-	//asessments a treatments ( n:1 )
+	//asessments to treatments ( n:1 )
 	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Treatment> treatmentList;
 	
-	//asessments a physical_detais ( n:1 )
+	//asessments to physical_detaiLs ( n:1 )
 	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<PhysicalDetail> physicalDetailList;
 	
-	//asessments a medical_antecedents ( n:1 )
+	//asessments to medical_antecedents ( n:1 )
 	@OneToMany(mappedBy = "asessment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<MedicalAntecedent> medicalAntecedents;
 	
-	//CONSTRUCTOR
 	public Asessment() {
 		this.treatmentList = new ArrayList<>();
 		this.physicalDetailList = new ArrayList<>();
 		this.medicalAntecedents = new ArrayList<>();
 	}
 
-	//GETTERS AND SETTERS
 	public Long getId() {
 		return id;
 	}
@@ -149,7 +146,7 @@ public class Asessment {
 		this.observation = observation;
 	}
 
-	@PrePersist //Antes de hacer la creacion
+	@PrePersist
 	protected void onCreate() {
 		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
 	}
@@ -157,6 +154,5 @@ public class Asessment {
 	protected void onUpdate() {
 		this.updateAt = new Date(); //DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	}
-	
 	
 }

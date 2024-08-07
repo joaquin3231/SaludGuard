@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.codingdojo.saludGuard"},{"l":"com.codingdojo.saludGuard.controllers"},{"l":"com.codingdojo.saludGuard.models"},{"l":"com.codingdojo.saludGuard.repositories"},{"l":"com.codingdojo.saludGuard.services"}];updateSearchResults();

@@ -23,40 +23,37 @@ import jakarta.persistence.Table;
 @Table(name = "patients")
 public class Patient{
 
-	//VARIABLES
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
+	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
 	
-	//CONEXIONES
-	//users a patients(1:1)
+	//Connections
+	
+	//users to patients(1:1)
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", unique = true)
 	private User user;
 	
-	//medical_records a patients(1:1)
+	//medical_records to patients(1:1)
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "medical_record_id", unique = true)
 	private MedicalRecord medicalRecord;
 	
-	//patient a asessment (n: 1)
+	//patient to asessment (n:1)
 	@OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Asessment> asessment;
 	
-	
-	//CONSTRUCTOR
 	public Patient() {
 		super();
 	}
 	
-	//GETTERS AND SETTERS
 	public Long getId() {
 		return id;
 	}
@@ -99,7 +96,7 @@ public class Patient{
 		this.asessment = asessment;
 	}
 
-	@PrePersist //Antes de hacer la creacion
+	@PrePersist
 	protected void onCreate() {
 		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
 	}

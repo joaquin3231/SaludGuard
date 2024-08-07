@@ -22,46 +22,39 @@ public class AdminService {
 	
 	public Admin registerAdmin(Admin newAdmin, BindingResult result) {
 		
-		//Comparar las contraseñas
 		String password = newAdmin.getPassword();
 		String confirm = newAdmin.getConfirm();
 		if(!password.equals(confirm)) {
-			//SI no son iguales
-			//path, clave, mensaje
+			
 			result.rejectValue("confirm", "Matches", "Password and confirmation don't match");
 		}
 		
-		//Revisar que el email no esté registrado
 		String email = newAdmin.getEmail();
-		Admin AdminExist = adminRepository.findByEmail(email); //Objeto de Admin o null
+		Admin AdminExist = adminRepository.findByEmail(email);
 		if(AdminExist != null) {
-			//El correo ya está registrado
+			
 			result.rejectValue("email", "Unique", "E-mail already exists");
 		}
 		
-		//Si existe error, regreso null
 		if(result.hasErrors()) {
 			return null;
 		} else {
-			//NO HAY ERRORES
-			//Hashear contraseña
+			
 			String passHash = BCrypt.hashpw(password, BCrypt.gensalt());
-			newAdmin.setPassword(passHash); //Establecemos el password hasheado
+			newAdmin.setPassword(passHash); 
 			return adminRepository.save(newAdmin);
 		}
 		
 	}
 	
 	public Admin login(String email, String password) {
-		//Revisamos que el correo exista en BD
-		Admin AdminTryingLogin = adminRepository.findByEmail(email); //Objeto Admin o NULL
+
+		Admin AdminTryingLogin = adminRepository.findByEmail(email);
 		
 		if(AdminTryingLogin == null) {
 			return null;
 		}
 		
-		//Comparar las contraseñas
-		//BCrypt.checkpw(Contra NO encriptada, Contra SI encriptada) -> True o False
 		if(BCrypt.checkpw(password, AdminTryingLogin.getPassword())) {
 			return AdminTryingLogin;
 		} else {
@@ -70,12 +63,10 @@ public class AdminService {
 		
 	}
 	
-	/* Método que en base a un id nos regresa un objeto de Admin */
 	public Admin getAdmin(Long id) {
 		return adminRepository.findById(id).orElse(null);
 	}
 	
-	//METODO QUE GUARDA USUARIO
 	public Admin saveAdmin (Admin admin) {
 		return adminRepository.save(admin);
 	}

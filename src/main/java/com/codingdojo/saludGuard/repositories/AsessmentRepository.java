@@ -16,20 +16,14 @@ public interface AsessmentRepository extends CrudRepository<Asessment, Long>{
 
 	List<Asessment> findAll();
 	
-	//Llamma a todos los Asessment en orden cronologico
-	//List<Asessment> findAllOrderBycreateAtAsc();
-	
 	Asessment findByPatient(Patient patient);
+	
 	@Query("SELECT a FROM Asessment a WHERE FUNCTION('DATE', a.createAt) = :date")
     List<Asessment> findByCreateAtIgnoringTime(@Param("date") Date date);
-	  
-	  //por nombre
-	  @Query("SELECT a FROM Asessment a WHERE a.doctor.user.firstName LIKE %:firstName%")
-	  List<Asessment> findByDoctorFirstName(@Param("firstName") String firstName);
-	  
-	  //por nombre y fecha
-	  @Query("SELECT a FROM Asessment a WHERE a.doctor.user.firstName LIKE %:firstName% AND FUNCTION('DATE', a.createAt) = FUNCTION('DATE', :createAt)")
-	  List<Asessment> findByDoctorFirstNameAndCreateAt(@Param("firstName") String firstName, @Param("createAt") Date createAt);
+	@Query("SELECT a FROM Asessment a WHERE a.doctor.user.firstName LIKE %:firstName%")
+	List<Asessment> findByDoctorFirstName(@Param("firstName") String firstName);
+	@Query("SELECT a FROM Asessment a WHERE a.doctor.user.firstName LIKE %:firstName% AND FUNCTION('DATE', a.createAt) = FUNCTION('DATE', :createAt)")
+	List<Asessment> findByDoctorFirstNameAndCreateAt(@Param("firstName") String firstName, @Param("createAt") Date createAt);
 
 	
 }

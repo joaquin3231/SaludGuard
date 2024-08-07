@@ -11,4 +11,5 @@ import com.codingdojo.saludGuard.models.MedicalRecord;
 public interface MedicalRecordRepository extends CrudRepository<MedicalRecord, Long>{
 
 	List<MedicalRecord> findAll();
+	
 }

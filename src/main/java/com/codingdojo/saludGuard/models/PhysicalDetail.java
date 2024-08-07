@@ -24,58 +24,55 @@ import jakarta.validation.constraints.Size;
 @Table(name = "physical_detais")
 public class PhysicalDetail {
 
-	//VARIABLES	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message="Especifique la altura del paciente (en metros)")
+	@NotNull(message="Please enter the height of the patient (m)")
 	private float height;
 	
-	@NotNull(message="Especifique el peso del paciente (en kg)")
+	@NotNull(message="Please enter the weight of the patient (kg)")
 	private float weight;
 	
-	private float patientIMC; //este comentario es para destacar a la variable ya que nose si va a quedarse o nop :)
+	private float patientIMC;
 	
-	@NotEmpty(message="Especifique la presión sanguínea del paciente (en mmHg)")
-	@Size(min=2, message = "Se requieren al menos dos dígitos")
+	@NotEmpty(message="Please spectify the blood pressure of the patient (mmHg)")
+	@Size(min=2, message = "Blood pressure requires 2 numeric digits at least")
 	private String bloodPressure;
 	
-	@NotEmpty(message="Especifique la frecuencia cardíaca (en ppm máx.)")
-	@Size(min=2, message = "Se requieren al menos dos dígitos")
+	@NotEmpty(message="Please spectify the heart rate of the patient (bpm max)")
+	@Size(min=2, message = "Heart rate requires 2 numeric digits at least")
 	private String heartRate;
 	
-	@NotEmpty(message="Especifique el estado general del paciente")
-	@Size(min=2, message = "Se requieren al menos dos dígitos")
+	@NotEmpty(message="Please enter the body state of the patient")
+	@Size(min=2, message = "If it doesn't apply, enter n/a")
 	private String bodyState;
 	
-	@NotEmpty(message="Especifique observaciones del paciente (si no aplica, escriba n/a)")
-	@Size(min=2, message = "Especifique observaciones del paciente")
+	@NotEmpty(message="Please enter any observations if needed")
+	@Size(min=2, message = "If it doesn't apply, enter n/a")
 	private String observ;
 	
-	@Column(updatable = false)//Este atributo solo se agrega 1 vez, y NUNCA se actualiza
+	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateAt;
 	
-	//CONEXIONES
-	//physical_detais a asessments ( 1:n )
+	//Connections
+	
+	//physical_detais to asessments (1:n)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "assement_id")
 	private Asessment asessment;
 	
-	//physical_detais a medical_redords ( 1:n )
+	//physical_detais to medical_redords (1:n)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "medical_record_id")
 	private MedicalRecord medicalRecord;
 	
-	
-	//CONSTRUCTOR
 	public PhysicalDetail() {}
 
-	//GETTERS AND SETTERS
 	public Long getId() {
 		return id;
 	}
@@ -162,10 +159,10 @@ public class PhysicalDetail {
 
 	@PrePersist
 	protected void onCreate() {
-		this.createAt = new Date(); 
+		this.createAt = new Date(); //DEFAULT CURRENT_TIMESTAMP
 	}
 	@PreUpdate
 	protected void onUpdate() {
-		this.updateAt = new Date(); 
+		this.updateAt = new Date(); //DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	}
 }

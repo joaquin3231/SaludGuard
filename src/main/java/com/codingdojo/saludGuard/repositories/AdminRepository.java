@@ -13,10 +13,7 @@ public interface AdminRepository extends CrudRepository<Admin, Long>{
 
 	List<Admin> findAll();
 	
-	//ENCONTRAR EL USUARIO POR email
 	Admin findByEmail(String email);
-	
-	//ENCONTRAR EL USUARIO POR DNI
 	Admin findByUserDNI(String userDNI);
 	
 }

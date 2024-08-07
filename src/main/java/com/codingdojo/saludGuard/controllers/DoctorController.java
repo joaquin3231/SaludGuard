@@ -34,8 +34,7 @@ public class DoctorController {
 	@GetMapping("/register/prof")
 	public String registerDoctor(@ModelAttribute("newUser") User newUser, Model model, HttpSession session) {
 		
-		/*=== REVISION DE SESION ===*/
-		Admin adminTemp = (Admin) session.getAttribute("adminInSession"); //Obj User or Null
+		Admin adminTemp = (Admin) session.getAttribute("adminInSession");
 		
 		if(adminTemp == null) {
 			
@@ -46,7 +45,6 @@ public class DoctorController {
 			
 			return "redirect:/home";
 		}
-		/*=== REVISION DE SESION ===*/
 		
 		model.addAttribute("genders", Gender.Genders);
 		
@@ -63,7 +61,7 @@ public class DoctorController {
 		userServ.register(newUser, result);
 		
 		if(result.hasErrors()) {
-			model.addAttribute("genders", Gender.Genders); //Enviar la lista de generos
+			model.addAttribute("genders", Gender.Genders); //List of genders (form)
 			return "register_d.jsp";
 		} else {
 			
@@ -78,26 +76,25 @@ public class DoctorController {
 	
 	@GetMapping("/register/prof/confirmation")
 	public String confirmDoctor(Model model, HttpSession session) {
-		/*=== REVISION DE SESION ===*/
-		User doctorTemp = (User) session.getAttribute("userDoctor"); //Obj User or Null
+
+		User doctorTemp = (User) session.getAttribute("userDoctor");
 		
 		if(doctorTemp == null) {
 			
 			return "redirect:/home";
 		}
-		/*=== REVISION DE SESION ===*/
+
 		return "confirm_reg_d.jsp";
 	}
 	
 	@PostMapping("/save/prof")
 	public String confirmDoctor(@RequestParam("medLicense") String medLicense, Model model, HttpSession session) {
-		User doctorTemp = (User) session.getAttribute("userDoctor"); //Obj User or Null
+		User doctorTemp = (User) session.getAttribute("userDoctor");
 		
 		if(doctorTemp == null) {
 			
 			return "redirect:/home";
 		}
-		/*=== REVISION DE SESION ===*/
 			
 		Doctor newDoctor = new Doctor();
 		newDoctor.setUser(doctorTemp);
