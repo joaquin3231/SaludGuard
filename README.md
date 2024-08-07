@@ -25,40 +25,36 @@ Este proyecto tiene como objetivo crear un sistema robusto para la gestión de h
 
 ## Instalación
 
-1. Cloná el repositorio en tu máquina local:
+1. Clone el repositorio en su máquina local:
 
    ```bash
-   git clone https://github.com/tuusuario/SaludGuard.git
+   git clone https://github.com/joaquin3231/SaludGuard.git
 
-2. Navegá al directorio del proyecto:
+2. Navegue al directorio del proyecto:
    ```bash
    cd SaludGuard
 
-3. Instalá las dependencias utilizando Maven:
+3. Instale las dependencias utilizando Maven:
     ```bash
     mvn clean install
+    
 ## Configuración
-Configurá la base de datos en el archivo 
+
+Modifique las siguientes líneas (con su usuario y contraseña) al archivo
 
 src/main/resources/application.properties:
 
-    spring.datasource.url=jdbc:mysql://localhost:3306/saludguard
+    spring.datasource.url=jdbc:mysql://localhost:3306/saludguard?createDatabaseIfNotExist=true
     spring.datasource.username=tu_usuario
     spring.datasource.password=tu_contraseña
     spring.jpa.hibernate.ddl-auto=update
 
-Si querés usar otro perfil (por ejemplo, desarrollo), podés configurar application-dev.properties de manera similar.
-
 ## Ejecución
 
-Para ejecutar la aplicación con el perfil de producción (prod):
+Para ejecutar la aplicación:
 
-    mvn spring-boot:run -Dspring-boot.run.profiles=prod
-
-Para ejecutar la aplicación con el perfil de desarrollo (dev):
-
-    mvn spring-boot:run -Dspring-boot.run.profiles=dev
+    mvn spring-boot:run "-Dspring-boot.run.profiles=prod"
 
 ## Uso
-Una vez que la aplicación esté en ejecución, podés acceder a ella desde tu navegador en http://localhost:8080/home
+Una vez que la aplicación esté en ejecución, puede acceder a ella desde su navegador en http://localhost:8080/home
 
