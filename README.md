@@ -15,7 +15,7 @@ SaludGuard es una aplicación de gestión de historias clínicas diseñada para 
 
 ## Descripción
 
-Este proyecto tiene como objetivo crear un sistema robusto para la gestión de historias clínicas, permitiendo a los doctores y pacientes acceder a la información médica de manera eficiente. La aplicación incluye funcionalidades como la creación, edición y visualización de perfiles médicos, así como la gestión de citas y tratamientos.
+Este proyecto tiene como objetivo crear un sistema robusto para la gestión de historias clínicas, permitiendo a los doctores y pacientes acceder a la información médica de manera eficiente. La aplicación incluye funcionalidades como la creación, edición y visualización de perfiles médicos, así como la gestión de aspectos del historial clínico.
 
 ## Requisitos
 
